@@ -1,0 +1,254 @@
+apply plugin: 'maven-publish'
+apply plugin: "com.google.cloud.artifactregistry.gradle-plugin"
+
+ext.licenseFile = files("$rootDir/LICENSE.txt")
+
+def versionPropsFile = file("version.properties")
+def versionProps = new Properties()
+versionPropsFile.withInputStream { versionProps.load(it) }
+def pubVersion = "${versionProps.getProperty("year")}.${versionProps.getProperty("versionMinor")}.${versionProps.getProperty("versionFix")}${versionProps.getProperty("prereleaseId") ? "-" + versionProps.getProperty("prereleaseId") : ""}"
+
+def outputsFolder = file("$buildDir/allOutputs")
+
+def versionFile = file("$outputsFolder/version.txt")
+
+task outputVersions() {
+    description = 'Prints the versions of wpilib to a file for use by the downstream packaging project'
+    group = 'Build'
+    inputs.file(versionPropsFile)
+    outputs.file(versionFile)
+    outputs.upToDateWhen { false }
+
+    doFirst {
+        buildDir.mkdir()
+        outputsFolder.mkdir()
+    }
+
+    doLast {
+        versionFile.write pubVersion
+    }
+}
+
+task libraryBuild() {}
+
+build.dependsOn outputVersions
+
+// publish runs even when native build tasks are skipped/cancelled by the toolchain plugin;
+// wire outputVersions into publish so version.txt is always written before artifact upload.
+tasks.withType(AbstractPublishToMaven).configureEach {
+    dependsOn outputVersions
+}
+
+task copyAllOutputs(type: Copy) {
+    destinationDir = outputsFolder
+}
+
+build.dependsOn copyAllOutputs
+copyAllOutputs.dependsOn outputVersions
+
+ext.addTaskToCopyAllOutputs = { task ->
+    copyAllOutputs.dependsOn task
+    copyAllOutputs.inputs.file task.archiveFile
+    copyAllOutputs.from task.archiveFile
+}
+
+def artifactGroupId = 'com.revrobotics.frc'
+def baseArtifactId = 'REVLib'
+def driverZipBaseName = "_GROUP_com_revrobotics_frc_ID_${baseArtifactId}-driver_CLS"
+def zipBaseName = "_GROUP_com_revrobotics_frc_ID_${baseArtifactId}-cpp_CLS"
+def javaBaseName = "_GROUP_com_revrobotics_frc_ID_${baseArtifactId}-java_CLS"
+def backendDriverZipBaseName = "_GROUP_com_revrobotics_frc_ID_BackendDriver_CLS"
+def wpiBackendDriverZipBaseName = "_GROUP_com_revrobotics_frc_ID_WpiBackendDriver_CLS"
+
+task cppHeadersZip(type: Zip) {
+    destinationDirectory = outputsFolder
+    archiveBaseName = zipBaseName
+    archiveClassifier = "headers"
+
+    from(licenseFile) {
+        into '/'
+    }
+
+    from('src/main/native/include') {
+        into '/'
+    }
+}
+
+task cppSourceZip(type: Zip) {
+    destinationDirectory = outputsFolder
+    archiveBaseName = zipBaseName
+    archiveClassifier = "sources"
+
+    from(licenseFile) {
+        into '/'
+    }
+
+    from('src/main/native/cpp') {
+        into '/'
+    }
+}
+
+task cppDriverHeadersZip(type: Zip) {
+    destinationDirectory = outputsFolder
+    archiveBaseName = driverZipBaseName
+    archiveClassifier = "headers"
+
+    from(licenseFile) {
+        into '/'
+    }
+
+    from('src/main/driver/include') {
+        into '/'
+    }
+
+    from("$buildDir/generated/headers/") {
+        into '/rev'
+    }
+}
+
+cppDriverHeadersZip.dependsOn generateVersions
+build.dependsOn cppHeadersZip
+addTaskToCopyAllOutputs(cppHeadersZip)
+build.dependsOn cppSourceZip
+addTaskToCopyAllOutputs(cppSourceZip)
+build.dependsOn cppDriverHeadersZip
+addTaskToCopyAllOutputs(cppDriverHeadersZip)
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    archiveClassifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    archiveClassifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+task outputJar(type: Jar, dependsOn: classes) {
+    archiveBaseName = javaBaseName
+    destinationDirectory = outputsFolder
+    from sourceSets.main.output
+}
+
+task outputSourcesJar(type: Jar, dependsOn: classes) {
+    archiveBaseName = javaBaseName
+    destinationDirectory = outputsFolder
+    archiveClassifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task outputJavadocJar(type: Jar, dependsOn: javadoc) {
+    archiveBaseName = javaBaseName
+    destinationDirectory = outputsFolder
+    archiveClassifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    tasks.named("assemble") {
+        dependsOn(sourcesJar)
+        dependsOn(javadocJar)
+        dependsOn(outputJar)
+        dependsOn(outputSourcesJar)
+        dependsOn(outputJavadocJar)
+    }
+}
+
+addTaskToCopyAllOutputs(outputSourcesJar)
+addTaskToCopyAllOutputs(outputJavadocJar)
+addTaskToCopyAllOutputs(outputJar)
+
+build.dependsOn outputSourcesJar
+build.dependsOn outputJavadocJar
+build.dependsOn outputJar
+
+libraryBuild.dependsOn build
+
+def releasesRepoUrl = "$buildDir/repos/releases"
+
+publishing {
+    repositories {
+        maven {
+
+            url = releasesRepoUrl
+        }
+
+        if(project.hasProperty("use-private-repo")) {
+            maven {
+                name = "PrivateREVRepo"
+                url "artifactregistry://us-central1-maven.pkg.dev/rev-hardware-client/private-01977979-bcc8-78b0-b419-93d4efd6d4d0-revrobotics"
+            }
+        }
+    }
+}
+
+task cleanReleaseRepo(type: Delete) {
+    delete releasesRepoUrl
+}
+
+tasks.matching {it != cleanReleaseRepo}.all {it.dependsOn cleanReleaseRepo}
+
+model {
+    publishing {
+        def revTaskList = createComponentZipTasks($.components, ['REVLib'], zipBaseName, Zip, project, includeStandardZipFormat)
+
+        def revDriverTaskList = createComponentZipTasks($.components, ['REVLibDriver'], driverZipBaseName, Zip, project, includeStandardZipFormat)
+
+        def revBackendDriverTaskList = createComponentZipTasks($.components, ['BackendDriver'], backendDriverZipBaseName, Zip, project, includeStandardZipFormat)
+        def wpiBackendDriverTaskList = createComponentZipTasks($.components, ['REVLibWpi'], wpiBackendDriverZipBaseName, Zip, project, includeStandardZipFormat)
+
+        publications {
+            cpp(MavenPublication) {
+                revTaskList.each {
+                    artifact it
+                }
+                artifact cppHeadersZip
+                artifact cppSourceZip
+
+                artifactId = "${baseArtifactId}-cpp"
+                groupId = artifactGroupId
+                version = pubVersion
+            }
+            driver(MavenPublication) {
+                revDriverTaskList.each {
+                    artifact it
+                }
+                artifact cppDriverHeadersZip
+
+                artifactId = "${baseArtifactId}-driver"
+                groupId = artifactGroupId
+                version = pubVersion
+            }
+
+            java(MavenPublication) {
+                artifact jar
+                artifact sourcesJar
+                artifact javadocJar
+
+                artifactId = "${baseArtifactId}-java"
+                groupId = artifactGroupId
+                version = pubVersion
+            }
+
+            revLibBackendDriver(MavenPublication) {
+                revBackendDriverTaskList.each {
+                    artifact it
+                }
+
+                artifactId = "RevLibBackendDriver"
+                groupId = artifactGroupId
+                version = pubVersion
+            }
+
+            wpiREVLibBackendDriver(MavenPublication) {
+                wpiBackendDriverTaskList.each {
+                    artifact it
+                }
+
+                artifactId = "RevLibWpiBackendDriver"
+                groupId = artifactGroupId
+                version = pubVersion
+            }
+        }
+    }
+}

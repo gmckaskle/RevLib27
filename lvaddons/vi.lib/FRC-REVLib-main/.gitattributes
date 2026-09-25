@@ -1,0 +1,18 @@
+*               text=auto
+
+*.bat           text eol=crlf
+
+*.c             text eol=lf
+*.cpp           text eol=lf
+*.h             text eol=lf
+*.txt           text eol=lf
+*.gradle        text eol=lf
+*.java          text eol=lf
+*.json          text eol=lf
+*.properties    text eol=lf
+*.sh            text eol=lf
+*.md            text eol=lf
+*.yml           text eol=lf
+*.clang-format  text eol=lf
+
+*.jar           binary

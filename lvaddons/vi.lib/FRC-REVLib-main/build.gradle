@@ -1,0 +1,346 @@
+import org.wpilib.hardware.toolchain.*
+
+plugins {
+    id 'cpp'
+    id 'java'
+    id 'org.wpilib.WPILibRepositoriesPlugin' version '2027.0.0'
+    id 'org.wpilib.NativeUtils' version '2027.7.1'
+    id 'org.wpilib.GradleJni' version '2027.0.0'
+    id 'org.wpilib.GradleVsCode' version '2027.0.0'
+    id 'google-test-test-suite'
+    id "org.sonarqube" version "2.7"
+    id 'com.diffplug.spotless' version '8.0.0'
+    id "com.google.cloud.artifactregistry.gradle-plugin" version "2.2.0"
+
+    id "org.wpilib.GradleRIO" version "2027.0.0-alpha-6"
+}
+
+// wpi.maven.useLocal = false
+// wpi.maven.useDevelopment = true
+// wpi.versions.wpilibVersion = '2027.+'
+// wpi.maven.useWpilibMavenLocalDevelopment = true
+// wpi.versions.wpilibVersion = '2027.424242.+'
+
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+    wpilibRepositories.use2027Repos()
+    if (project.hasProperty('releaseMode')) {
+        wpilibRepositories.addAllReleaseRepositories(it)
+    } else {
+        wpilibRepositories.addAllDevelopmentRepositories(it)
+    }
+}
+
+/******************************************************
+ * Build options
+ * -PreleaseMode will force only release versions of the wpilib repo
+ *
+ * -Ponly<platform> will only build for a specific platform, list:
+ *
+ * linuxsystemcore
+ * linuxarm64
+ * windowsx86-64
+ * linuxx86-64
+ * osxuniversal
+ ******************************************************/
+
+
+apply from: 'config.gradle'
+
+apply from: 'dependencies.gradle'
+
+nativeUtils {
+    exportsConfigs {
+        REVLib {
+        }
+    }
+    privateExportsConfigs {
+        REVLibDriver {
+            exportsFile = project.file("src/main/driver/symbols.txt")
+            performStripAllSymbols = false
+        }
+        BackendDriver {
+            exportsFile = project.file("src/main/backend-driver/symbols.txt")
+            performStripAllSymbols = false
+        }
+        REVLibWpi {
+            exportsFile = project.file("src/main/revlib-wpi/symbols.txt")
+            performStripAllSymbols = false
+        }
+    }
+}
+
+model {
+    components {
+        REVLib(NativeLibrarySpec) {
+            sources {
+                cpp {
+                    source {
+                        srcDirs 'src/main/native/cpp'
+                        include '**/*.cpp'
+                    }
+                    exportedHeaders {
+                        srcDirs 'src/main/native/include'
+                    }
+                }
+            }
+            binaries.all {
+                lib library: "REVLibDriver", linkage: 'shared'
+                lib library: "ThirdParty", linkage: 'static'
+                lib library: "BackendDriver", linkage: 'shared'
+
+                if (toolChain in Clang) {
+                    cppCompiler.args "-mmacosx-version-min=11.0"
+                }
+            }
+
+
+            nativeUtils.useRequiredLibrary(it, "wpilib_shared")
+        }
+
+        REVLibDriver(JniNativeLibrarySpec) {
+            enableCheckTask true
+            javaCompileTasks << compileJava
+            jniCrossCompileOptions << JniCrossCompileOptions(nativeUtils.wpi.platforms.systemcore)
+            jniCrossCompileOptions << JniCrossCompileOptions(nativeUtils.wpi.platforms.linuxarm64)
+            sources {
+                cpp {
+                    source {
+                        srcDirs 'src/main/driver/cpp'
+                        include '**/*.cpp'
+                    }
+                    exportedHeaders {
+                        srcDir 'src/main/driver/include'
+                        srcDir "$buildDir/generated/headers"
+                    }
+                }
+            }
+
+            binaries.all {
+                lib library: "ThirdParty", linkage: 'static'
+                lib library: "BackendDriver", linkage: 'shared'
+
+                if (toolChain in Clang) {
+                    cppCompiler.args "-mmacosx-version-min=11.0"
+                    // Linker minimum macOS version
+                    linker.args "-mmacosx-version-min=11.0"
+                }
+            }
+        }
+
+        ThirdParty(NativeLibrarySpec) {
+            sources {
+                cpp {
+                    source {
+                        srcDirs 'src/main/third-party/fmt/src'
+                        include '**/*.cpp'
+                    }
+                    exportedHeaders {
+                        srcDirs 'src/main/third-party/fmt/include'
+                    }
+                }
+            }
+
+            binaries.all {
+                if (toolChain in Clang) {
+                    cppCompiler.args "-mmacosx-version-min=11.0"
+                    // Linker minimum macOS version
+                    linker.args "-mmacosx-version-min=11.0"
+                }
+            }
+        }
+
+        BackendDriver(NativeLibrarySpec) {
+            sources {
+                cpp {
+                    source {
+                        srcDirs 'src/main/backend-driver/cpp'
+                        include '**/*.cpp'
+                    }
+                    exportedHeaders {
+                        srcDir 'src/main/backend-driver/include'
+                    }
+                }
+            }
+
+            binaries.all {
+                if (toolChain in Clang) {
+                    cppCompiler.args "-mmacosx-version-min=11.0"
+                    // Linker minimum macOS version
+                    linker.args "-mmacosx-version-min=11.0"
+                }
+            }
+        }
+
+        REVLibWpi(NativeLibrarySpec) {
+            sources {
+                cpp {
+                    source {
+                        srcDirs 'src/main/revlib-wpi/cpp'
+                        include '**/*.cpp'
+                    }
+                    exportedHeaders {
+                        srcDir 'src/main/revlib-wpi/include'
+                    }
+                }
+            }
+
+            binaries.all {
+                lib library: "BackendDriver", linkage: 'static'
+                if (toolChain in Clang) {
+                    cppCompiler.args "-mmacosx-version-min=11.0"
+                    // Linker minimum macOS version
+                    linker.args "-mmacosx-version-min=11.0"
+                }
+            }
+
+            nativeUtils.useRequiredLibrary(it, "driver_shared")
+        }
+    }
+
+    testSuites {
+        REVLibTest(GoogleTestTestSuiteSpec) {
+            testing $.components.REVLib
+            sources.cpp {
+                source {
+                    srcDir 'src/test/cpp'
+                    include '**/*.cpp'
+                }
+            }
+
+            binaries.all {
+                lib library: "REVLibDriver", linkage: 'shared'
+                lib library: "REVLibWpi", linkage: 'shared'
+                lib library: "BackendDriver", linkage: 'shared'
+
+                def arch = it.targetPlatform.name
+                if (nativeUtils.isNativeDesktopPlatform(it.targetPlatform) && it.buildType.name == 'debug') {
+                    def filePath = it.tasks.install.installDirectory.get().toString() + File.separatorChar + 'lib'
+                    test.dependsOn it.tasks.install
+                    test.systemProperty 'java.library.path', filePath
+                    test.environment 'LD_LIBRARY_PATH', filePath
+                    test.workingDir filePath
+                }
+            }
+            nativeUtils.useRequiredLibrary(it, "wpilib_shared", "googletest_static")
+        }
+    }
+}
+
+if (project.hasProperty('onlylinuxsystemcore') || project.hasProperty('onlylinuxarm64')) {
+    test.enabled = false
+}
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs.add '-XDstringConcat=inline'
+    options.encoding = 'UTF-8'
+}
+
+tasks.named('jar') {
+    manifest {
+        attributes('Automatic-Module-Name': 'com.revrobotics.frc')
+    }
+}
+
+// Generate version file and vendor json
+def versionOutput = file("$buildDir/generated/headers/rev/REVLibVersion.h")
+def vendorJSONOutput = file("$buildDir/generated/vendordeps/REVLib.json")
+
+def versionPropsFile = file("version.properties")
+def versionProps = new Properties()
+versionPropsFile.withInputStream { versionProps.load(it) }
+ext.year = versionProps.getProperty("year")
+ext.versionMinor = versionProps.getProperty("versionMinor")
+ext.versionFix = versionProps.getProperty("versionFix")
+ext.prereleaseId = versionProps.getProperty("prereleaseId") ? "-" + versionProps.getProperty("prereleaseId") : ""
+ext.frcYear = versionProps.getProperty("wpilibYear")
+
+def generateVersions = tasks.register('generateVersions') {
+    def version = file('src/generate/REVLibVersion.h.in')
+    def vendorJSON = file('src/generate/REVLib.json.in')
+
+    inputs.file(version)
+    inputs.file(vendorJSON)
+    inputs.file(versionPropsFile)
+
+    outputs.file(versionOutput)
+    outputs.file(vendorJSONOutput)
+
+    doLast {
+        versionOutput.text = version.text.replace('${year}', year).replace('${minor_version}', versionMinor).replace('${fix_version}', versionFix).replace('${prerelease_id}', prereleaseId)
+        vendorJSONOutput.text = vendorJSON.text.replace('${year}', year).replace('${minor_version}', versionMinor).replace('${fix_version}', versionFix).replace('${prerelease_id}', prereleaseId).replace('${frc_year}', frcYear)
+    }
+}
+
+tasks.withType(CppCompile).configureEach {
+    dependsOn generateVersions
+}
+
+apply from: 'publish.gradle'
+
+spotless {
+    java {
+        target fileTree('.') {
+            include '**/*.java'
+            exclude '**/build/**', '**/build-*/**'
+        }
+        toggleOffOn()
+        googleJavaFormat()
+        removeUnusedImports()
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+    groovyGradle {
+        target fileTree('.') {
+            include '**/*.gradle'
+            exclude '**/build/**', '**/build-*/**'
+        }
+        greclipse()
+        leadingTabsToSpaces(4)
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+    format 'xml', {
+        target fileTree('.') {
+            include '**/*.xml'
+            exclude '**/build/**', '**/build-*/**', '**/.idea/**'
+        }
+        eclipseWtp('xml')
+        trimTrailingWhitespace()
+        leadingTabsToSpaces(2)
+        endWithNewline()
+    }
+    format 'misc', {
+        target fileTree('.') {
+            include '**/*.md', '**/.gitignore'
+            exclude '**/build/**', '**/build-*/**', 'doxygen-awesome-css/**'
+        }
+        trimTrailingWhitespace()
+        leadingTabsToSpaces(2)
+        endWithNewline()
+    }
+}
+
+test {
+    useJUnitPlatform()
+
+    testLogging {
+        showStandardStreams = true
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+        exceptionFormat = 'full'
+    }
+}
+
+javadoc {
+    options {
+        // Just configuring links to WPILib docs also sets up links to the appropriate version of
+        // the JDK docs. Things broke when Harper tried to directly configure both.
+        addStringOption("link", "https://github.wpilib.org/allwpilib/docs/release/java/")
+    }
+}
+
+wrapper {
+    gradleVersion = '9.4.1'
+}

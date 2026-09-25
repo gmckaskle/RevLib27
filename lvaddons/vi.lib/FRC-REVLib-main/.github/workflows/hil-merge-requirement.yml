@@ -1,0 +1,169 @@
+name: Create A301 HIL Tests Check
+# Marks a pull request as blocked on a bench run the moment a new commit
+# appears on it.
+#
+# This file is IDENTICAL in REV-HIL-Tester, REV-Firmware, and FRC-REVLib --
+# copy it verbatim. It works out which repo it is in from `context.repo`.
+#
+# What it does NOT do is enforce anything. Enforcement is entirely branch
+# protection: make "A301 HIL Tests" a required status check and a PR with
+# no such status is already unmergeable. What this adds is that the block is
+# visible and self-explanatory from the moment you push, instead of showing up
+# as a bare "Expected -- waiting for status to be reported", and that a stale
+# green from the previous head commit is replaced rather than left to look like
+# it applies to the new one.
+#
+# A bench result belongs to the exact commit it tested, so pushing to a PR
+# always invalidates it. That is the point, not a rough edge.
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  statuses: write
+  pull-requests: read
+
+jobs:
+  require-hil:
+    name: Merge Requirement
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    # A pull_request from a fork gets a read-only token, so the status write
+    # would fail. Skipping is safe: no status at all still blocks the merge,
+    # which is the fail-closed direction.
+    if: github.event.pull_request.head.repo.full_name == github.repository
+
+    steps:
+      - name: Mark the head commit as awaiting a bench run
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const sha = context.payload.pull_request.head.sha;
+            const CONTEXT = 'A301 HIL Tests';
+
+            // A reopen, or a synchronize that lands on a commit the bench has
+            // already reported on, must not clobber a real verdict -- neither
+            // with a fresh "pending" nor with the path-based pass below. This
+            // runs first for that reason: a real bench result outranks
+            // everything else here.
+            const { data } = await github.rest.repos.listCommitStatusesForRef({
+              ...context.repo,
+              ref: sha,
+              per_page: 100,
+            });
+            const existing = data.find(s => s.context === CONTEXT);
+            if (existing && existing.state !== 'pending') {
+              core.info(`${sha.slice(0, 8)} already has a ${existing.state} bench result; leaving it alone.`);
+              return;
+            }
+
+            // Branch protection cannot scope a required check to a path: once
+            // "A301 HIL Tests" is required, every PR needs it, including ones
+            // that only touch a README. So the scoping happens here instead --
+            // a PR that changes nothing the bench exercises gets an immediate
+            // pass rather than a block. The check stays required, which is what
+            // keeps it fail-closed for the PRs that do matter.
+            //
+            // Two ways to describe a repo, and the difference matters:
+            //
+            //   require: the bench is needed only if some changed file matches.
+            //            Use where the bench-relevant code is a small, known
+            //            corner of the repo. Adding a new relevant directory
+            //            without listing it here silently skips the bench.
+            //
+            //   ignore:  the bench is needed unless EVERY changed file matches.
+            //            Fail-safe -- anything unlisted still demands a run --
+            //            so this is the right shape wherever the blast radius
+            //            of a source change is hard to bound.
+            //
+            // A repo listed in neither always requires the bench.
+            const REPOS = {
+              'rev-hil-tester': {
+                require: [
+                  /^system-core\//,
+                  /^\.github\/workflows\/hil-testbench\.yml$/,
+                  /^\.github\/scripts\//,
+                ],
+              },
+              // The bench only tests the A301, and the shared middleware here
+              // does not reach it, so only the A301 sources and the motor
+              // control layer they build on gate a merge. This is the
+              // `require` shape: a new directory that does affect the A301
+              // will skip the bench until it is added to this list.
+              'rev-firmware': {
+                require: [
+                  /^a301\//i,
+                  /^revmc\//i,
+                ],
+              },
+              // Same reasoning: the bench builds against a REVLib artifact from
+              // this repo, and src/ feeds it wholesale.
+              'frc-revlib': {
+                ignore: [
+                  /^README\.md$/,
+                  /^Changelog\.md$/,
+                  /^LICENSE/,
+                  /^Doxyfile$/,
+                  /^doxygen-awesome-css\//,
+                  /^rev-logo\.png$/,
+                  /^\.vscode\//,
+                  /^\.styleguide/,
+                  /^\.git(ignore|attributes|modules)$/,
+                ],
+              },
+            };
+            const rules = REPOS[context.repo.repo.toLowerCase()];
+
+            let relevant = true;
+            let why = '';
+            if (rules) {
+              const files = await github.paginate(github.rest.pulls.listFiles, {
+                ...context.repo,
+                pull_number: context.payload.pull_request.number,
+                per_page: 100,
+              });
+              const names = files.map(f => f.filename);
+
+              if (names.length >= 3000) {
+                // The API caps a PR's file list at 3000, so past that the list
+                // is a truncation rather than the change. Never conclude
+                // "irrelevant" from a partial view.
+                why = 'the changed-file list is truncated at 3000';
+              } else if (rules.require) {
+                const hits = names.filter(n => rules.require.some(p => p.test(n)));
+                relevant = hits.length > 0;
+                why = relevant
+                  ? `${hits.length} changed file(s) affect the bench, e.g. ${hits[0]}`
+                  : `none of the ${names.length} changed file(s) affect the bench`;
+              } else if (rules.ignore) {
+                const hits = names.filter(n => !rules.ignore.some(p => p.test(n)));
+                relevant = hits.length > 0;
+                why = relevant
+                  ? `${hits.length} changed file(s) could affect the bench, e.g. ${hits[0]}`
+                  : `all ${names.length} changed file(s) are documentation`;
+              }
+              core.info(why);
+            }
+
+            if (!relevant) {
+              await github.rest.repos.createCommitStatus({
+                ...context.repo,
+                sha,
+                context: CONTEXT,
+                state: 'success',
+                description: 'Not required: this PR does not effect the A301 HIL Tester',
+              });
+              core.info(`Passed ${sha.slice(0, 8)} without a bench run (${why}).`);
+              return;
+            }
+
+            await github.rest.repos.createCommitStatus({
+              ...context.repo,
+              sha,
+              context: CONTEXT,
+              state: 'pending',
+              description: 'Comment /A301-HIL-Test on this PR to run the bench',
+              target_url: 'https://github.com/REVrobotics/REV-HIL-Tester/actions/workflows/hil-testbench.yml',
+            });
+            core.info(`Marked ${sha.slice(0, 8)} as awaiting a bench run.`);

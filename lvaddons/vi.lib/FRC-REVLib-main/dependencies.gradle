@@ -1,0 +1,18 @@
+dependencies {
+    implementation 'org.wpilib.cscore:cscore-java:2027.+'
+    implementation 'org.wpilib.cameraserver:cameraserver-java:2027.+'
+    implementation 'org.wpilib.ntcore:ntcore-java:2027.+'
+    implementation 'org.wpilib.wpilibj:wpilibj-java:2027.+'
+    implementation 'org.wpilib.wpiutil:wpiutil-java:2027.+'
+    implementation 'org.wpilib.wpimath:wpimath-java:2027.+'
+    implementation 'org.wpilib.wpiunits:wpiunits-java:2027.+'
+    implementation 'org.wpilib.hal:hal-java:2027.+'
+    //    implementation 'org.wpilib.thirdparty.frc2025.opencv:opencv-java:4.10.0-2'
+
+    implementation("org.jspecify:jspecify:1.0.0")
+    //testImplementation(platform('org.junit:junit-bom:5.7.0'))
+    //testImplementation('org.junit.jupiter:junit-jupiter')
+    testImplementation(platform('org.junit:junit-bom:6.0.3'))
+    testImplementation('org.junit.jupiter:junit-jupiter')
+    testRuntimeOnly('org.junit.platform:junit-platform-launcher')
+}

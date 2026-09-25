@@ -1,0 +1,10 @@
+pluginManagement {
+    repositories {
+        mavenLocal()
+        gradlePluginPortal()
+
+        maven {
+            url = "https://storage.googleapis.com/revlib-internal-0198d233-f85d-7fdb-b59b-e2398e2dfb19/"
+        }
+    }
+}

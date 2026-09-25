@@ -1,0 +1,277 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - "main"
+    tags-ignore:
+      - "*"
+  pull_request:
+    branches:
+      - "*"
+  workflow_call:
+    inputs:
+      public-release:
+        required: false
+        type: boolean
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  lint_format:
+    if: github.event_name == 'pull_request'
+    uses: ./.github/workflows/lint-format.yml
+    secrets:
+      personal_access_token: ${{ secrets.REVBOT2_AUTO_COMMIT_TOKEN }}
+
+  build:
+    needs: lint_format
+    if: ${{ always() && (needs.lint_format.result == 'success' || needs.lint_format.result == 'skipped') }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            container: wpilib/systemcore-cross-ubuntu:2027-24.04
+            name: linux
+            build-options: "-Ponlylinuxx86-64"
+            skip-tests: false
+            delete-common-zips: false
+            cmake-flags: ""
+          - os: ubuntu-latest
+            container: wpilib/systemcore-cross-ubuntu:2027-24.04
+            name: systemcore
+            build-options: "-Ponlylinuxsystemcore"
+            skip-tests: false
+            delete-common-zips: true
+            cmake-flags: ""
+          - os: ubuntu-latest
+            container: wpilib/aarch64-cross-ubuntu:2027-bookworm-24.04
+            name: linux-aarch64
+            build-options: "-Ponlylinuxarm64"
+            skip-tests: false
+            delete-common-zips: true
+            cmake-flags: "-DCMAKE_SYSTEM_NAME=Linux -DCMAKE_SYSTEM_PROCESSOR=aarch64 -DCMAKE_C_COMPILER=aarch64-bookworm-linux-gnu-gcc -DCMAKE_CXX_COMPILER=aarch64-bookworm-linux-gnu-g++"
+          - os: macos-latest
+            container: ""
+            name: macos
+            build-options: "-Pbuildalldesktop -Ptoolchain-optional-systemCore"
+            skip-tests: true
+            delete-common-zips: true
+            cmake-flags: ""
+          - os: windows-latest
+            container: ""
+            name: windows64
+            build-options: "-Ponlywindowsx86-64"
+            skip-tests: false
+            delete-common-zips: true
+            cmake-flags: "-G \"Visual Studio 18 2026\""
+    name: "build-${{ matrix.name }}"
+    runs-on: ${{ matrix.os }}
+    container: ${{ matrix.container }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.client_payload.REVLIB_REF || github.sha }}
+
+      - name: Cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            .gradle
+            bin
+            build
+          key: ${{ matrix.name }}-build-${{ github.sha }}
+          restore-keys: |
+            ${{ matrix.name }}-build-
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: "zulu"
+          java-version: 25
+
+      - name: Download Systemcore Toolchain
+        run: |
+          ./gradlew installSystemCoreToolchain
+        if: ${{ matrix.name == 'systemcore' }}
+
+      - name: Set prereleaseId to GitHub SHA
+        if: ${{ !inputs.public-release }}
+        run: |
+          sed -i.bak 's/^prereleaseId =.*/prereleaseId = ${{ github.sha }}/' version.properties
+          rm version.properties.bak
+
+      - name: Build
+        run: |
+          ./gradlew installSystemCoreToolchain build ${{ matrix.build-options }} -PreleaseMode
+        if: ${{ !matrix.skip-tests }}
+
+      - name: Build CMake Non-Windows
+        run: |
+          mkdir -p build-cmake
+          mkdir -p build-cmake-artifacts/${{ matrix.name }}
+          cd build-cmake
+          cmake -DCMAKE_BUILD_TYPE=Release ${{ matrix.cmake-flags }} ..
+          cmake --build .
+
+          shopt -s nullglob
+
+          # Create arrays of matching files
+          files=(src/main/message-queue-driver/*.so src/main/message-queue-driver/*.dylib src/main/callback-driver/*.so src/main/callback-driver/*.dylib)
+
+          # Only run cp for files that exist
+          if [ ${#files[@]} -gt 0 ]; then
+            cp "${files[@]}" ../build-cmake-artifacts/${{ matrix.name }}
+          fi
+        if: ${{ matrix.name != 'windows64' }}
+
+      - name: Build CMake Windows
+        run: |
+          mkdir -p build-cmake
+          mkdir -p build-cmake-artifacts/${{ matrix.name }}
+          cd build-cmake
+          cmake ${{ matrix.cmake-flags }} ..
+          cmake --build . --config Release
+          cp src/main/message-queue-driver/Release/*.dll ../build-cmake-artifacts/${{ matrix.name }}
+          cp src/main/callback-driver/Release/*.dll ../build-cmake-artifacts/${{ matrix.name }}
+        if: ${{ matrix.name == 'windows64' }}
+
+      - name: Publish
+        run: |
+          ./gradlew publish ${{ matrix.build-options }} -PreleaseMode
+
+      # Put release files together in one directory
+      - name: Create Artifact
+        run: |
+          mkdir -p REVLib/maven
+          mkdir -p REVLib/vendordeps
+          mkdir -p REVLibDesktop/drivers
+          cp -r build/repos/releases/com/ REVLib/maven/com/
+          cp build/generated/vendordeps/REVLib.json REVLib/vendordeps/
+          cp -r build-cmake-artifacts REVLibDesktop/drivers
+
+      # These files are common on every OS
+      - name: Avoid duplicate files
+        if: matrix.delete-common-zips == true
+        run: |
+          find REVLib/maven/com/revrobotics/frc -name "*-headers.zip*" -delete
+          find REVLib/maven/com/revrobotics/frc -name "*-sources*.zip*" -delete
+          find REVLib/maven/com/revrobotics/frc -name "*.pom*" -delete
+
+      # Upload build artifact
+      - name: Upload build artifact
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: REVLib-${{ matrix.name }}
+          path: REVLib/
+
+      # Upload desktop drivers artifact
+      - name: Upload build artifact
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: REVLibDesktop-${{ matrix.name }}
+          path: REVLibDesktop/
+
+      # Upload version.txt
+      - name: Upload version artifact
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: version
+          path: build/allOutputs/version.txt
+        if: ${{ matrix.name == 'linux' }}
+
+  merge-artifacts:
+    runs-on: ubuntu-latest
+    needs: build
+    if: ${{ always() && needs.build.result == 'success' }}
+    steps:
+      - name: Merge artifacts
+        uses: actions/upload-artifact/merge@v4
+        with:
+          name: REVLib
+          pattern: REVLib-*
+          delete-merged: true
+      - name: Merge Desktop artifacts
+        uses: actions/upload-artifact/merge@v4
+        with:
+          name: REVLibDesktop
+          pattern: REVLibDesktop-*
+          delete-merged: true
+
+
+  validate-artifact:
+    runs-on: ubuntu-latest
+    needs: merge-artifacts
+    if: ${{ always() && needs.merge-artifacts.result == 'success' }}
+    steps:
+      # Download (and unzip) the previously merged artifact
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          path: validate
+
+      # Test all zip files
+      - name: Test zip files
+        id: test_zip_files
+        run: |
+          # Recursively test all of the zip files, placing any FAILED files in a text file
+          echo "Test all zip files"
+          find ./validate/REVLib -name "*.zip" -execdir zip -T '{}' \; | (grep FAILED || true) >> failed.txt
+
+          # Any lines in the 'failed' test file implies corruption
+          echo "Check for corrupted zip files"
+          # Save result to a variable so we can cleanup in this step
+          echo "zip_file_validation=$(if [ -s failed.txt ]; then echo "FAILED"; else echo "OK"; fi)" >> $GITHUB_OUTPUT
+
+          echo "clean up"
+          rm -rf ./validate
+          cat failed.txt
+          rm failed.txt
+
+      # Check if any zip files failed
+      - name: corrupted zip files found
+        if: ${{ steps.test_zip_files.outputs.zip_file_validation == 'FAILED' }}
+        run: |
+          echo "Corrupted zip files found: Re-run all jobs"
+          exit 1
+
+  build-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: "zulu"
+          java-version: 25
+
+      - name: Build javadoc
+        run: |
+          chmod +x ./gradlew  # needed when running GitHub Local Actions
+          ./gradlew installSystemCoreToolchain
+          ./gradlew javadoc -PreleaseMode
+
+      - name: Build cpp docs
+        uses: REVrobotics/doxygen-action@v1
+        with:
+          working-directory: "."
+          doxyfile-path: "./Doxyfile"
+          enable-latex: false
+
+      - name: Upload docs as artifact
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: docs
+          path: build/docs/

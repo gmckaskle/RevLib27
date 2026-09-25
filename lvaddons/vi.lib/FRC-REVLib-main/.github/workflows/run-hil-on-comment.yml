@@ -1,0 +1,397 @@
+name: A301 HIL Comment Request
+
+# Lets a maintainer start an A301 bench run by commenting on a pull request.
+#
+#   /A301-HIL-Test                            must be the first command
+#   /REV-HIL-Tester:<commit|branch|tag|#PR>   any order after that
+#   /REV-Firmware:<commit|branch|tag|#PR>
+#   /FRC-REVLib:<version|commit|branch|tag|#PR>
+#   /test:<Class|Class#Test>                  repeatable, or comma separated
+#
+# This file is IDENTICAL in REV-HIL-Tester, REV-Firmware, and FRC-REVLib --
+# copy it verbatim, do not edit per repo. It works out which repo it is in
+# from `context.repo` and defaults that repo's ref to the PR head, so
+# commenting on an FRC-REVLib PR tests that PR without having to name it.
+#
+# It fires and forgets: the run's verdict comes back as the "A301 HIL Tests"
+# commit status on the PR head, which is what branch protection gates on.
+# Nothing here waits, so no runner minutes are burned on the ~7 minutes the
+# bench takes.
+#
+# WARNING: `issue_comment` workflows only ever run from the DEFAULT BRANCH.
+# This file has to be merged to main before a single comment does anything,
+# and edits on a branch have no effect.
+
+on:
+  issue_comment:
+    types: [created, edited]
+
+# Deliberately no `contents: write`: the dispatch uses HIL_DISPATCH_PAT, which
+# is scoped to REV-HIL-Tester alone. This token never needs write access to the
+# repo the comment was left on.
+#
+# `pull-requests` MUST be write. The acknowledgement reply goes through the
+# issues API, but its target is a pull request, and GitHub authorizes that
+# against `pull_requests` -- `issues: write` only covers real issues. With
+# `pull-requests: read` the reaction and the reply both 403 with "Resource not
+# accessible by integration" while the commit status posts fine, which reads
+# like a broken token rather than one missing scope.
+permissions:
+  issues: write          # the rocket reaction on the triggering comment
+  pull-requests: write   # read the PR head SHA, and post the acknowledgement
+  statuses: write        # stamp "pending" immediately
+  actions: write
+
+jobs:
+  dispatch:
+    name: Dispatch A301 HIL Run Through Comment
+    # Cheap prefilter. `contains` rather than `startsWith` because a comment
+    # may open with a blank line; the "must come first" rule is enforced
+    # precisely in the parser, which can actually tokenize.
+    #
+    # This matches the parser's case-insensitivity without any extra work:
+    # GitHub's `contains()` is documented as not case sensitive, so
+    # /a301-hil-test gets through here too. Do not "fix" this with toLower() --
+    # that is not one of GitHub's expression functions and the workflow will
+    # fail to parse.
+    if: >-
+      github.event.issue.pull_request &&
+      contains(github.event.comment.body, '/A301-HIL-Test')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      # Parse and validate. Runs in github-script rather than a `run:` block
+      # because the comment body is attacker-controlled text -- interpolating
+      # it into a shell command would be a straight command injection.
+      - name: Parse the command
+        id: parse
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = context.payload.comment.body || '';
+
+            // Anyone can comment on a pull request, and this schedules work on
+            // a physical bench in the lab. Restrict it to people who already
+            // have write access to the repo.
+            const association = context.payload.comment.author_association;
+            if (!['OWNER', 'MEMBER', 'COLLABORATOR'].includes(association)) {
+              core.info(`Ignoring /A301-HIL-Test from ${association}.`);
+              core.setOutput('skip', 'true');
+              return;
+            }
+
+            // Which client_payload field each repo name maps to.
+            const REF_FIELD = {
+              'rev-hil-tester': 'system_core_ref',
+              'rev-firmware':   'firmware_ref',
+              'frc-revlib':     'revlib_ref',
+            };
+
+            // The value is `.*` rather than `.+` so a trailing-colon typo like
+            // `/test:` still parses as a command and gets rejected below. With
+            // `.+` it would fail to match at all, be dropped as prose, and
+            // quietly run the whole suite.
+            const COMMAND = /^\/([A-Za-z0-9][A-Za-z0-9_-]*)(?::(.*))?$/;
+            const REF_OK = /^#?[A-Za-z0-9._\/-]{1,200}$/;
+            const SELECTOR_OK = /^[A-Za-z0-9_.#-]{1,200}$/;
+
+            // The explanation is posted best-effort: if the token cannot write
+            // comments, the operator still needs the reason in the job log
+            // rather than a bare "Resource not accessible by integration" that
+            // hides whatever was actually wrong with the command.
+            const fail = async (message) => {
+              try {
+                await github.rest.issues.createComment({
+                  ...context.repo,
+                  issue_number: context.issue.number,
+                  body: `**A301 HIL request rejected.**\n\n${message}\n\n` +
+                    '<details><summary>Command reference</summary>\n\n' +
+                    '```\n' +
+                    '/A301-HIL-Test                                must be first\n' +
+                    '/REV-HIL-Tester:<commit|branch|tag|#PR>       bench code (default: main)\n' +
+                    '/REV-Firmware:<commit|branch|tag|#PR>         firmware to flash\n' +
+                    '/FRC-REVLib:<version|commit|branch|tag|#PR>   REVLib to build against\n' +
+                    '/test:<Class|Class#Test>                      repeatable or comma separated\n' +
+                    '```\n</details>',
+                });
+              } catch (error) {
+                core.warning(`Could not post the rejection comment: ${error.message}`);
+              }
+              core.setFailed(message);
+            };
+
+            // Only whitespace-delimited tokens that look like commands are
+            // considered, so surrounding prose is ignored.
+            const commands = body.split(/\s+/)
+              .map(t => t.match(COMMAND))
+              .filter(Boolean)
+              .map(m => ({ key: m[1].toLowerCase(), value: (m[2] || '').trim(), raw: m[0] }));
+
+            if (!commands.length || commands[0].key !== 'a301-hil-test') {
+              return fail('`/A301-HIL-Test` has to be the first command in the comment.');
+            }
+            if (commands[0].value) {
+              return fail('`/A301-HIL-Test` takes no value. Put refs in their own `/Repo:<ref>` commands.');
+            }
+
+            const payload = {};
+            const selectors = [];
+
+            for (const cmd of commands.slice(1)) {
+              if (cmd.key === 'a301-hil-test') {
+                return fail('`/A301-HIL-Test` appears more than once.');
+              }
+
+              if (cmd.key === 'test') {
+                // Comma separated and repeatable both work, so retrying a
+                // handful of flaky failures reads naturally either way.
+                const one = cmd.value.split(',').map(s => s.trim()).filter(Boolean);
+                if (!one.length) {
+                  return fail(`\`${cmd.raw}\` needs a value, e.g. \`/test:Setpoint#dutyCycleNoise\`.`);
+                }
+                for (const selector of one) {
+                  if (!SELECTOR_OK.test(selector)) {
+                    return fail(`\`${selector}\` is not a valid test selector. Allowed: letters, digits, \`.\` \`_\` \`-\` \`#\`.`);
+                  }
+                  selectors.push(selector);
+                }
+                continue;
+              }
+
+              const field = REF_FIELD[cmd.key];
+              if (!field) {
+                return fail(`Unknown command \`${cmd.raw}\`.`);
+              }
+              if (!cmd.value) {
+                return fail(`\`/${cmd.key}\` needs a value, e.g. \`/${cmd.key}:main\`.`);
+              }
+              if (!REF_OK.test(cmd.value)) {
+                return fail(`\`${cmd.value}\` is not a valid ref.`);
+              }
+              if (payload[field]) {
+                return fail(`\`${cmd.raw}\` conflicts with an earlier command for the same repo.`);
+              }
+              payload[field] = cmd.value;
+            }
+
+            if (selectors.length) {
+              payload.test_selector = selectors.join(' ');
+            }
+
+            // The commit under test is this PR's head, which is also the commit
+            // the merge gate has to land on.
+            const pr = await github.rest.pulls.get({
+              ...context.repo,
+              pull_number: context.issue.number,
+            });
+            const headSha = pr.data.head.sha;
+
+            // Commenting on a PR means "test this PR", so this repo's own ref
+            // defaults to the head commit rather than to whatever asset happens
+            // to be checked into the bench.
+            const ownField = REF_FIELD[context.repo.repo.toLowerCase()];
+            let testsThisHead = true;
+            if (ownField) {
+              const given = payload[ownField];
+              if (!given) {
+                payload[ownField] = headSha;
+              } else {
+                // An explicit ref for this repo overrides the head. Stamping
+                // the head green off the back of testing some *other* commit
+                // would be a false pass -- exactly the thing the gate exists to
+                // stop -- so the head is only claimed when the ref really is
+                // the head. A short SHA needs 7 characters before it is treated
+                // as a prefix rather than as a branch that happens to match.
+                //
+                // The `#` is required for the PR-number case. A bare `123` is
+                // not unambiguously this PR: the bench resolves system_core_ref
+                // with `git rev-parse`, where `123` is a branch or tag, so a
+                // branch literally named after the PR number would certify this
+                // head off a run of something else entirely. Being lenient
+                // about what to *run* is fine; being lenient about what to
+                // *certify* is not, so only the explicit spelling counts.
+                const isPrRef = given.startsWith('#');
+                const ref = given.replace(/^#/, '').toLowerCase();
+                testsThisHead =
+                  (ref.length >= 7 && headSha.toLowerCase().startsWith(ref)) ||
+                  (isPrRef && ref === String(context.issue.number));
+              }
+            }
+
+            // Bench code defaults to main. Everything else left blank stays
+            // blank, meaning "use the asset checked into the bench".
+            if (!payload.system_core_ref) {
+              payload.system_core_ref = 'main';
+            }
+
+            // Stamp the result onto this PR's head even when no ref resolved to
+            // it -- this is what lets this repo require the check. Skipped when
+            // the run was pointed somewhere else, per above; the run still
+            // happens, it just does not certify this PR.
+            if (testsThisHead) {
+              payload.status_repo = `${context.repo.owner}/${context.repo.repo}`;
+              payload.status_sha = headSha;
+            }
+
+            // The reaction is cosmetic, so it must never be what stops a run
+            // from being dispatched. The likeliest reason it fails is a 403
+            // from a read-only workflow token, which is a repo setting rather
+            // than anything to do with this comment -- and that same setting
+            // silently breaks the merge gate, so say so loudly here.
+            try {
+              await github.rest.reactions.createForIssueComment({
+                ...context.repo,
+                comment_id: context.payload.comment.id,
+                content: 'rocket',
+              });
+            } catch (error) {
+              core.warning(
+                `Could not react to the comment: ${error.message}. ` +
+                'A 403 here means Settings -> Actions -> General -> Workflow permissions ' +
+                'is set to read-only. That also blocks the pending status and the ' +
+                '"A301 HIL Tests" merge gate, which fail without an error of their own.'
+              );
+            }
+
+            core.setOutput('skip', 'false');
+            core.setOutput('head_sha', headSha);
+            core.setOutput('stamps_head', String(testsThisHead));
+            core.setOutput('dispatch_body', JSON.stringify({
+              event_type: 'run_hil_tests',
+              client_payload: payload,
+            }));
+            core.setOutput('summary', [
+              `| Input | Value |`,
+              `|---|---|`,
+              `| Bench code | \`${payload.system_core_ref}\` |`,
+              `| Firmware | ${payload.firmware_ref ? `\`${payload.firmware_ref}\`` : 'checked into the bench'} |`,
+              `| REVLib | ${payload.revlib_ref ? `\`${payload.revlib_ref}\`` : 'checked into the bench'} |`,
+              `| Tests | ${payload.test_selector ? `\`${payload.test_selector}\`` : 'every test'} |`,
+            ].join('\n'));
+
+      # Dispatch. The body was built and JSON-encoded above and is passed
+      # through the environment, never interpolated into the command line.
+      - name: Dispatch to REV-HIL-Tester
+        if: steps.parse.outputs.skip == 'false'
+        env:
+          DISPATCH_PAT: ${{ secrets.HIL_DISPATCH_PAT }}
+          DISPATCH_BODY: ${{ steps.parse.outputs.dispatch_body }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "${DISPATCH_PAT:-}" ]; then
+            echo "::error::The HIL_DISPATCH_PAT secret is not set on this repo. It needs a fine-grained PAT with Contents: write on REVrobotics/REV-HIL-Tester and nothing else."
+            exit 1
+          fi
+
+          # curl exits non-zero on a transport failure (DNS, TLS, connection
+          # refused) without ever producing a status. `|| true` keeps the step
+          # alive to report that properly instead of dying on the pipefail, and
+          # the fallback keeps the message from degrading to a bare "HTTP ".
+          code=$(curl -sS --retry 3 --retry-connrefused --max-time 60 \
+            -o /tmp/hil-dispatch.json -w '%{http_code}' \
+            -X POST \
+            -H "Authorization: Bearer ${DISPATCH_PAT}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            -H "Content-Type: application/json" \
+            -d "$DISPATCH_BODY" \
+            "https://api.github.com/repos/REVrobotics/REV-HIL-Tester/dispatches") || true
+          code="${code:-000}"
+
+          if [ "$code" = "000" ]; then
+            echo "::error::Could not reach the GitHub API to dispatch the run (no HTTP response after retries). This is a network or outage problem, not a permissions one -- just comment again."
+            rm -f /tmp/hil-dispatch.json
+            exit 1
+          fi
+
+          if [ "$code" != "204" ]; then
+            echo "::error::repository_dispatch to REV-HIL-Tester failed (HTTP $code). A 404 here almost always means HIL_DISPATCH_PAT lacks Contents: write on that repo rather than that the repo is missing."
+            cat /tmp/hil-dispatch.json 2>/dev/null || true
+            rm -f /tmp/hil-dispatch.json
+            exit 1
+          fi
+
+          rm -f /tmp/hil-dispatch.json
+          echo "Dispatched run_hil_tests to REVrobotics/REV-HIL-Tester."
+
+      # Acknowledge. The pending status is what makes the PR visibly blocked
+      # from the moment the run is requested rather than only once it lands.
+      - name: Acknowledge on the PR
+        if: always() && steps.parse.outputs.skip == 'false'
+        uses: actions/github-script@v7
+        env:
+          DISPATCHED: ${{ steps.parse.outcome == 'success' && job.status || 'failure' }}
+          HEAD_SHA: ${{ steps.parse.outputs.head_sha }}
+          SUMMARY: ${{ steps.parse.outputs.summary }}
+          STAMPS_HEAD: ${{ steps.parse.outputs.stamps_head }}
+        with:
+          script: |
+            const sha = process.env.HEAD_SHA;
+            const runs = 'https://github.com/REVrobotics/REV-HIL-Tester/actions/workflows/hil-testbench.yml';
+            const ok = process.env.DISPATCHED === 'success';
+            const stampsHead = process.env.STAMPS_HEAD === 'true';
+
+            // Only move this commit to `pending` if a verdict is actually
+            // coming for it. A pending nobody will ever resolve blocks the PR
+            // forever with no way to tell that from a run still in flight.
+            if (stampsHead || !ok) {
+              await github.rest.repos.createCommitStatus({
+                ...context.repo,
+                sha,
+                context: 'A301 HIL Tests',
+                state: ok ? 'pending' : 'error',
+                description: ok
+                  ? 'Queued on the A301 bench'
+                  : 'Could not reach the A301 bench -- see the workflow log',
+                target_url: runs,
+              });
+            }
+
+            if (!ok) return;
+
+            const caveat = stampsHead ? [] : [
+              '',
+              `⚠️ **This run will not certify \`${sha.slice(0, 8)}\`.** You pointed this repo's ref`,
+              'at something other than this PR\'s head, so the bench is testing that instead. Marking',
+              'the head green off the back of it would be a false pass. Re-run without the override',
+              'to certify this PR.',
+            ];
+
+            const body = [
+              `🔧 **A301 HIL run queued** for \`${sha.slice(0, 8)}\`.`,
+              '',
+              process.env.SUMMARY,
+              ...caveat,
+              '',
+              'The bench runs one job at a time, so this may sit queued behind another run.',
+              `Progress: [REV-HIL-Tester Actions](${runs}).`,
+            ].join('\n');
+
+            // The run summary always gets it, so the record of what was
+            // dispatched survives even where the comment cannot be written.
+            await core.summary.addRaw(body).write();
+
+            // The comment is a convenience. By the time it is attempted the
+            // dispatch has already happened and the pending status is already
+            // posted, so failing the job here reports a run that did start as
+            // one that did not -- the single most misleading thing this
+            // workflow could do. Best-effort, like the reaction above.
+            try {
+              await github.rest.issues.createComment({
+                ...context.repo,
+                issue_number: context.issue.number,
+                body,
+              });
+            } catch (error) {
+              core.warning(
+                `Could not post the acknowledgement comment: ${error.message}. ` +
+                'The run WAS dispatched and the "A301 HIL Tests" status WAS posted -- ' +
+                'only the comment is missing, and the summary above has the same text. ' +
+                'A 403 here means this repo\'s GITHUB_TOKEN was not granted issue-comment ' +
+                'write: check the "GITHUB_TOKEN Permissions" list in this run\'s Set up job ' +
+                'step against the permissions: block in this file, and check that ' +
+                'Settings -> General -> Features -> Issues is enabled on this repo.'
+              );
+            }

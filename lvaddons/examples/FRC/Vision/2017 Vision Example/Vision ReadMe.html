@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+  <title>FRC 2015 LabVIEW Vision Readme</title>
+</head>
+<body>
+<h1 style="text-align: center;">FRC 2017 LabVIEW Vision Example</h1>
+<br>
+The vision examples for the My Computer section are intended to open on the laptop or desktop computer and not on the roboRIO. They can be used to compare approaches, algorithms, and cameras. They allow for quick experimentation or calibration of vision code even before you have access to a roboRIO. They can also be used as a basis for dashboard based vision processing. If you are looking for the roboRIO example, look in the roboRIO target section in the project window.
+
+<br><br>
+The Tutorials tab of the LabVIEW Getting Started Window contains step-by-step information for integration with robot and dashboard code.
+<br><br>
+
+This example project comes with a collection of sample images. You can also change to the camera tab and enter in your camera's address. The USB camera will typically be "USB 0" or "USB 1" depending on whether the computer has a built-in webcam. Axis cameras can be accessed at their fixed IP address, or using "axis-camera.local" -- provided that is their host name. Older Axis cameras often use their axis-serial number as the default host name. The host name can be modified using the Axis web-based camera configuration utility.
+
+<br><br>
+The FRC Color Processing Example.vi assumes the bright retro-reflection from a ring light and scores particles in the image using analytical measurements based on the geometry of the taped shape. By default it is set up to perform a color threshold for a colored LED ring light. If the robot uses a white ring light, it is possible to modify the processing to be intensity based for either a color or a grayscale image. The default scoring uses rectangle size, location, and proportions to identify the best group. You may want to review the analytical calculations, adjust the way these scores are combined, or adjust the threshold. Annotations within the image help explain the scores of various particles.
+
+<br><br>
+The distance calculation is based on edge detection in the original color image. If the camera is mounted parallel to the cylinder calibration may not be needed, but if the camera is mounted at an angle, the calibration can be used to correct for perspective distortion as well as lens distortion without having much impact on performance. Calibration is not complicated and involves using a sheet of printed circular dots such as C:\Users\Public\Documents\National Instruments\Vision\Documentation\Calibration Grid.pdf. The printout needs to be held vertically (in the same plane as the cylinder). You may also want to use a clipboard or other mounting to ensure the image is held flat. Launch the Vision Calibration Utility, from National Instruments>>Vision>>Utilities. The calibration to use is Distortion Model. Capture an image that is mostly full-frame. Adjust the mask so that the dots are able to be processed by the training utility, and it will attach the distortion field parameters to the PNG image. You may need to modify the code to point to your new PNG, and you may need to update your project build specification to ensure that your calibration file is deployed with your build EXE. Also remember that the PNG and your processed images need to be the same size/resolution.
+
+
+<br><br>
+The FRC Color Processing Low Goal Example.vi uses color to produce a binary image of particles. It then uses location, fill ratio, and aspect ratio to identify the group of colored shapes. The low goal is quite tricky to process since the colors are not very unique on the field.
+
+<br><br>
+The desktop VIs support interactive calibration. If you click and draw a line segment over the image, the sampled pixels will be used to set the H, S, and V values based on the averge and standard deviation of each element.
+<br><br>
+
+The Tutorials tab of the LabVIEW Getting Started Window contains step-by-step information for integration with robot and dashboard code.
+</body>
+</html>

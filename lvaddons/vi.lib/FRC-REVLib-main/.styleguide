@@ -1,0 +1,49 @@
+cppHeaderFileInclude {
+  \.h$
+  \.hpp$
+  \.inc$
+  \.inl$
+}
+
+cppSrcFileInclude {
+  \.cpp$
+}
+
+generatedFileExclude {
+  frc_cmd_frame\.h$
+  src/main/driver/cpp/PHFrames.cpp
+  \.png$
+  doxygen-awesome-css/
+  src/main/driver/cpp/CANA301Frames.cpp
+  src/main/driver/cpp/CANDetachedEncoderFrames.cpp
+  src/main/driver/cpp/CANDetachedEncoderParameters.cpp
+  src/main/driver/cpp/CANServoHubFrames.cpp
+  src/main/driver/cpp/CANSparkFrames.cpp
+  src/main/driver/cpp/CANSparkParameters.cpp
+  src/main/driver/include/first/CANA301Frames.h
+  src/main/driver/include/rev/CANDetachedEncoderFrames.h
+  src/main/driver/include/rev/CANDetachedEncoderParameters.h
+  src/main/driver/include/rev/CANServoHubFrames.h
+  src/main/driver/include/rev/CANSparkFrames.h
+  src/main/driver/include/rev/CANSparkParameters.h
+  src/main/native/include/rev/config/SparkParameters.h
+  src/main/native/include/rev/config/DetachedEncoderParameters.h
+}
+
+modifiableFileExclude {
+  gradle/
+  LabVIEW/
+  third-party/
+}
+
+licenseUpdateExclude {
+  src/main/driver/cpp/StatusLoggerDriver.cpp
+  src/main/driver/include/rev/StatusLoggerDriver.h
+}
+
+includeOtherLibs {
+  ^fmt/
+  ^frc/
+  ^hal/
+  ^wpi/
+}

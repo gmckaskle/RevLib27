@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<nidocument>
+<nicomment>
+
+<nifamily familyname="REVLib" displayname="REVLib">
+</nifamily>
+</nicomment>
+<nierror code="-8024">
+Unable to persist parameters while robot is enabled
+</nierror>
+<nierror code="-8023">
+Feedback sensor incompatible with data port configuration
+</nierror>
+<nierror code="-8022">
+Invalid brushless encoder configuration
+</nierror>
+<nierror code="-8021">
+SPARK Flex brushed mode without dock
+</nierror>
+<nierror code="-8020">
+Invalid SPARK MAX data port configuration
+</nierror>
+<nierror code="-8019">
+Invalid CAN ID
+</nierror>
+<nierror code="-8018">
+Duplicate CAN ID
+</nierror>
+<nierror code="-8017">
+CAN disconnected
+</nierror>
+<nierror code="-8016">
+Unknown
+</nierror>
+<nierror code="-8015">
+Setpoint out of range
+</nierror>
+<nierror code="-8014">
+Invalid
+</nierror>
+<nierror code="-8013">
+Follower config mismatch
+</nierror>
+<nierror code="-8012">
+Parameter not implemented or deprecated
+</nierror>
+<nierror code="-8011">
+Parameter invalid
+</nierror>
+<nierror code="-8010">
+Parameter access mode
+</nierror>
+<nierror code="-8009">
+Parameter mismatch type
+</nierror>
+<nierror code="-8008">
+Parameter invalid ID
+</nierror>
+<nierror code="-8007">
+Firmware too new
+</nierror>
+<nierror code="-8006">
+Firmware too old
+</nierror>
+<nierror code="-8005">
+Can't find firmware
+</nierror>
+<nierror code="-8004">
+HAL
+</nierror>
+<nierror code="-8003">
+Not implemented
+</nierror>
+<nierror code="-8002">
+CANTimeout
+</nierror>
+<nierror code="-8001">
+General
+</nierror>
+</nidocument>

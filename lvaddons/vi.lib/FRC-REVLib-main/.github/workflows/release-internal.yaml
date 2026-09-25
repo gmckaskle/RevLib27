@@ -1,0 +1,75 @@
+name: Make internal release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  release:
+    strategy:
+      fail-fast: false
+      max-parallel: 1 # avoid multiple gradle publishers at same time
+      matrix:
+        include:
+          - os: ubuntu-latest
+            container: wpilib/ubuntu-base:22.04
+            name: linux
+            build-options: "-Ponlylinuxx86-64"
+            skip-tests: false
+          - os: ubuntu-latest
+            container: wpilib/roborio-cross-ubuntu:2025-22.04
+            name: roborio
+            build-options: "-Ponlylinuxathena"
+            skip-tests: false
+          - os: ubuntu-latest
+            container: wpilib/raspbian-cross-ubuntu:bookworm-22.04
+            name: raspbian
+            build-options: "-Ponlylinuxarm32"
+            skip-tests: false
+          - os: ubuntu-latest
+            container: wpilib/aarch64-cross-ubuntu:bookworm-22.04
+            name: linux-aarch64
+            build-options: "-Ponlylinuxarm64"
+            skip-tests: false
+          - os: macos-latest
+            container: ""
+            name: macos
+            build-options: "-Pbuildalldesktop"
+            skip-tests: true
+          - os: windows-latest
+            container: ""
+            name: windows64
+            build-options: "-Ponlywindowsx86-64"
+            skip-tests: false
+    name: "release-${{ matrix.name }}"
+    runs-on: ${{ matrix.os }}
+    container: ${{ matrix.container }}
+
+    # Add "id-token" with the intended permissions.
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: "zulu"
+          java-version: 17
+      - uses: 'google-github-actions/auth@v2'
+        with:
+          project_id: 'rev-hardware-client'
+          service_account: 'private-maven-repo-publisher@rev-hardware-client.iam.gserviceaccount.com'
+          workload_identity_provider: 'projects/298246875558/locations/global/workloadIdentityPools/github/providers/revui-demo'
+          create_credentials_file: true
+      - name: Put sha in version
+        run: |
+          sed -i "s/prereleaseId =/prereleaseId = ${{ github.sha }}/" version.properties
+          cat version.properties
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v2'
+        with:
+          version: '>= 363.0.0'
+      - name: Release to internal maven
+        run: |
+          ./gradlew publishAllToPrivate -Puse-private-repo

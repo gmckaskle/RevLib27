@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+  <title>FRC LabVIEW Vision Readme</title>
+</head>
+<body>
+<h1 style="text-align: center;">FRC AprilTag LabVIEW Vision Example</h1>
+<br>
+The vision example for the My Computer section is intended to open on the laptop or desktop computer and not on the roboRIO. It can be used to explore different cameras and settings to discover performance and capability tradeoffs. It allows for quick experimentation or calibration of vision code even before you have access to a roboRIO. It can also be used as a basis for dashboard based vision processing. If you are looking for the roboRIO example, look in the roboRIO target section in the project window.
+
+<br><br>
+The Tutorials tab of the LabVIEW Getting Started Window contains step-by-step information for integration with robot and dashboard code.
+<br><br>
+
+This example project comes with a collection of sample images and will display connected cameras in the dropdown menu.
+
+<br><br>
+Be sure to adjust the Tag Family to match any printed targets you are using. The raw outputs of the processing are shown at the far right of the panel. To the left of that is an overhead representation of a robot with the camera mounted and facing the AprilTag. The robot position/pose are computed using the homography matrix and intrinsic camera matrix. The homography matrix acts as a function to map points in the plane of the AprilTag target to the plane of the camera sensor. Using the information about the camera sensor and lens, this can be used to identify where the robot camera is placed and its orientation. Next to the picture are some charts showing fluctuations of the measurements. 
+
+<br><br>
+
+
+The roboRIO section of this project contains a simplified VI that can be used for locating AprilTags on the roboRIO processor. This example uses a USB camera as its input and makes displays optional to better approximate how it would execute on the robot.
+</body>
+</html>

@@ -1,0 +1,23 @@
+///// IMAQDX Type Definition /////
+genericType: RevSpark
+genericTypeName: RevSpark
+control: RevSpark.ctl
+refnum: GenericTag
+sorted: yes
+adapt: yes
+matchExact: strict
+menuSelect: yes
+setFunction: LV_IMAQdxSetAttribute
+getFunction: LV_IMAQdxGetAttribute
+batchFunction: LV_IMAQdxAttributeBatch
+library: niimaqdx.dll
+termName: "RevSpark Session"
+sourcePalette: "<vilib>:\vision\driver\IMAQdx.llb\IMAQdx Open Camera.vi"
+eventRegisterFunction: LV_IMAQdxRegisterEvent
+cleanup: idle
+calling: C
+passAttributeError: none
+passMethodError: none
+hasActiveProp: no
+passEventRegError: none
+

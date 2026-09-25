@@ -1,0 +1,244 @@
+ Volume in drive C is Windows
+ Volume Serial Number is 02D7-8F01
+
+ Directory of C:\dev\labview\src\LabVIEW\bin32\user.lib\REVLibDriver5\VIs
+
+08/18/2024  09:12 AM    <DIR>          .
+08/18/2024  09:12 AM    <DIR>          ..
+08/18/2024  08:55 AM             7,753 c REV Lib Error From Code.vi
+08/18/2024  08:55 AM             7,184 c REV Lib Error Size.vi
+08/18/2024  08:55 AM             6,858 c REV Lib Flush Errors.vi
+08/18/2024  08:55 AM             7,808 c REV Lib Send Error.vi
+08/18/2024  08:55 AM             7,337 c REV Lib Suppress Errors.vi
+08/18/2024  08:54 AM             8,296 c SIM Spark Clear Faults.vi
+08/18/2024  08:54 AM             7,971 c SIM Spark Destory.vi
+08/18/2024  08:54 AM             8,236 c SIM Spark Get Alt Encoder Position.vi
+08/18/2024  08:54 AM             8,240 c SIM Spark Get Alt Encoder Velocity.vi
+08/18/2024  08:54 AM             8,215 c SIM Spark Get Analog Position.vi
+08/18/2024  08:54 AM             8,215 c SIM Spark Get Analog Velocity.vi
+08/18/2024  08:54 AM             8,214 c SIM Spark Get Analog Voltage.vi
+08/18/2024  08:54 AM             8,218 c SIM Spark Get Applied Output.vi
+08/18/2024  08:54 AM             8,199 c SIM Spark Get Bus Voltage.vi
+08/18/2024  08:54 AM             8,214 c SIM Spark Get Output Current.vi
+08/18/2024  08:54 AM             8,738 c SIM Spark Get Position Conversion Factor.vi
+08/18/2024  08:54 AM             8,188 c SIM Spark Get Position.vi
+08/18/2024  08:54 AM             8,742 c SIM Spark Get Velocity Conversion Factor.vi
+08/18/2024  08:54 AM             8,184 c SIM Spark Get Velocity.vi
+08/18/2024  08:54 AM             8,298 c SIM Spark Is Sim.vi
+08/18/2024  08:54 AM             9,168 c SIM Spark Restore Factory Defaults.vi
+08/18/2024  08:54 AM             8,252 c SIM Spark Set Alt Encoder Velocity.vi
+08/18/2024  08:54 AM             8,231 c SIM Spark Set Analog Position.vi
+08/18/2024  08:54 AM             8,239 c SIM Spark Set Analog Velocity.vi
+08/18/2024  08:54 AM             8,234 c SIM Spark Set Analog Voltage.vi
+08/18/2024  08:54 AM             8,230 c SIM Spark Set Applied Output.vi
+08/18/2024  08:54 AM             8,574 c SIM Spark Set Free Speed.vi
+08/18/2024  08:54 AM             8,598 c SIM Spark Set Position Conversion Factor.vi
+08/18/2024  08:54 AM             8,584 c SIM Spark Set Stall Torque.vi
+08/18/2024  08:54 AM             8,753 c SIM Spark Set Telemetry.vi
+08/18/2024  08:54 AM             8,598 c SIM Spark Set Velocity Conversion Factor.vi
+08/18/2024  08:54 AM             7,682 c Spark Burn Flash.vi
+08/18/2024  08:54 AM             7,536 c Spark Check Id.vi
+08/18/2024  08:54 AM             7,692 c Spark Clear Faults.vi
+08/18/2024  08:54 AM             8,610 c Spark Create Inplace.vi
+08/18/2024  08:54 AM             8,762 c Spark Create.vi
+08/18/2024  08:54 AM             7,335 c Spark Destroy.vi
+08/18/2024  08:54 AM             7,764 c Spark Disable Voltage Compensation.vi
+08/18/2024  08:54 AM             8,427 c Spark Enable Limit Switch.vi
+08/18/2024  08:54 AM             8,409 c Spark Enable Soft Limit.vi
+08/18/2024  08:54 AM             8,147 c Spark Enable Voltage Compensation.vi
+08/18/2024  08:54 AM             8,020 c Spark Factory Wipe.vi
+08/18/2024  08:54 AM             8,114 c Spark Generate Error.vi
+08/18/2024  08:54 AM             8,321 c Spark Get Alt Encoder Average Depth.vi
+08/18/2024  08:54 AM             8,305 c Spark Get Alt Encoder Counts Per Revolution.vi
+08/18/2024  08:54 AM             8,300 c Spark Get Alt Encoder Inverted.vi
+08/18/2024  08:54 AM             8,366 c Spark Get Alt Encoder Measurement Period.vi
+08/18/2024  08:54 AM             8,327 c Spark Get Alt Encoder Position Factor.vi
+08/18/2024  08:54 AM             8,280 c Spark Get Alt Encoder Position.vi
+08/18/2024  08:54 AM             8,327 c Spark Get Alt Encoder Velocity Factor.vi
+08/18/2024  08:54 AM             8,292 c Spark Get Alt Encoder Velocity.vi
+08/18/2024  08:54 AM             8,304 c Spark Get Analog Average Depth.vi
+08/18/2024  08:54 AM             8,223 c Spark Get Analog Inverted.vi
+08/18/2024  08:54 AM             8,341 c Spark Get Analog Measurement Period.vi
+08/18/2024  08:54 AM             8,155 c Spark Get Analog Mode.vi
+08/18/2024  08:54 AM             8,341 c Spark Get Analog Position Conversion Factor.vi
+08/18/2024  08:54 AM             8,263 c Spark Get Analog Position.vi
+08/18/2024  08:54 AM             8,349 c Spark Get Analog Velocity Conversion Factor.vi
+08/18/2024  08:54 AM             8,267 c Spark Get Analog Velocity.vi
+08/18/2024  08:54 AM             8,198 c Spark Get Analog Voltage.vi
+08/18/2024  08:54 AM             7,231 c Spark Get API Version.vi
+08/18/2024  08:54 AM             8,274 c Spark Get Applied Output.vi
+08/18/2024  08:54 AM             8,261 c Spark Get Average Depth.vi
+08/18/2024  08:54 AM             8,235 c Spark Get Bus Voltage.vi
+08/18/2024  08:54 AM             8,285 c Spark Get Closed Loop Ramp Rate.vi
+08/18/2024  08:54 AM             7,684 c Spark Get Control Frame Period.vi
+08/18/2024  08:54 AM             8,309 c Spark Get Counts Per Revolution.vi
+08/18/2024  08:54 AM             8,396 c Spark Get D Filter.vi
+08/18/2024  08:54 AM             8,325 c Spark Get D.vi
+08/18/2024  08:54 AM             8,169 c Spark Get Device Id.vi
+08/18/2024  08:54 AM             8,890 c Spark Get DRV Status.vi
+08/18/2024  08:54 AM             8,320 c Spark Get Duty Cycle Average Depth.vi
+08/18/2024  08:54 AM             8,299 c Spark Get Duty Cycle Inverted.vi
+08/18/2024  08:54 AM             8,191 c Spark Get Duty Cycle Mode.vi
+08/18/2024  08:54 AM             8,265 c Spark Get Duty Cycle Offset.vi
+08/18/2024  08:54 AM             8,330 c Spark Get Duty Cycle Position Factor.vi
+08/18/2024  08:54 AM             8,283 c Spark Get Duty Cycle Position.vi
+08/18/2024  08:54 AM             8,315 c Spark Get Duty Cycle Sample Delta.vi
+08/18/2024  08:54 AM             8,334 c Spark Get Duty Cycle Velocity Factor.vi
+08/18/2024  08:54 AM             8,287 c Spark Get Duty Cycle Velocity.vi
+08/18/2024  08:54 AM             8,280 c Spark Get Encoder Inverted.vi
+08/18/2024  08:54 AM             8,264 c Spark Get Encoder Position.vi
+08/18/2024  08:54 AM             8,264 c Spark Get Encoder Velocity.vi
+08/18/2024  08:54 AM             8,605 c Spark Get Fault.vi
+08/18/2024  08:54 AM             8,194 c Spark Get Faults.vi
+08/18/2024  08:54 AM             8,278 c Spark Get Feedback Device ID.vi
+08/18/2024  08:54 AM             8,366 c Spark Get FF.vi
+08/18/2024  08:54 AM             9,580 c Spark Get Firmware Version.vi
+08/18/2024  08:54 AM             8,325 c Spark Get Hall Sensor Average Depth.vi
+08/18/2024  08:54 AM             8,299 c Spark Get Hall Sensor Sample Rate.vi
+08/18/2024  08:54 AM             8,171 c Spark Get I Accum.vi
+08/18/2024  08:54 AM             8,431 c Spark Get I Max Accum.vi
+08/18/2024  08:54 AM             8,386 c Spark Get I Zone.vi
+08/18/2024  08:54 AM             8,329 c Spark Get I.vi
+08/18/2024  08:54 AM             8,141 c Spark Get Idle Mode.vi
+08/18/2024  08:54 AM             8,232 c Spark Get Inverted.vi
+08/18/2024  08:54 AM             7,694 c Spark Get Last Error.vi
+08/18/2024  08:54 AM             8,458 c Spark Get Limit Polarity.vi
+08/18/2024  08:54 AM             8,572 c Spark Get Limit Switch.vi
+08/18/2024  08:54 AM             8,504 c Spark Get MAX Motion Allowed Closed Loop Error.vi
+08/18/2024  08:54 AM             8,476 c Spark Get MAX Motion Max Accel.vi
+08/18/2024  08:54 AM             8,463 c Spark Get MAX Motion Max Jerk.vi
+08/18/2024  08:54 AM             8,483 c Spark Get MAX Motion Max Velocity.vi
+08/18/2024  08:54 AM             8,475 c Spark Get MAX Motion Mode.vi
+08/18/2024  08:54 AM             8,310 c Spark Get Measurement Period.vi
+08/18/2024  08:54 AM             8,295 c Spark Get Motor Interface.vi
+08/18/2024  08:54 AM             8,289 c Spark Get Motor Temperature.vi
+08/18/2024  08:54 AM             8,150 c Spark Get Motor Type.vi
+08/18/2024  08:54 AM             8,267 c Spark Get Open Loop Ramp Rate.vi
+08/18/2024  08:54 AM             8,270 c Spark Get Output Current.vi
+08/18/2024  08:54 AM             8,406 c Spark Get Output Max.vi
+08/18/2024  08:54 AM             8,406 c Spark Get Output Min.vi
+08/18/2024  08:54 AM             8,325 c Spark Get P.vi
+08/18/2024  08:54 AM            10,198 c Spark Get Parameter Bool.vi
+08/18/2024  08:54 AM            10,201 c Spark Get Parameter Float32.vi
+08/18/2024  08:54 AM            10,179 c Spark Get Parameter Int32.vi
+08/18/2024  08:54 AM            10,208 c Spark Get Parameter Uint32.vi
+08/18/2024  08:54 AM            10,180 c Spark Get Periodic Status0.vi
+08/18/2024  08:54 AM             9,476 c Spark Get Periodic Status1.vi
+08/18/2024  08:54 AM             9,156 c Spark Get Periodic Status2.vi
+08/18/2024  08:54 AM             9,400 c Spark Get Periodic Status3.vi
+08/18/2024  08:54 AM             8,828 c Spark Get Periodic Status4.vi
+08/18/2024  08:54 AM             9,252 c Spark Get Periodic Status5.vi
+08/18/2024  08:54 AM             9,212 c Spark Get Periodic Status6.vi
+08/18/2024  08:54 AM             8,314 c Spark Get Position Conversion Factor.vi
+08/18/2024  08:54 AM             8,302 c Spark Get Position PID Max Input.vi
+08/18/2024  08:54 AM             8,298 c Spark Get Position PID Min Input.vi
+08/18/2024  08:54 AM             8,324 c Spark Get Position PID Wrap Enable.vi
+08/18/2024  08:54 AM             8,699 c Spark Get Secondary Current Limit.vi
+08/18/2024  08:54 AM             8,753 c Spark Get Serial Number.vi
+08/18/2024  08:54 AM             9,107 c Spark Get Smart Current Limit.vi
+08/18/2024  08:54 AM             8,499 c Spark Get Smart Motion Accel Strategy.vi
+08/18/2024  08:54 AM             8,510 c Spark Get Smart Motion Allowed Closed Loop Error.vi
+08/18/2024  08:54 AM             8,482 c Spark Get Smart Motion Max Accel.vi
+08/18/2024  08:54 AM             8,493 c Spark Get Smart Motion Max Velocity.vi
+08/18/2024  08:54 AM             8,472 c Spark Get Smart Motion Min Output Velocity.vi
+08/18/2024  08:54 AM             8,550 c Spark Get Soft Limit.vi
+08/18/2024  08:54 AM             8,171 c Spark Get Spark Model.vi
+08/18/2024  08:54 AM             8,700 c Spark Get Sticky Fault.vi
+08/18/2024  08:54 AM             8,277 c Spark Get Sticky Faults.vi
+08/18/2024  08:54 AM             8,322 c Spark Get Velocity Conversion Factor.vi
+08/18/2024  08:54 AM             8,320 c Spark Get Voltage Compensation Nominal Voltage.vi
+08/18/2024  08:54 AM             7,753 c Spark ID Assign.vi
+08/18/2024  08:54 AM             7,590 c Spark Identify Unique Id.vi
+08/18/2024  08:54 AM             7,676 c Spark Identify.vi
+08/18/2024  08:54 AM             8,243 c Spark Is Follower.vi
+08/18/2024  08:54 AM             8,576 c Spark Is Limit Enabled.vi
+08/18/2024  08:54 AM             8,609 c Spark Is Soft Limit Enabled.vi
+08/18/2024  08:54 AM             7,527 c Spark Register Id.vi
+08/18/2024  08:54 AM             8,132 c Spark Restore Factory Defaults.vi
+08/18/2024  08:54 AM             7,414 c Spark Safe Float.vi
+08/18/2024  08:54 AM             8,145 c Spark Set Alt Encoder Average Depth.vi
+08/18/2024  08:54 AM             8,117 c Spark Set Alt Encoder Counts Per Revolution.vi
+08/18/2024  08:54 AM             8,120 c Spark Set Alt Encoder Inverted.vi
+08/18/2024  08:54 AM             8,178 c Spark Set Alt Encoder Measurement Period.vi
+08/18/2024  08:54 AM             8,143 c Spark Set Alt Encoder Position Factor.vi
+08/18/2024  08:54 AM             8,100 c Spark Set Alt Encoder Position.vi
+08/18/2024  08:54 AM             8,151 c Spark Set Alt Encoder Velocity Factor.vi
+08/18/2024  08:54 AM             8,116 c Spark Set Analog Average Depth.vi
+08/18/2024  08:54 AM             8,027 c Spark Set Analog Inverted.vi
+08/18/2024  08:54 AM             8,157 c Spark Set Analog Measurement Period.vi
+08/18/2024  08:54 AM             8,019 c Spark Set Analog Mode.vi
+08/18/2024  08:54 AM             8,157 c Spark Set Analog Position Conversion Factor.vi
+08/18/2024  08:54 AM             8,161 c Spark Set Analog Velocity Conversion Factor.vi
+08/18/2024  08:54 AM             8,077 c Spark Set Average Depth.vi
+08/18/2024  08:54 AM             7,719 c Spark Set CAN Max Retries.vi
+08/18/2024  08:54 AM             8,003 c Spark Set CAN Timeout.vi
+08/18/2024  08:54 AM             8,097 c Spark Set Closed Loop Ramp Rate.vi
+08/18/2024  08:54 AM             7,732 c Spark Set Control Frame Period.vi
+08/18/2024  08:54 AM             8,121 c Spark Set Counts Per Revolution.vi
+08/18/2024  08:54 AM             8,216 c Spark Set D Filter.vi
+08/18/2024  08:54 AM             8,149 c Spark Set D.vi
+08/18/2024  08:54 AM             8,136 c Spark Set Duty Cycle Average Depth.vi
+08/18/2024  08:54 AM             8,119 c Spark Set Duty Cycle Inverted.vi
+08/18/2024  08:54 AM             8,051 c Spark Set Duty Cycle Mode.vi
+08/18/2024  08:54 AM             8,085 c Spark Set Duty Cycle Offset.vi
+08/18/2024  08:54 AM             8,142 c Spark Set Duty Cycle Position Factor.vi
+08/18/2024  08:54 AM             8,131 c Spark Set Duty Cycle Sample Delta.vi
+08/18/2024  08:54 AM             8,146 c Spark Set Duty Cycle Velocity Factor.vi
+08/18/2024  08:54 AM             8,096 c Spark Set Encoder Inverted.vi
+08/18/2024  08:54 AM             8,076 c Spark Set Encoder Position.vi
+08/18/2024  08:54 AM             8,257 c Spark Set Feedback Device Range.vi
+08/18/2024  08:54 AM             8,111 c Spark Set Feedback Device.vi
+08/18/2024  08:54 AM             8,154 c Spark Set FF.vi
+08/18/2024  08:54 AM             8,306 c Spark Set Follow.vi
+08/18/2024  08:54 AM             8,141 c Spark Set Hall Sensor Average Depth.vi
+08/18/2024  08:54 AM             8,115 c Spark Set Hall Sensor Sample Rate.vi
+08/18/2024  08:54 AM             7,987 c Spark Set I Accum.vi
+08/18/2024  08:54 AM             8,251 c Spark Set I Max Accum.vi
+08/18/2024  08:54 AM             8,202 c Spark Set I Zone.vi
+08/18/2024  08:54 AM             8,149 c Spark Set I.vi
+08/18/2024  08:54 AM             8,009 c Spark Set Idle Mode.vi
+08/18/2024  08:54 AM             8,008 c Spark Set Inverted.vi
+08/18/2024  08:54 AM             8,014 c Spark Set Last Error.vi
+08/18/2024  08:54 AM             8,330 c Spark Set Limit Polarity.vi
+08/18/2024  08:54 AM             8,324 c Spark Set MAX Motion Allowed Closed Loop Error.vi
+08/18/2024  08:54 AM             8,296 c Spark Set MAX Motion Max Accel.vi
+08/18/2024  08:54 AM             8,283 c Spark Set MAX Motion Max Jerk.vi
+08/18/2024  08:54 AM             8,303 c Spark Set MAX Motion Max Velocity.vi
+08/18/2024  08:54 AM             8,343 c Spark Set MAX Motion Mode.vi
+08/18/2024  08:54 AM             8,130 c Spark Set Measurement Period.vi
+08/18/2024  08:54 AM             8,018 c Spark Set Motor Type.vi
+08/18/2024  08:54 AM             8,083 c Spark Set Open Loop Ramp Rate.vi
+08/18/2024  08:54 AM             8,408 c Spark Set Output Range.vi
+08/18/2024  08:54 AM             8,153 c Spark Set P.vi
+08/18/2024  08:54 AM            10,014 c Spark Set Parameter Bool.vi
+08/18/2024  08:54 AM            10,017 c Spark Set Parameter Float32.vi
+08/18/2024  08:54 AM             9,999 c Spark Set Parameter Int32.vi
+08/18/2024  08:54 AM            10,032 c Spark Set Parameter Uint32.vi
+08/18/2024  08:54 AM             8,445 c Spark Set Periodic Frame Period.vi
+08/18/2024  08:54 AM             7,742 c Spark Set Periodic Frame Timeout.vi
+08/18/2024  08:54 AM             8,134 c Spark Set Position Conversion Factor.vi
+08/18/2024  08:54 AM             8,106 c Spark Set Position PID Max Input.vi
+08/18/2024  08:54 AM             8,106 c Spark Set Position PID Min Input.vi
+08/18/2024  08:54 AM             8,136 c Spark Set Position PID Wrap Enable.vi
+08/18/2024  08:54 AM             8,379 c Spark Set Secondary Current Limit.vi
+08/18/2024  08:54 AM             8,067 c Spark Set Sensor Type.vi
+08/18/2024  08:54 AM             7,752 c Spark Set Sim Alt Encoder Velocity.vi
+08/18/2024  08:54 AM             7,735 c Spark Set Sim Analog Position.vi
+08/18/2024  08:54 AM             7,739 c Spark Set Sim Analog Velocity.vi
+08/18/2024  08:54 AM             7,718 c Spark Set Sim Analog Voltage.vi
+08/18/2024  08:54 AM             7,742 c Spark Set Sim Applied Output.vi
+08/18/2024  08:54 AM             8,066 c Spark Set Sim Free Speed.vi
+08/18/2024  08:54 AM             8,080 c Spark Set Sim Stall Torque.vi
+08/18/2024  08:54 AM             8,623 c Spark Set Smart Current Limit.vi
+08/18/2024  08:54 AM             8,375 c Spark Set Smart Motion Accel Strategy.vi
+08/18/2024  08:54 AM             8,338 c Spark Set Smart Motion Allowed Closed Loop Error.vi
+08/18/2024  08:54 AM             8,306 c Spark Set Smart Motion Max Accel.vi
+08/18/2024  08:54 AM             8,313 c Spark Set Smart Motion Max Velocity.vi
+08/18/2024  08:54 AM             8,304 c Spark Set Smart Motion Min Output Velocity.vi
+08/18/2024  08:54 AM             8,370 c Spark Set Soft Limit.vi
+08/18/2024  08:54 AM             8,134 c Spark Set Velocity Conversion Factor.vi
+08/18/2024  08:54 AM             9,104 c Spark Setpoint Command.vi
+08/18/2024  08:54 AM            14,457 dir.mnu
+08/18/2024  09:12 AM                 0 names.txt
+             235 File(s)      1,952,495 bytes
+               2 Dir(s)  147,245,998,080 bytes free

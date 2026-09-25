@@ -1,0 +1,203 @@
+name: Make Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    uses: ./.github/workflows/build.yml
+    with:
+      public-release: true
+
+  check-versions:
+    runs-on: ubuntu-latest
+    needs: build
+    outputs:
+      EXPECTED_TAG: ${{ env.EXPECTED_TAG }}
+      VERSION: ${{ env.VERSION }}
+    steps:
+      - name: Get sha and tag
+        run: |
+          echo "EXPECTED_TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+          echo "COMMIT_SHA=${{ github.sha }}" >> $GITHUB_ENV
+
+      # Download both SDK and version.txt
+      - name: Download workflow artifacts
+        uses: dawidd6/action-download-artifact@v14
+        with:
+          run_id: ${{ github.run_id }}
+          path: '.'
+
+      # Get publish.gradle version
+      - name: Get publish.gradle version
+        id: get_version
+        run: |
+          echo "VERSION=$(cat version/version.txt)" >> $GITHUB_ENV
+          echo "version=v$(cat version/version.txt)" >> $GITHUB_OUTPUT
+
+      # Get json from file
+      - name: Get REVLib.json
+        id: get_json
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: REVLib/vendordeps/REVLib.json
+
+      # Store versions into variables
+      - name: Parse JSON
+        id: parse_json
+        run: |
+          echo "version=v${{ fromJson(steps.get_json.outputs.content).version }}" >> $GITHUB_OUTPUT
+          echo "javaVersion=v${{ fromJson(steps.get_json.outputs.content).javaDependencies[0].version }}" >> $GITHUB_OUTPUT
+          echo "jniVersion=v${{ fromJson(steps.get_json.outputs.content).jniDependencies[0].version }}" >> $GITHUB_OUTPUT
+          echo "cppVersion=v${{ fromJson(steps.get_json.outputs.content).cppDependencies[0].version }}" >> $GITHUB_OUTPUT
+          echo "driverVersion=v${{ fromJson(steps.get_json.outputs.content).cppDependencies[1].version }}" >> $GITHUB_OUTPUT
+
+      # Check publish.gradle version
+      - name: publish.gradle version check FAILED
+        if: ${{ steps.get_version.outputs.version != env.EXPECTED_TAG }}
+        run: |
+          echo Expected tag: ${{ env.EXPECTED_TAG }}
+          echo publish.gradle version: ${{ steps.get_version.outputs.version }}
+          exit 1
+
+      # Check all versions in vendordeps JSON
+      - name: vendordeps JSON versions check FAILED
+        if: ${{ steps.parse_json.outputs.version != env.EXPECTED_TAG ||
+          steps.parse_json.outputs.javaVersion != env.EXPECTED_TAG ||
+          steps.parse_json.outputs.jniVersion != env.EXPECTED_TAG ||
+          steps.parse_json.outputs.cppVersion != env.EXPECTED_TAG ||
+          steps.parse_json.outputs.driverVersion != env.EXPECTED_TAG }}
+        run: |
+          echo Expected tag: ${{ env.EXPECTED_TAG }}
+          echo version: ${{ steps.parse_json.outputs.version }}
+          echo javaDependencies[0].version: ${{ steps.parse_json.outputs.javaVersion }}
+          echo jniDependencies[0].version: ${{ steps.parse_json.outputs.jniVersion }}
+          echo cppDependencies[0].version: ${{ steps.parse_json.outputs.cppVersion }}
+          echo cppDependencies[1].version: ${{ steps.parse_json.outputs.driverVersion }}
+          exit 1
+
+  prepare-release:
+    runs-on: ubuntu-latest
+    needs: check-versions
+    steps:
+      # Download API, docs, and version.txt
+      - name: Download workflow artifacts
+        uses: dawidd6/action-download-artifact@v14
+        with:
+          run_id: ${{ github.run_id }}
+          path: './artifacts'
+
+      # Create new release draft
+      - name: Create release
+        id: create_release
+        env:
+          GITHUB_TOKEN: ${{ secrets.REVBOT2_GH_TOKEN }}
+        run: |
+          ROOT=$(pwd)
+          REV_GH_ORG=REVrobotics
+          BINARIES_GH_REPO=REV-Software-Binaries
+          METADATA_GH_REPO=Software-Update-Metadata
+          MAVEN_GH_REPO=maven.revrobotics.com
+          CODE_DOCS_GH_REPO=codedocs.revrobotics.com
+          TAG=revlib-${{ needs.check-versions.outputs.VERSION }}
+          REVLIB_OFFLINE_ZIP=REVLib-offline-${{ needs.check-versions.outputs.EXPECTED_TAG }}.zip
+          REVLIB_DOCS_ZIP=REVLib-docs-${{ needs.check-versions.outputs.EXPECTED_TAG }}.zip
+
+          echo "## Known issues:" > notes
+          echo >> notes
+          echo "## Changelog:" >> notes
+          echo >> notes
+
+          echo "Configuring git"
+          git config --global user.email "noah+gitbot@revrobotics.com"
+          git config --global user.name "REV-Bot2"
+
+          # Workaround for https://github.com/cli/cli/issues/2944
+          echo "Running gh auth setup-git"
+          gh auth setup-git
+
+          echo "Cloning $METADATA_GH_REPO"
+          gh repo clone "$REV_GH_ORG/$METADATA_GH_REPO"
+
+          echo "Cloning $MAVEN_GH_REPO"
+          gh repo clone "$REV_GH_ORG/$MAVEN_GH_REPO"
+
+          echo "Cloning $CODE_DOCS_GH_REPO"
+          gh repo clone "$REV_GH_ORG/$CODE_DOCS_GH_REPO"
+
+          echo "Creating $BINARIES_GH_REPO release"
+          gh release create $TAG --repo $REV_GH_ORG/$BINARIES_GH_REPO --draft --notes-file ./notes --title "REVLib ${{ needs.check-versions.outputs.VERSION }}"
+
+          echo "Sleep after creating release to avoid weird race conditions"
+          sleep 5
+
+          echo "Creating offline and docs zip files"
+          cd "$ROOT/artifacts/REVLib"
+          zip -r ../$REVLIB_OFFLINE_ZIP . *
+          cd ..
+          cd docs
+          zip -r ../$REVLIB_DOCS_ZIP . *
+
+          echo "Uploading offline and docs zip files to the GitHub release"
+          cd "$ROOT/artifacts/"
+          gh release upload $TAG --repo $REV_GH_ORG/$BINARIES_GH_REPO $REVLIB_OFFLINE_ZIP $REVLIB_DOCS_ZIP
+
+          echo "Uploading Maven zips and jars to the GitHub release"
+          cd "$ROOT/artifacts/REVLib/maven/"
+          find . \( -name "*.zip" -o -name "*.jar" \) | sed 's|^./||' | while read path; do
+            gh release upload $TAG --repo $REV_GH_ORG/$BINARIES_GH_REPO "$path"
+            filename=$(basename "$path")
+            echo "/$path https://github.com/REVrobotics/REV-Software-Binaries/releases/download/$TAG/$filename 302!" >> "$ROOT/$MAVEN_GH_REPO/_redirects"
+          done
+
+          echo "Copying non-zip and non-jar Maven files"
+          cd "$ROOT/artifacts/REVLib/maven/"
+          find . ! \( -name "*.zip" -o -name "*.jar" \) -type f | sed 's|^./||' | while read path; do
+            cp --parents "$path" "$ROOT/$MAVEN_GH_REPO/"
+          done
+
+          echo "Submitting PR for $MAVEN_GH_REPO"
+          cd "$ROOT/$MAVEN_GH_REPO/"
+          # We're re-using the tag name from the binaries repository as the branch name for this PR
+          git switch --create $TAG
+          git add -A
+          git commit -m "Update Maven repo with REVLib ${{ needs.check-versions.outputs.VERSION }}"
+          git push -u origin $TAG
+          gh pr create --repo "$REV_GH_ORG/$MAVEN_GH_REPO" --title "Update Maven repo with REVLib ${{ needs.check-versions.outputs.VERSION }}" --body ""
+
+          echo "Submitting PR with updated REVLib.json to $METADATA_GH_REPO"
+          # Update the current year's REVLib.json
+          export SEMVER=${{ needs.check-versions.outputs.VERSION }}
+          cp "$ROOT/artifacts/REVLib/vendordeps/REVLib.json" "$ROOT/$METADATA_GH_REPO/deploy/automated/REVLib-${SEMVER%.*.*}.json"
+          cd "$ROOT/$METADATA_GH_REPO/"
+          # We're re-using the tag name from the binaries repository as the branch name for this PR
+          git switch --create $TAG
+          git add -A
+          git commit -m "Update REVLib.json with version ${{ needs.check-versions.outputs.VERSION }}"
+          git push -u origin $TAG
+          gh pr create --repo "$REV_GH_ORG/$METADATA_GH_REPO" --title "Update REVLib.json with version ${{ needs.check-versions.outputs.VERSION }}" --body ""
+
+          echo "Submitting PR for $CODE_DOCS_GH_REPO"
+          cd "$ROOT/$CODE_DOCS_GH_REPO/"
+          rm -rf ./cpp/
+          rm -rf ./java/
+          cp --recursive "$ROOT/artifacts/docs/cppdoc/html/" "$ROOT/$CODE_DOCS_GH_REPO/cpp"
+          cp --recursive "$ROOT/artifacts/docs/javadoc/" "$ROOT/$CODE_DOCS_GH_REPO/java"
+
+          echo "$ROOT/artifacts/docs/cppdoc/html/ contents"
+          ls "$ROOT/artifacts/docs/cppdoc/html/"
+          echo "$ROOT/$CODE_DOCS_GH_REPO/cpp/ contents"
+          ls "$ROOT/$CODE_DOCS_GH_REPO/cpp"
+
+          # We're re-using the tag name from the binaries repository as the branch name for this PR
+          git switch --create $TAG
+          git add -A
+          git commit -m "Update docs for REVLib version ${{ needs.check-versions.outputs.VERSION }}"
+          git push -u origin $TAG
+          gh pr create --repo "$REV_GH_ORG/$CODE_DOCS_GH_REPO" --title "Update docs for REVLib version ${{ needs.check-versions.outputs.VERSION }}" --body ""

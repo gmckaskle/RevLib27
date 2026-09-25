@@ -1,0 +1,68 @@
+name: Changelog Check
+
+on:
+  pull_request:
+    branches:
+      - '*'
+  issue_comment:
+    types: [created]  # Trigger on comment creation
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      PR_BODY: ${{ github.event.pull_request.body }}
+      BASE: ${{ github.event.pull_request.base.sha }}
+      HEAD: ${{ github.event.pull_request.head.sha }}
+      DISABLE_CHANGELOG_CHECK: ${{ secrets.DISABLE_CHANGELOG_CHECK || 'NO' }}  # Use secret or default to 'NO'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check for override in PR comments
+        if: github.event_name == 'issue_comment' && contains(github.event.comment.body, '/no-changelog-check')
+        run: |
+          echo "Disabling changelog check due to user comment."
+          echo "DISABLE_CHANGELOG_CHECK=YES" >> "$GITHUB_ENV"
+
+      - name: Check for override in PR body
+        if: github.event_name != 'issue_comment'
+        run: |
+          if echo "${{ env.PR_BODY }}" | grep -qE --ignore-case "No changelog needed"; then
+            echo "PR_BODY_DISABLES_CHECK=YES" >> "$GITHUB_ENV"
+          else
+            echo "PR_BODY_DISABLES_CHECK=NO" >> "$GITHUB_ENV"
+          fi
+
+      - name: Check for Changelog
+        run: |
+          if [[ "${{ env.DISABLE_CHANGELOG_CHECK }}" == "YES" ]]; then
+            echo "Changelog check skipped due to user comment."
+            exit 0
+          fi
+
+          if [[ "${{ env.PR_BODY_DISABLES_CHECK }}" == "YES" ]]; then
+            echo "Changelog check skipped due to PR body."
+            exit 0
+          fi
+
+          FILES_CHANGED=$(git diff $BASE..$HEAD --name-only)
+
+          check_folder_changelog() {
+            local folder="$1"
+            local changelog="Changelog.md"
+
+            if echo "$FILES_CHANGED" | grep -qE "^$folder/"; then
+              echo "$folder was changed"
+              if ! echo "$FILES_CHANGED" | grep -qE "^$changelog$"; then
+                echo "Error: $folder was changed, but $changelog was not updated."
+                exit 1
+              fi
+            fi
+          }
+
+          check_folder_changelog "src"
+          check_folder_changelog "LabVIEW"
