@@ -1,498 +1,832 @@
 RCversion: 3
 include: "RevSpark.rch"
 
- ///// IMAQdx Class Definition /////
+ ///// REVSpark Class Definition /////
  class: RevSpark
 genericType: RevSpark
 passAttributeError: none
 className: RevSpark
 flags: 0
 
-event:	FrameDone	"Frame Done"	0	2
-	BufferInterval	numeric	uInt32	value	config
-	ActualBufferNumber	numeric	uInt32	value	data
-	"Execute an event handler when a frame done event occurs."	"IMAQdx_Register_Events.html#details"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-event:	PnP	"Plug and Play"	1	1
-	Event	numeric	uInt32		enum	{"Camera Attached"=0, "Camera Detached"=1, "Bus Reset"=2}	value	configdata
-	"Execute an event handler when a plug and play event occurs."	"IMAQdx_Register_Events.html#details"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-event:	AttributeUpdated	"Attribute Updated"	2	1
-	Name	string	StrHandle	in	configdata
-	"Execute an event handler when an attribute updated event occurs."	"IMAQdx_Register_Events.html#details"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-event:	IOSignalEdge	"IO Signal Edge"	3	3
-	"Signal Type"	numeric	uInt32	enum	{"TTL"=0, "RTSI"=1, "Iso In"=2, "Iso Out"=3}	value	configdata
-	"Signal Number"	numeric	uInt32	value	configdata
-	"Signal Edge"	numeric	uInt32	enum	{"Rising Edge"=0, "Falling Edge"=1}	value	configdata
-	"Execute an event handler when an IO signal edge event occurs."	"IMAQdx_Register_Events.html#details"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-event:	StatusSignal	"Status Signal"	4	1
-	"Signal Type"	numeric	uInt32	enum	{"Acquisition Active"=0, "Acquisition Done"=1, "Frame Start"=2, "Frame Done"=3, "Buffer Complete"=4}	value	configdata
-	"Execute an event handler when a status signal event occurs."	"IMAQdx_Register_Events.html#details"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: BaseAddress
-	"Camera Information:Base Address"
-	uL	readonly	29	0
-	"Read only. Gets the base address of the camera registers."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: BusType
-	"Camera Information:Bus Type"
-	uL	enum	{"FireWire"=825440564, "Ethernet"=1768977972, "Simulator"=544434541, "Direct Show"=1685284983, "IP"=1230005101, "Smart Cam2"=1396924722, "USB3Vision"=1431519795, "UVC"=1431716640, "ISC"=1230193440, "Camera Link"=1129074251, "CXP"=1129861152}	readonly	29	1
-	"Read only. Gets the bus type of the camera."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: ModelName
-	"Camera Information:Model Name"
-	string	readonly	29	2
-	"Read only. Returns the model name."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: SerialNumberHigh
-	"Camera Information:Serial Number High"
-	uL	readonly	29	3
-	"Read only. Gets the upper 32-bits of the camera 64-bit serial number."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: SerialNumberLow
-	"Camera Information:Serial Number Low"
-	uL	readonly	29	4
-	"Read only. Gets the lower 32-bits of the camera 64-bit serial number."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: VendorName
-	"Camera Information:Vendor Name"
-	string	readonly	29	5
-	"Read only. Returns the vendor name."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: HostIPAddress
-	"Camera Information:Host IP Address"
-	string	readonly	29	2B
-	"Read only. Returns the host adapter IP address."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: IPAddress
-	"Camera Information:IP Address"
-	string	readonly	29	2C
-	"Read only. Returns the IP address."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: PrimaryURLString
-	"Camera Information:Primary URL String"
-	string	readonly	29	48
-	"Read only. Gets the camera's primary URL string."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: SecondaryURLString
-	"Camera Information:Secondary URL String"
-	string	readonly	29	49
-	"Read only. Gets the camera's secondary URL string."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: AcquisitionInProgress
-	"Status Information:Acquisition In Progress"
-	bool	readonly	29	6
-	"Read only. Gets the current state of the acquisition. TRUE if acquiring; otherwise FALSE."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: BufferCount
-	"Status Information:Last Buffer Count"
-	uL	readonly	29	7
-	"Read only. Gets the number of transferred buffers."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: LastBufferNumber
-	"Status Information:Last Buffer Number"
-	uL	readonly	29	8
-	"Read only. Gets the last cumulative buffer number transferred."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: LostBufferCount
-	"Status Information:Lost Buffer Count"
-	uL	readonly	29	9
-	"Read only. Gets the number of lost buffers during an acquisition session."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: LostPacketCount
-	"Status Information:Lost Packet Count"
-	uL	readonly	29	A
-	"Read only. Gets the number of lost packets during an acquisition session."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: RequestedResendPackets
-	"Status Information:Requested Resend Packet Count"
-	uL	readonly	29	3D
-	"Read only. Gets the number of packets requested to be resent during an acquisition session."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: ReceivedResendPackets
-	"Status Information:Received Resend Packets"
-	uL	readonly	29	3E
-	"Read only. Gets the number of packets that were requested to be resent during an acquisition session and were completed."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: HandledEventCount
-	"Status Information:Handled Event Count"
-	uL	readonly	29	53
-	"Read only. Gets the number of handled events during an acquisition session."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: LostEventCount
-	"Status Information:Lost Event Count"
-	uL	readonly	29	54
-	"Read only. Gets the number of lost events during an acquisition session."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: BayerGainB
-	"Acquisition Attributes:Bayer:Gain B"
-	fD	readwrite	29	B
-	"Sets/gets the white balance gain for the blue component of the Bayer conversion."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: BayerGainG
-	"Acquisition Attributes:Bayer:Gain G"
-	fD	readwrite	29	C
-	"Sets/gets the white balance gain for the green component of the Bayer conversion."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: BayerGainR
-	"Acquisition Attributes:Bayer:Gain R"
-	fD	readwrite	29	D
-	"Sets/gets the white balance gain for the red component of the Bayer conversion."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: BayerPattern
-	"Acquisition Attributes:Bayer:Pattern"
-	uL	enum	{"None"=0, "GB"=1, "GR"=2, "BG"=3, "RG"=4, "Use Hardware Value"=5}	readwrite	29	E
-	"Sets/gets the Bayer pattern to use."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: StreamChannelMode
-	"Acquisition Attributes:Controller:Stream Channel Mode"
-	uL	enum	{"Automatic"=0, "Manual"=1}	readwrite	29	51
-	"Gets/sets the mode for allocating a FireWire stream channel."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: DesiredStreamChannel
-	"Acquisition Attributes:Controller:Desired Stream Channel"
-	uL	readwrite	29	52
-	"Gets/sets the stream channel to manually allocate."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: FrameInterval
-	"Acquisition Attributes:Frame Interval"
-	uL	readonly	29	F
-	"Read only. Gets the duration in milliseconds between successive frames."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: IgnoreFirstFrame
-	"Acquisition Attributes:Ignore First Frame"
-	bool	readwrite	29	10
-	"Gets/sets the video delay of one frame between starting the camera and receiving the video feed."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: OffsetX
-	"Acquisition Attributes:Offset X"
-	uL	readwrite	29	11
-	"Gets/sets the left offset of the image."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: OffsetY
-	"Acquisition Attributes:Offset Y"
-	uL	readwrite	29	12
-	"Gets/sets the top offset of the image."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: Width
-	"Acquisition Attributes:Width"
-	uL	readwrite	29	13
-	"Gets/sets the width of the image."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: Height
-	"Acquisition Attributes:Height"
-	uL	readwrite	29	14
-	"Gets/sets the height of the image."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: PixelFormat
-	"Acquisition Attributes:Pixel Format"
-	uL	readwrite	29	15
-	"Gets/sets the pixel format of the source sensor."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: PacketSize
-	"Acquisition Attributes:Packet Size"
-	uL	readwrite	29	16
-	"Gets/sets the packet size in bytes."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: PayloadSize
-	"Acquisition Attributes:Payload Size"
-	uL	readwrite	29	17
-	"Gets/sets the frame size in bytes."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: Speed
-	"Acquisition Attributes:Speed"
-	uL	enum	{"100Mbps"=0, "200Mbps"=1, "400Mbps"=2, "800Mbps"=3}	readwrite	29	18
-	"Gets/sets the transfer speed in Mbps for a FireWire packet."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: ShiftPixelBits
-	"Acquisition Attributes:Shift Pixel Bits"
-	bool	readwrite	29	19
-	"Gets/sets the alignment of 16-bit cameras. Downshift the pixel bits if the camera returns most significant bit-aligned data."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: SwapPixelBytes
-	"Acquisition Attributes:Swap Pixel Bytes"
-	bool	readwrite	29	1A
-	"Gets/sets the endianness of 16-bit cameras. Swap the pixel bytes if the camera returns little endian data."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: OverwriteMode
-	"Acquisition Attributes:Overwrite Mode"
-	uL	enum	{"Get Oldest"=0, "Fail"=2, "Get Newest"=3}	readwrite	29	1B
-	"Gets/sets the overwrite mode, used to determine acquisition when an image transfer cannot be completed due to an overwritten internal buffer."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: Timeout
-	"Acquisition Attributes:Timeout"
-	uL	readwrite	29	1C
-	"Gets/sets the timeout value in milliseconds, used to abort an acquisition when the image transfer cannot be completed within the delay."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: VideoMode
-	"Acquisition Attributes:Video Mode"
-	uL	readwrite	29	1D
-	"Gets/sets the video mode for a camera."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: BitsPerPixel
-	"Acquisition Attributes:Bits Per Pixel"
-	uL	enum	{"Use Hardware Value"=0, "10-bit"=10, "12-bit"=12, "14-bit"=14, "16-bit"=16}	readwrite	29	3C
-	"Gets/sets the actual bits per pixel. For 16-bit components, this represents the actual bit depth (10-, 12-, 14-, or 16-bit)."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: PixelSignedness
-	"Acquisition Attributes:Pixel Signedness"
-	uL	enum	{"Unsigned"=0, "Signed"=1, "Use Hardware Value"=2}	readwrite	29	57
-	"Gets/sets the signedness of the pixel. For 16-bit components, this represents the actual pixel signedness (Signed, or Unsigned)."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: ReserveDualPackets
-	"Acquisition Attributes:Reserve Dual Packets"
-	bool	readwrite	29	4F
-	"Gets/sets if dual packets will be reserved for a very large FireWire packet."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: ReceiveTimestampMode
-	"Acquisition Attributes:Receive Timestamp Mode"
-	uL	enum	{"None"=0, "Tick Count"=1, "System Time"=2}	readwrite	29	50
-	"Gets/sets the mode for timestamping images received by the driver."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: ActualPeakBandwidth
-	"Acquisition Attributes:Advanced Ethernet:Bandwidth Control:Actual Peak Bandwidth"
-	fD	readonly	29	4D
-	"Read only. Returns the actual maximum peak bandwidth the camera will be configured to use."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: DesiredPeakBandwidth
-	"Acquisition Attributes:Advanced Ethernet:Bandwidth Control:Desired Peak Bandwidth"
-	fD	readwrite	29	4E
-	"Gets/sets the desired maximum peak bandwidth the camera should use."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: DestinationMode
-	"Acquisition Attributes:Advanced Ethernet:Controller:Destination Mode"
-	uL	enum	{"Unicast"=0, "Broadcast"=1, "Multicast"=2}	readwrite	29	3A
-	"Gets/Sets where the camera is instructed to send the image stream."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: DestinationMulticastAddress
-	"Acquisition Attributes:Advanced Ethernet:Controller:Destination Multicast Address"
-	string	readwrite	29	3B
-	"Gets/Sets the multicast address the camera should send data in multicast mode."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: EventsEnabled
-	"Acquisition Attributes:Advanced Ethernet:Event Parameters:Events Enabled"
-	bool	readwrite	29	55
-	"Gets/Sets if events will be handled."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: MaxOutstandingEvents
-	"Acquisition Attributes:Advanced Ethernet:Event Parameters:Max Outstanding Events"
-	uL	readwrite	29	56
-	"Gets/Sets the maximum number of outstanding events to queue."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: TestPacketEnabled
-	"Acquisition Attributes:Advanced Ethernet:Test Packet Parameters:Test Packet Enabled"
-	bool	readwrite	29	58
-	"Gets/Sets whether the driver will validate the image streaming settings using test packets prior to an acquisition"	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: TestPacketTimeout
-	"Acquisition Attributes:Advanced Ethernet:Test Packet Parameters:Test Packet Timeout"
-	uL	readwrite	29	59
-	"Gets/Sets the timeout for validating test packet reception (if enabled)"	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: MaxTestPacketRetries
-	"Acquisition Attributes:Advanced Ethernet:Test Packet Parameters:Max Test Packet Retries"
-	uL	readwrite	29	5A
-	"Gets/Sets the number of retries for validating test packet reception (if enabled)"	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: ChunkDataDecodingEnabled
-	"Acquisition Attributes:Chunk Data Decoding:Chunk Data Decoding Enabled"
-	bool	readwrite	29	5B
-	"Gets/Sets whether the driver will decode any chunk data in the image stream"	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: MaximumChunkCopySize
-	"Acquisition Attributes:Chunk Data Decoding:Maximum Chunk Copy Size"
-	uL	readwrite	29	5C
-	"Gets/Sets the maximum size of any single chunk data element that will be made available"	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: LostPacketMode
-	"Acquisition Attributes:Advanced Ethernet:Lost Packet Mode"
-	uL	enum	{"Ignore"=0, "Fail"=1}	readwrite	29	3F
-	"Gets/sets the behavior when the user extracts a buffer that has missing packets."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: MemoryWindowSize
-	"Acquisition Attributes:Advanced Ethernet:Resend Parameters:Memory Window Size"
-	uL	readwrite	29	1E
-	"Gets/sets the size of the memory window of the camera in kilobytes. Should match the camera's internal buffer size."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: ResendsEnabled
-	"Acquisition Attributes:Advanced Ethernet:Resend Parameters:Resends Enabled"
-	bool	readwrite	29	40
-	"Gets/sets if resends will be issued for missing packets."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: ResendThresholdPercentage
-	"Acquisition Attributes:Advanced Ethernet:Resend Parameters:Resend Threshold Percentage"
-	uL	readwrite	29	41
-	"Gets/sets the threshold of the packet processing window that will trigger packets to be resent."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: ResendBatchingPercentage
-	"Acquisition Attributes:Advanced Ethernet:Resend Parameters:Resend Batching Percentage"
-	uL	readwrite	29	42
-	"Gets/sets the percent of the packet resend threshold that will be issued as one group past the initial threshold sent in a single request."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: MaxResendsPerPacket
-	"Acquisition Attributes:Advanced Ethernet:Resend Parameters:Max Resends Per Packet"
-	uL	readwrite	29	43
-	"Gets/sets the maximum number of resend requests that will be issued for a missing packet."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: ResendResponseTimeout
-	"Acquisition Attributes:Advanced Ethernet:Resend Parameters:Resend Response Timeout"
-	uL	readwrite	29	44
-	"Gets/sets the time to wait for a resend request to be satisfied before sending another."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: NewPacketTimeout
-	"Acquisition Attributes:Advanced Ethernet:Resend Parameters:New Packet Timeout"
-	uL	readwrite	29	45
-	"Gets/sets the time to wait for new packets to arrive in a partially completed image before assuming the rest of the image was lost."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: MissingPacketTimeout
-	"Acquisition Attributes:Advanced Ethernet:Resend Parameters:Missing Packet Timeout"
-	uL	readwrite	29	46
-	"Gets/sets the time to wait for a missing packet before issuing a resend."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: ResendTimerResolution
-	"Acquisition Attributes:Advanced Ethernet:Resend Parameters:Resend Timer Resolution"
-	uL	readwrite	29	47
-	"Gets/sets the resolution of the packet processing system that is used for all packet-related timeouts."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: ActiveAttribute
-	"Camera Attributes:Active Attribute"
-	string	readwrite	29	1F
-	"Gets/sets the active attribute"	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: ValueU32
-	"Camera Attributes:Value:U32"
-	uL	readwrite	29	20
-	"Gets/sets the current value as an integer for the active attribute."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: ValueI64
-	"Camera Attributes:Value:I64"
-	iQ	readwrite	29	31
-	"Gets/sets the current value as a 64-bit integer for the active attribute."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: ValueDBL
-	"Camera Attributes:Value:DBL"
-	fD	readwrite	29	21
-	"Gets/sets the current value as a double precision floating point number for the active attribute."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: ValueString
-	"Camera Attributes:Value:String"
-	string	readwrite	29	22
-	"Gets/sets the current value as a string for the active attribute."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: ValueBool
-	"Camera Attributes:Value:Bool"
-	bool	readwrite	29	2A
-	"Gets/sets the current value as a boolean for the active attribute."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: MinU32
-	"Camera Attributes:Minimum:U32"
-	uL	readonly	29	23
-	"Read only. Gets the current minimum as an integer for the active attribute."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: MinI64
-	"Camera Attributes:Minimum:I64"
-	iQ	readonly	29	32
-	"Read only. Gets the current minimum as a 64-bit integer for the active attribute."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: MinDBL
-	"Camera Attributes:Minimum:DBL"
-	fD	readonly	29	24
-	"Read only. Gets the current minimum as a double precision floating point number for the active attribute."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: MinString
-	"Camera Attributes:Minimum:String"
-	string	readonly	29	25
-	"Read only. Gets the current minimum as a string for the active attribute."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: MaxU32
-	"Camera Attributes:Maximum:U32"
-	uL	readonly	29	26
-	"Read only. Gets the current maximum as an integer for the active attribute."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: MaxI64
-	"Camera Attributes:Maximum:I64"
-	iQ	readonly	29	33
-	"Read only. Gets the current maximum as a 64-bit integer for the active attribute."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: MaxDBL
-	"Camera Attributes:Maximum:DBL"
-	fD	readonly	29	27
-	"Read only. Gets the current maximum as a double precision floating point number for the active attribute."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: MaxString
-	"Camera Attributes:Maximum:String"
-	string	readonly	29	28
-	"Read only. Gets the current maximum as a string for the active attribute.-"	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: Type
-	"Camera Attributes:Type"
-	uL	enum	{"U32"=0, "I64"=1, "DBL"=2, "String"=3, "Enum"=4, "Bool"=5, "Command"=6}	readonly	29	29
-	"Read only. Gets the active type for the active attribute."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: EnumValues[]
-	"Camera Attributes:Enum:Values[]"
-	uL1D	readonly	29	2D
-	"Read only. Returns an array of enum attribute values for the active attribute."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: EnumStrings[]
-	"Camera Attributes:Enum:Strings[]"
-	string1D	readonly	29	2E
-	"Read only. Returns an array of enum attribute strings for the active attribute."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: IsReadable
-	"Camera Attributes:Is Readable"
-	bool	readonly	29	2F
-	"Read only. Gets the read access for the active attribute. TRUE if readable; otherwise FALSE."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: IsWritable
-	"Camera Attributes:Is Writable"
-	bool	readonly	29	30
-	"Read only. Gets the write access for the active attribute. TRUE if writable; otherwise FALSE."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: IncU32
-	"Camera Attributes:Increment:U32"
-	uL	readonly	29	35
-	"Read only. Gets the increment as an integer for the active attribute."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: IncI64
-	"Camera Attributes:Increment:I64"
-	iQ	readonly	29	34
-	"Read only. Gets the increment as a 64-bit integer for the active attribute."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: IncDBL
-	"Camera Attributes:Increment:DBL"
-	fD	readonly	29	36
-	"Read only. Gets the increment as a double precision floating point number for the active attribute."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: IncString
-	"Camera Attributes:Increment:String"
-	string	readonly	29	37
-	"Read only. Gets the increment as a string for the active attribute."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: Tooltip
-	"Camera Attributes:Tooltip"
-	string	readonly	29	38
-	"Read only. Gets the tooltip for the active attribute."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: Units
-	"Camera Attributes:Units"
-	string	readonly	29	39
-	"Read only. Gets the units for the active attribute."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: Visibility
-	"Camera Attributes:Visibility"
-	uL	enum	{"Simple"=4096, "Intermediate"=8192, "Advanced"=16384}	readonly	29	4A
-	"Read only. Gets the visibility for the active attribute."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: Description
-	"Camera Attributes:Description"
-	string	readonly	29	4B
-	"Read only. Gets the description for the active attribute."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
-
-attribute: DisplayName
-	"Camera Attributes:Display Name"
-	string	readonly	29	4C
-	"Read only. Gets the display name for the active attribute."	"IMAQdx_Properties.html"	"..\..\help\NI-IMAQdx_VI_Reference.chm"
 
+
+attribute:  CANID	
+    "Basic Configuration:CAN Id"
+	uL	readwrite	29	  0
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  InputMode	
+    "Basic Configuration:Input Mode"
+	uL	readwrite	29	  1
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  MotorType	
+    "Basic Configuration:Motor Type"
+	uL	readwrite	29	  2
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  CommutationAdvance	
+    "Basic Configuration:Commutation Advance"
+	uL	readwrite	29	  3
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  ControlType	
+    "PID COntrol Configuration:Control Type"
+	uL	readwrite	29	  5
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  IdleMode	
+    "Basic Configuration:Idle Mode"
+	uL	readwrite	29	  6
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  InputDeadband	
+    "Basic Configuration:Input Deadband"
+	uL	readwrite	29	  7
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  ClosedLoopControlSensor	
+    "Basic Configuration:Closed Loop Control Sensor"
+	uL	readwrite	29	  9
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  PolePairs	
+    "Basic Configuration:Pole Pairs"
+	uL	readwrite	29	  A
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  CurrentChop	
+    "Basic Configuration:Current Chop"
+	uL	readwrite	29	  B
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  CurrentChopCycles	
+    "Basic Configuration:Current Chop Cycles"
+	uL	readwrite	29	  C
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  P_0	
+    "Basic Configuration:P_0"
+	uL	readwrite	29	  D
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  I_0	
+    "Basic Configuration:CAN I_0"
+	uL	readwrite	29	  E
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  D_0	
+    "Basic Configuration:D_0"
+	uL	readwrite	29	  F
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  V_0	
+    "Basic Configuration:V_0"
+	uL	readwrite	29	  10
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  IZone_0	
+    "Basic Configuration:IZone_0"
+	uL	readwrite	29	  11
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  DFilter_0	
+    "Basic Configuration:DFilter_0"
+	uL	readwrite	29	  12
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  OutputMin_0	
+    "Basic Configuration:Output Min_0"
+	uL	readwrite	29	  13
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  OutputMax_0	
+    "Basic Configuration:Output Max_0"
+	uL	readwrite	29	  14
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  P_1	
+    "Basic Configuration:P_1"
+	uL	readwrite	29	  15
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  I_1	
+    "Basic Configuration:I_1"
+	uL	readwrite	29	  16
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  D_1	
+    "Basic Configuration:D_1"
+	uL	readwrite	29	  17
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  V_1	
+    "Basic Configuration:V_1"
+	uL	readwrite	29	  18
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  IZone_1	
+    "Basic Configuration:IZone_1"
+	uL	readwrite	29	  19
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  DFilter_1	
+    "Basic Configuration:DFilter_1"
+	uL	readwrite	29	  1A
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  OutputMin_1	
+    "Basic Configuration:Output Min_1"
+	uL	readwrite	29	  1B
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  OutputMax_1	
+    "Basic Configuration:Output Max_1"
+	uL	readwrite	29	  1C
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  P_2	
+    "Basic Configuration:P_2"
+	uL	readwrite	29	  1D
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  I_2	
+    "Basic Configuration:I_2"
+	uL	readwrite	29	  1E
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  D_2	
+    "Basic Configuration:D_2"
+	uL	readwrite	29	  1F
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  V_2	
+    "Basic Configuration:V_2"
+	uL	readwrite	29	  20
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  IZone_2	
+    "Basic Configuration:IZone_2"
+	uL	readwrite	29	  21
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  DFilter_2	
+    "Basic Configuration:DFilter_2"
+	uL	readwrite	29	  22
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  OutputMin_2	
+    "Basic Configuration:Output Min_2"
+	uL	readwrite	29	  23
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  OutputMax_2	
+    "Basic Configuration:Output Max_2"
+	uL	readwrite	29	  24
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  P_3	
+    "Basic Configuration:P_3"
+	uL	readwrite	29	  25
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  I_3	
+    "Basic Configuration:I_3"
+	uL	readwrite	29	  26
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  D_3	
+    "Basic Configuration:D_3"
+	uL	readwrite	29	  27
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  V_3	
+    "Basic Configuration:V_3"
+	uL	readwrite	29	  28
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  IZone_3	
+    "Basic Configuration:IZone_3"
+	uL	readwrite	29	  29
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  DFilter_3	
+    "Basic Configuration:DFilter_3"
+	uL	readwrite	29	  2A
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  OutputMin_3	
+    "Basic Configuration:Output Min_3"
+	uL	readwrite	29	  2B
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  OutputMax_3	
+    "Basic Configuration:Output Max_3"
+	uL	readwrite	29	  2C
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  Inverted	
+    "Basic Configuration:Inverted"
+	uL	readwrite	29	  2D
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  LimitSwitchFwdPolarity	
+    "Basic Configuration:Limit Switch Fwd Polarity"
+	uL	readwrite	29	  32
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  LimitSwitchRevPolarity	
+    "Basic Configuration:Limit Switch Rev Polarity"
+	uL	readwrite	29	  33
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  HardLimitFwdEn	
+    "Basic Configuration:Hard Limit Fwd Enable"
+	uL	readwrite	29	  34
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  HardLimitRevEn	
+    "Basic Configuration:Hard Limit Rev Enable"
+	uL	readwrite	29	  35
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  SoftLimitFwdEn	
+    "Basic Configuration:Soft Limit Fwd Enable"
+	uL	readwrite	29	  36
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  SoftLimitRevEn	
+    "Basic Configuration:Soft Limit Rev Enable"
+	uL	readwrite	29	  37
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  OpenLoopRampRate	
+    "Basic Configuration:Open Loop Ramp Rate"
+	uL	readwrite	29	  38
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  LegacyFollowerID	
+    "Basic Configuration:Legacy Follower ID"
+	uL	readwrite	29	  39
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  LegacyFollowerConfig	
+    "Basic Configuration:Legacy Follower Config"
+	uL	readwrite	29	  3A
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  SmartCurrentStallLimit	
+    "Basic Configuration:Smart Current Stall Limit"
+	uL	readwrite	29	  3B
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  SmartCurrentFreeLimit	
+    "Basic Configuration:Smart Current Free Limit"
+	uL	readwrite	29	  3C
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  SmartCurrentConfig	
+    "Basic Configuration:Smart Current Config"
+	uL	readwrite	29	  3D
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  SmartCurrentReserved	
+    "Basic Configuration:Smart Current Reserved"
+	uL	readwrite	29	  3E
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  MotorKv	
+    "Basic Configuration:Motor Kv"
+	uL	readwrite	29	  3F
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  EncoderCountsPerRev	
+    "Basic Configuration:Encoder Counts Per Rev"
+	uL	readwrite	29	  45
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  EncoderAverageDepth	
+    "Basic Configuration:Encoder Average Depth"
+	uL	readwrite	29	  46
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  EncoderSampleDelta	
+    "Basic Configuration:Encoder Sample Delta"
+	uL	readwrite	29	  47
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  EncoderInverted	
+    "Basic Configuration:Encoder Inverted"
+	uL	readwrite	29	  48
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  VoltageCompensationMode	
+    "Basic Configuration:Voltage Compensation Mode"
+	uL	readwrite	29	  4A
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  CompensatedNominalVoltage	
+    "Basic Configuration:Compensated Nominal Voltage"
+	uL	readwrite	29	  4B
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  IMaxAccum_0	
+    "Basic Configuration:IMaxAccum_0"
+	uL	readwrite	29	  60
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  AllowedClosedLoopError_0	
+    "More Configuration:Allowed Closed Loop Error_0"
+	uL	readwrite	29	  61
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  IMaxAccum_1	
+    "Basic Configuration:IMaxAccum_1"
+	uL	readwrite	29	  64
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  AllowedClosedLoopError_1	
+    "Basic Configuration:Allowed Closed Loop Error_1"
+	uL	readwrite	29	  65
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+
+attribute:  IMaxAccum_2	
+    "Basic Configuration:IMaxAccum_2"
+	uL	readwrite	29	  68
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  AllowedClosedLoopError_2	
+    "Basic Configuration:Allowed Closed Loop Error_2"
+	uL	readwrite	29	  69
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  IMaxAccum_3	
+    "Basic Configuration:IMaxAccum_3"
+	uL	readwrite	29	  6C
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  AllowedClosedLoopError_3	
+    "Basic Configuration:Allowed Closed Loop Error_3"
+	uL	readwrite	29	  6D
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  ClosedLoopRampRate	
+    "Basic Configuration:Closed Loop Ramp Rate"
+	uL	readwrite	29	  72
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  SoftLimitForward	
+    "Basic Configuration:Soft Limit Forward"
+	uL	readwrite	29	  73
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  SoftLimitReverse	
+    "Basic Configuration:Soft Limit Reverse"
+	uL	readwrite	29	  74
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  AnalogAverageDepth	
+    "Basic Configuration:Analog Average Depth"
+	uL	readwrite	29	  79
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  AnalogSensorMode	
+    "Basic Configuration:Analog Sensor Mode"
+	uL	readwrite	29	  7A
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  AnalogInverted	
+    "Basic Configuration:Analog Inverted"
+	uL	readwrite	29	  7B
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  AnalogSampleDelta	
+    "Basic Configuration:Analog Sample Delta"
+	uL	readwrite	29	  7C
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  CompatibilityPortConfig	
+    "Basic Configuration:Compatibility Port Config"
+	uL	readwrite	29	  7F
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  AltEncoderCountsPerRev	
+    "Basic Configuration:Alt Encoder Counts Per Rev"
+	uL	readwrite	29	  80
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  AltEncoderAverageDepth	
+    "Basic Configuration:Alt Encoder Average Depth"
+	uL	readwrite	29	  81
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  AltEncoderSampleDelta	
+    "Basic Configuration:Alt Encoder Sample Delta"
+	uL	readwrite	29	  82
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  AltEncoderInverted	
+    "Basic Configuration:Alt Encoder Inverted"
+	uL	readwrite	29	  83
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  NumParameters	
+    "Basic Configuration:Num Parameters"
+	uL	readwrite	29	  8A
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  DutyCycleInverted	
+    "Basic Configuration:Duty Cycle Inverted"
+	uL	readwrite	29	  8D
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  DutyCycleAverageDepth	
+    "Basic Configuration:Duty Cycle Average Depth"
+	uL	readwrite	29	  8F
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  DutyCycleOffsetLegacy	
+    "Basic Configuration:Duty Cycle Offset Legacy"
+	uL	readwrite	29	  91
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  DutyCycleRangeOffset	
+    "Basic Configuration:Duty Cycle Range Offset"
+	uL	readwrite	29	  92
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  PositionPIDWrapEnable	
+    "Basic Configuration:Position PID Wrap Enable"
+	uL	readwrite	29	  95
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  DutyCycleSensorPrescaler	
+    "Basic Configuration:Duty Cycle Sensor Prescaler"
+	uL	readwrite	29	  99
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  DutyCycleOffset	
+    "Basic Configuration:Duty Cycle Offset"
+	uL	readwrite	29	  9A
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  ProductId	
+    "Basic Configuration:Product Id"
+	uL	readwrite	29	  9B
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  DeviceMajorVersion	
+    "Basic Configuration:Device Major Version"
+	uL	readwrite	29	  9C
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  DeviceMinorVersion	
+    "Basic Configuration:Device Minor Version"
+	uL	readwrite	29	  9D
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  Status0Period	
+    "Basic Configuration:Status 0 Period"
+	uL	readwrite	29	  9E
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  Status1Period	
+    "Basic Configuration:Status 1 Period"
+	uL	readwrite	29	  9F
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  Status2Period	
+    "Basic Configuration:Status 2 Period"
+	uL	readwrite	29	  A0
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  Status3Period	
+    "Basic Configuration:Status 3 Period"
+	uL	readwrite	29	  A1
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  Status4Period	
+    "Basic Configuration:Status 4 Period"
+	uL	readwrite	29	  A2
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  Status5Period	
+    "Basic Configuration:Status 5 Period"
+	uL	readwrite	29	  A3
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  Status6Period	
+    "Basic Configuration:Status 6 Period"
+	uL	readwrite	29	  A4
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  Status7Period	
+    "Basic Configuration:Status 7 Period"
+	uL	readwrite	29	  A5
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  MAXMotionCruiseVelocity_0	
+    "Basic Configuration:MAXMotion Cruise Velocity_0"
+	uL	readwrite	29	  A6
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  MAXMotionMaxAccel_0	
+    "Basic Configuration:MAXMotion Max Accel_0"
+	uL	readwrite	29	  A7
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  MAXMotionMaxJerk_0	
+    "Basic Configuration:MAXMotion Max Jerk_0"
+	uL	readwrite	29	  A8
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  MAXMotionAllowedProfileError_0	
+    "Basic Configuration:MAXMotion Allowed Profile Error_0"
+	uL	readwrite	29	  A9
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  MAXMotionPositionMode_0	
+    "Basic Configuration:MAXMotion Position Mode_0"
+	uL	readwrite	29	  AA
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  MAXMotionCruiseVelocity_1	
+    "Basic Configuration:MAXMotion Cruise Velocity_1"
+	uL	readwrite	29	  AB
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  MAXMotionMaxAccel_1	
+    "Basic Configuration:MAXMotion Max Accel_1"
+	uL	readwrite	29	  AC
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  MAXMotionMaxJerk_1	
+    "Basic Configuration:MAXMotion Max Jerk_1"
+	uL	readwrite	29	  AD
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  MAXMotionAllowedProfileError_1	
+    "Basic Configuration:MAXMotion Allowed Profile Error_1"
+	uL	readwrite	29	  AE
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  MAXMotionPositionMode_1	
+    "Basic Configuration:MAXMotion Position Mode_1"
+	uL	readwrite	29	  AF
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  MAXMotionCruiseVelocity_2	
+    "Basic Configuration:MAXMotion Cruise Velocity_2"
+	uL	readwrite	29	  B0
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  MAXMotionMaxAccel_2	
+    "Basic Configuration:MAXMotion Max Accel_2"
+	uL	readwrite	29	  B1
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  MAXMotionMaxJerk_2	
+    "Basic Configuration:MAXMotion Max Jerk_2"
+	uL	readwrite	29	  B2
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  MAXMotionAllowedProfileError_2	
+    "Basic Configuration:MAXMotion Allowed Profile Error_2"
+	uL	readwrite	29	  B3
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  MAXMotionPositionMode_2	
+    "Basic Configuration:MAXMotion Position Mode_2"
+	uL	readwrite	29	  B4
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  MAXMotionCruiseVelocity_3	
+    "Basic Configuration:MAXMotion Cruise Velocity_3"
+	uL	readwrite	29	  B5
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  MAXMotionMaxAccel_3	
+    "Basic Configuration:MAXMotion Max Accel_3"
+	uL	readwrite	29	  B6
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  MAXMotionMaxJerk_3	
+    "Basic Configuration:MAXMotion Max Jerk_3"
+	uL	readwrite	29	  B7
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  MAXMotionAllowedProfileError_3	
+    "Basic Configuration:MAXMotion Allowed Profile Error_3"
+	uL	readwrite	29	  B8
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  MAXMotionPositionMode_3	
+    "Basic Configuration:MAXMotion Position Mode_3"
+	uL	readwrite	29	  B9
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  ForceEnableStatus_0	
+    "Basic Configuration:Force Enable Status_0"
+	uL	readwrite	29	  BA
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  ForceEnableStatus_1	
+    "Basic Configuration:Force Enable Status_1"
+	uL	readwrite	29	  BB
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  ForceEnableStatus_2	
+    "Basic Configuration:Force Enable Status_2"
+	uL	readwrite	29	  BC
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  ForceEnableStatus_3	
+    "Basic Configuration:Force Enable Status_3"
+	uL	readwrite	29	  BD
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  ForceEnableStatus_4	
+    "Basic Configuration:Force Enable Status_4"
+	uL	readwrite	29	  BE
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  ForceEnableStatus_5	
+    "Basic Configuration:Force Enable Status_5"
+	uL	readwrite	29	  BF
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  ForceEnableStatus_6	
+    "Basic Configuration:Force Enable Status_6"
+	uL	readwrite	29	  C0
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  ForceEnableStatus_7	
+    "Basic Configuration:Force Enable Status_7"
+	uL	readwrite	29	  C1
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  FollowerModeLeaderId	
+    "Basic Configuration:Follower Mode Leader Id"
+	uL	readwrite	29	  C2
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  FollowerModeIsInverted	
+    "Basic Configuration:Follower Mode Is Inverted"
+	uL	readwrite	29	  C3
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  DutyCycleEncoderStartPulseUs	
+    "Basic Configuration:Duty Cycle Encoder Start Pulse Us"
+	uL	readwrite	29	  C4
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  DutyCycleEncoderEndPulseUs	
+    "Basic Configuration:Duty Cycle Encoder End Pulse Us"
+	uL	readwrite	29	  C5
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  ParamTableVersion	
+    "Basic Configuration:Param Table Version"
+	uL	readwrite	29	  C6
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  Status8Period	
+    "Basic Configuration:Status8 Period"
+	uL	readwrite	29	  C7
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  ForceEnableStatus_8	
+    "Basic Configuration:Force Enable Status_8"
+	uL	readwrite	29	  C8
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  LimitSwitchPositionSensor	
+    "Basic Configuration:Limit Switch Position Sensor"
+	uL	readwrite	29	  C9
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  LimitSwitchFwdPosition	
+    "Basic Configuration:Limit Switch Fwd Position"
+	uL	readwrite	29	  CA
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  LimitSwitchRevPosition	
+    "Basic Configuration:Limit Switch Rev Position"
+	uL	readwrite	29	  CB
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  S_0	
+    "Basic Configuration:S_0"
+	uL	readwrite	29	  CC
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  A_0	
+    "Basic Configuration:A_0"
+	uL	readwrite	29	  CD
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  G_0	
+    "Basic Configuration:G_0"
+	uL	readwrite	29	  CE
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  Cos_0	
+    "Basic Configuration:Cos_0"
+	uL	readwrite	29	  CF
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  CosRatio_0	
+    "Basic Configuration:Cos Ratio_0"
+	uL	readwrite	29	  D0
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  S_1	
+    "Basic Configuration:S_1"
+	uL	readwrite	29	  D1
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  A_1	
+    "Basic Configuration:A_1"
+	uL	readwrite	29	  D2
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  G_1	
+    "Basic Configuration:G_1"
+	uL	readwrite	29	  D3
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  Cos_1	
+    "Basic Configuration:Cos_1"
+	uL	readwrite	29	  D4
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  CosRatio_1	
+    "Basic Configuration:Cos Ratio_1"
+	uL	readwrite	29	  D5
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  S_2	
+    "Basic Configuration:S_2"
+	uL	readwrite	29	  D6
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  A_2	
+    "Basic Configuration:A_2"
+	uL	readwrite	29	  D7
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  G_2	
+    "Basic Configuration:G_2"
+	uL	readwrite	29	  D8
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  Cos_2	
+    "Basic Configuration:Cos_2"
+	uL	readwrite	29	  D9
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  CosRatio_2	
+    "Basic Configuration:Cos Ratio_2"
+	uL	readwrite	29	  DA
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  S_3	
+    "Basic Configuration:S_3"
+	uL	readwrite	29	  DB
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  A_3	
+    "Basic Configuration:A_3"
+	uL	readwrite	29	  DC
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  G_3	
+    "Basic Configuration:G_3"
+	uL	readwrite	29	  DD
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  Cos_3	
+    "Basic Configuration:Cos_3"
+	uL	readwrite	29	  DE
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  CosRatio_3	
+    "Basic Configuration:Cos Ratio_3"
+	uL	readwrite	29	  DF
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  Status9Period	
+    "Basic Configuration:Status9 Period"
+	uL	readwrite	29	  E0
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  ForceEnableStatus_9	
+    "Basic Configuration:Force Enable Status_9"
+	uL	readwrite	29	  E1
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  DetachedEncoderDeviceID	
+    "Basic Configuration:Detached Encoder Device ID"
+	uL	readwrite	29	  E2
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
