@@ -1,0 +1,27 @@
+Updating to new Systemcore image:
+-------------------------------------
+Download latest limelight OS from GitHub repo, currently 14.
+Download latest zip of LV for Syscore from GitHub.com/ni/systemcore-labview.
+Install Limelight Hardware Manager.
+Install latest WPILib, currently A7. from GitHub systemcore testing
+
+Use USB cable between Syscore and laptop. Power syscore. Screen should be blank -- imaging mode.
+Find device, then select firmware update in HW manager.
+When it finishes, there isn't much indication of success. But redo power without USB cable to see if
+screen boots.
+
+Connect from laptop to syscore  -- robot.local.
+Wifi might work, but better luck with ethernet, or USB after powered up.
+Click on the Add Package button. Select the LV for Systemcore zip file.
+
+I had to restart the LV docker process before it booted successfully.
+
+
+Copy contents of  to controller.
+
+
+Update ~/natinst/.config/?/?/labview.conf to add    LVAddons.AdditionalLocations = "/home/systemcore/natinst/lvaddons"
+I added a .bashrc file so that I could extend LD_LIBRARY_PATH to include ...
+
+
+Latest mrclib comes from frcmaven.wpi.edu

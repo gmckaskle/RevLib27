@@ -1,0 +1,21 @@
+///// REVSpark Type Definition /////
+genericType: RevSpark
+genericTypeName: RevSpark
+control: RevSpark.ctl
+refnum: GenericTag
+sorted: no
+adapt: yes
+matchExact: strict
+menuSelect: yes
+setFunction: LV_REVSparkSetAttribute
+getFunction: LV_REVSparkGetAttribute
+library: FRC_NetworkTablesLV.dll
+termName: "RevSpark Session"
+sourcePalette: "<vilib>:\REVLibDriver5\VIs\SPARK Open Brushless.vi"
+cleanup: idle
+calling: C
+passAttributeError: none
+passMethodError: none
+hasActiveProp: no
+passEventRegError: none
+
