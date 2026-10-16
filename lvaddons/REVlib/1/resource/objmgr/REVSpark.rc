@@ -21,6 +21,11 @@ attribute:  IdleMode
 	uL	enum	{"Coast"=0, "Brake"=1}    readwrite	29	  6
 	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
+attribute:  PowerDash	
+    "Power:-"
+	uL	readwrite	29	  6
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
 attribute:  InputDeadband	
     "Power:Input Deadband"
 	fD	readwrite	29	  7
@@ -29,6 +34,11 @@ attribute:  InputDeadband
 attribute:  OpenLoopRampRate	
     "Power:Open Loop Ramp Rate"
 	fD	readwrite	29	  38
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  PowerDivide1	
+    "Power:-"
+	fD	readwrite	29	  0
 	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  SmartCurrentStallLimit	
@@ -59,6 +69,11 @@ attribute:  CurrentChop
 attribute:  CurrentChopCycles	
     "Power:Current Chop Cycles"
 	uL	readwrite	29	  C
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  PowerDivide2	
+    "Power:-"
+	fD	readwrite	29	  0
 	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  MotorOutputCurrent	
@@ -108,6 +123,11 @@ attribute:  PositionPIDWrap
 attribute:  DetachedEncoderDeviceID	
     "PID:Detached Encoder Device ID"
 	uL	readwrite	29	  E2
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  PIDDivider	
+    "PID:-"
+	uL	readwrite	29	  0
 	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDF_0	
@@ -422,6 +442,11 @@ attribute:  AltEncoderVelocityValue
 
 
 
+
+attribute:  SensorDivider	
+    "Sensor:-"
+	uL readwrite	29	  0
+	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  CompatibilityPortConfig	
     "Sensor:Spark Data Port Mode"

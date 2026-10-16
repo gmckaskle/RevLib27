@@ -2,7 +2,7 @@
 genericType: RevSpark
 genericTypeName: RevSpark
 control: RevSpark.ctl
-refnum: GenericTag
+objtype: Refnum
 sorted: no
 adapt: yes
 matchExact: strict
