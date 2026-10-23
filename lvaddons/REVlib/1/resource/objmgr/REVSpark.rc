@@ -582,22 +582,22 @@ attribute:  ForceEnableStatus_9
 
 attribute:  MotorFaults	
     "Status:Faults"
-	typedef "<vilib>:REV Custom Controls\Spark Faults2.ctl"  readwrite	29	  226
+	typedef "<vilib>:REV Custom Controls\Spark Faults.ctl"  readwrite	29	  226
 	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  MotorStickyFaults	
     "Status:Sticky Faults"
-	typedef "<vilib>:REV Custom Controls\Spark Faults2.ctl"  readwrite	29	  227
+	typedef "<vilib>:REV Custom Controls\Spark Faults.ctl"  readwrite	29	  227
 	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  MotorWarnings	
     "Status:Warnings"
-	typedef "<vilib>:REV Custom Controls\Spark Warnings2.ctl"  readwrite	29	  228
+	typedef "<vilib>:REV Custom Controls\Spark Warnings.ctl"  readwrite	29	  228
 	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  MotorStickyWarnings	
     "Status:Sticky Warnings"
-	typedef "<vilib>:REV Custom Controls\Spark Warnings2.ctl"  readwrite	29	  229
+	typedef "<vilib>:REV Custom Controls\Spark Warnings.ctl"  readwrite	29	  229
 	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 
