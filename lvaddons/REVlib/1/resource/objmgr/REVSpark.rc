@@ -14,327 +14,440 @@ flags: 0
 attribute:  Inverted	
     "Power:Inverted"
 	bool	readwrite	29	  2D
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Inverted: Sets whether the direction the motor is driven is inverted."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  IdleMode	
     "Power:Idle Mode"
 	uL	enum	{"Coast"=0, "Brake"=1}    readwrite	29	  6
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Idle Mode: Spark's disabled behavior type."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PowerDash	
     "Power:-"
 	uL	readwrite	29	  6
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"dash"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  InputDeadband	
     "Power:Input Deadband"
 	fD	readwrite	29	  7
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Input Deadband: The proportion size of the PWM input period region for idling/disabling the motor in PWM mode."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  OpenLoopRampRate	
     "Power:Open Loop Ramp Rate"
 	fD	readwrite	29	  38
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Open Loop Ramp Rate: Ramp rate for the duty cycle applied to the motor with open-loop control. This value is the desired change in duty cycle per second."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
-attribute:  PowerDivide1	
+attribute:  PowerDash1	
     "Power:-"
 	fD	readwrite	29	  0
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"dash"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  SmartCurrentStallLimit	
     "Power:Smart Current Stall Limit"
 	uL	readwrite	29	  3B
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Smart Current Stall Limit: The smart phase current upper limit."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  SmartCurrentFreeLimit	
     "Power:Smart Current Free Limit"
 	uL	readwrite	29	  3C
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Smart Current Free Limit: The expected phase current when the motor is free spinning. Used when the motor RPM has reached above the 'Smart Current Config' RPM threshold and will linearly reduce the current limit to the free limit current configured."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  SmartCurrentConfig	
     "Power:Smart Current Config"
 	uL	readwrite	29	  3D
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Smart Current Config: The Smart Current configuration settings. Currently sets the RPM threshold that will begin reducing the phase current upper limit to the 'Smart Current Free Limit'. Set to an RPM value higher than the motor free speed to disable this behavior."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  VoltageCompensation	
     "Power:Voltage Compensation"
 	typedef "<vilib>:REV Custom Controls\Spark Voltage Compensation.ctl"    readwrite	29	  200
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Voltage Compensation Mode: Sets the type of voltage compensation. 'Nominal Voltage Compensation Mode' will scale the applied output at the current voltage level to the configured nominal voltage level. This helps with driving consistency as voltage levels change."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  CurrentChop	
     "Power:Current Chop"
 	fD	readwrite	29	  B
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Current Chop: The phase current threshold for activating the current chopping protection mechanism. Current chopping will attempt to average out the phase currents of the motor to below the threshold by disabling the motor for the number of 'Current Chop Cycles' and resume afterwards."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  CurrentChopCycles	
     "Power:Current Chop Cycles"
 	uL	readwrite	29	  C
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Current Chop Cycles: The number of cycles that the motor will brake for when the motor phase currents reach above the current chop threshold."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
-attribute:  PowerDivide2	
+attribute:  PowerDash2	
     "Power:-"
 	fD	readwrite	29	  0
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"dash"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  MotorOutputCurrent	
     "Power:Output Current"
-	fD  readwrite	29	  201
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	fD  readonly	29	  201
+	"Motor Output Current: The amps being consumed by the motor."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  MotorTemperature
     "Power:Motor Temperature"
-	fD  readwrite	29	  202
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	fD  readonly	29	  202
+	"Motor Temperature: Temperature of motor controller in degC."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 	
 attribute:  MotorBusVoltage	
     "Power:Bus Voltage"
-	fD  readwrite	29	  203
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	fD  readonly	29	  203
+	"Motor Bus Voltage: The input voltage to the motor controller."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 	
 attribute:  MotorAppliedOutput
     "Power:Applied Output"
-	fD  readwrite	29	  204
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	fD  readonly	29	  204
+	"Motor Applied Output: The equivalent DC volts being applied to the motor."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 
 attribute:  FollowerModeInfo	
     "Follow"
 	cluster {2, "Leader CAN ID"=uL, "Inverted"=bool}	readwrite	29	  205
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Follower Info: Is the duty cycle value received from the leader Spark be inverted. CAN ID of the leader Spark."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 
 
 attribute:  ControlType	
     "PID:Control Type"
-	uL	enum	{"Duty Cycle"=0, "Velocity"=1, "Voltage"=2, "Position"=3, "Current"=4, "MaxMotion Position"=5, "MaxMotion Velocity"=6}    readwrite	29	  5
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	uL	enum	{"Duty Cycle"=0, "Velocity"=1, "Voltage"=2, "Position"=3, "Current"=4, "MaxMotion Position"=5, "MaxMotion Velocity"=6}    readonly	29	  5
+	"Control Type: The setpoint control type last accepted by the Spark. This should not be modified directly."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  ClosedLoopControlSensor	
     "PID:Closed Loop Control Sensor"
 	uL	enum	{"None"=0, "Main Encoder"=1, "Analog"=2, "Alt Encoder"=3, "Duty Cycle"=4, "Detached Absolute"=5, "Detached Relative"=6}    readwrite	29	  9
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
-"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Closed Loop Control Sensor: The reference/feedback sensor type used for closed loop motor control."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PositionPIDWrap	
     "PID:Position PID Wrap"
 	cluster { 3, "Enable" = bool, "Min" = fD, "Max"=fD } readwrite	29	  206
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Position PID Wrap Info: Determine if the position wraps between the ranges of 'Min' and 'Max'."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  DetachedEncoderDeviceID	
     "PID:Detached Encoder Device ID"
 	uL	readwrite	29	  E2
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Detached Encoder Device ID: Sets the Detached Encoder CAN ID for Closed-Loop PID control."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
-attribute:  PIDDivider	
+attribute:  PIDDash	
     "PID:-"
 	uL	readwrite	29	  0
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"dash"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDF_0	
     "PID:Slot 0:PIDF Gains"
 	cluster { 4, "kP" = fD, "kI" = fD, "kD"=fD, "kF"=fD } readwrite	29	  207
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"PID Slot 0 Coefficients: kP, kI, kD, and the velocity feed-forward coefficient kF."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDOutRng_0	
     "PID:Slot 0:Output Range"
 	cluster { 2, "min" = fD, "max" = fD } readwrite	29	  208
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"PID Slot 0 Output Range: Limits to keep the outputs from PID in a safe and controllable range."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDAdv_0	
-    "PID:Slot 0:Advanced"
+    "PID:Slot 0:Advanced:All Elements"
 	cluster { 4, "i Zone" = fD, "max I Accum" = fD, "d Filter"=fD, "error Limit"=fD } readwrite	29	  209
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"PID Slot 0 Advanced Settings: The error zone where accumulation is helpful to control versus where it should be reset to avoid further instability. Max limits how large accumulated integral error can become, d filter can keep sensor noise from destabilizing control, and a limit on the error term before PID calculation."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  PIDAdv0Dash	
+    "PID:Slot 0:Advanced::-"
+	uL	readwrite	29	  0
+	"dash"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  PIDAdv_0_iZone	
+    "PID:Slot 0:Advanced:i Zone"
+	fD readwrite	29	  11
+	"PID Slot 0 Advanced i Zone: The error zone where accumulation is helpful to control versus where it should be reset to avoid further instability."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  PIDAdv_0_maxAccum	
+    "PID:Slot 0:Advanced:max I Accum"
+	fD readwrite	29	  60
+	"PID Slot 0 Advanced Max I Accum: Limit accumulated integral error to cap the contribution and help with built-up overshoot."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  PIDAdv_0_dFilter	
+    "PID:Slot 0:Advanced:d Filter"
+	fD readwrite	29	  12
+	"PID Slot 0 Advanced d FIlter: Low-pass filter for derivative error to mediate sensor noise."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  PIDAdv_0_ErrorLimit	
+    "PID:Slot 0:Advanced:Error Limit"
+	fD readwrite	29	  61
+	"PID Slot 0 Advanced Error Limit: Cap reaction to large error term."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+
+
 
 attribute:  PIDModel_0	
     "PID:Slot 0:Model Gains"
 	cluster { 5, "kS" = fD, "kA" = fD, "kG"=fD, "kCos"=fD, "Cos Ratio"=fD } readwrite	29	  20A
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"PID Slot 0 Model Values: Coefficients to help overcome static friction, apply acceleration boost, and terms for gravity compensation on linear or radial position control."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDF_1	
     "PID:Slot 1:PIDF Gains"
 	cluster { 4, "kP" = fD, "kI" = fD, "kD"=fD, "kF"=fD } readwrite	29	  20B
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"PID Slot 1 Coefficients: kP, kI, kD, and the velocity feed-forward coefficient kF"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDOutRng_1	
     "PID:Slot 1:Output Range"
 	cluster { 2, "min" = fD, "max" = fD } readwrite	29	  20C
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"PID Slot 1 Output Range: Limits to keep the outputs from PID in a safe and controllable range."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDAdv_1	
-    "PID:Slot 1:Advanced"
+    "PID:Slot 1:Advanced:All Elements"
 	cluster { 4, "i Zone" = fD, "max I Accum" = fD, "d Filter"=fD, "error Limit"=fD } readwrite	29	  20D
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"PID Slot 1 Advanced Settings: The error zone where accumulation is helpful to control versus where it should be reset to avoid further instability. Max limits how large accumulated integral error can become, d filter can keep sensor noise from destabilizing control, and a limit on the error term before PID calculation."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  PIDAdv1Dash	
+    "PID:Slot 1:Advanced::-"
+	uL	readwrite	29	  0
+	"dash"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  PIDAdv_1_iZone	
+    "PID:Slot 1:Advanced:i Zone"
+	fD readwrite	29	  19
+	"PID Slot 1 Advanced i Zone: The error zone where accumulation is helpful to control versus where it should be reset to avoid further instability."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  PIDAdv_1_maxAccum	
+    "PID:Slot 1:Advanced:max I Accum"
+	fD readwrite	29	  64
+	"PID Slot 1 Advanced Max I Accum: Limit accumulated integral error to cap the contribution and help with built-up overshoot."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  PIDAdv_1_dFilter	
+    "PID:Slot 1:Advanced:d Filter"
+	fD readwrite	29	  1A
+	"PID Slot 1 Advanced d FIlter: Low-pass filter for derivative error to mediate sensor noise."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  PIDAdv_1_ErrorLimit	
+    "PID:Slot 1:Advanced:Error Limit"
+	fD readwrite	29	  65
+	"PID Slot 1 Advanced Error Limit: Cap reaction to large error term."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+
+
+
 
 attribute:  PIDModel_1	
     "PID:Slot 1:Model Gains"
 	cluster { 5, "kS" = fD, "kA" = fD, "kG"=fD, "kCos"=fD, "Cos Ratio"=fD } readwrite	29	  20E
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"PID Slot 1 Model Values: Coefficients to help overcome static friction, apply acceleration boost, and terms for gravity compensation on linear or radial position control."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDF_2	
     "PID:Slot 2:PIDF Gains"
 	cluster { 4, "kP" = fD, "kI" = fD, "kD"=fD, "kF"=fD } readwrite	29	  20F
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"PID Slot 2 Coefficients: kP, kI, kD, and the velocity feed-forward coefficient kF"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDOutRng_2	
     "PID:Slot 2:Output Range"
 	cluster { 2, "min" = fD, "max" = fD } readwrite	29	  210
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"PID Slot 2 Output Range: Limits to keep the outputs from PID in a safe and controllable range."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDAdv_2	
-    "PID:Slot 2:Advanced"
+    "PID:Slot 2:Advanced:All Elements"
 	cluster { 4, "i Zone" = fD, "max I Accum" = fD, "d Filter"=fD, "error Limit"=fD } readwrite	29	  211
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"PID Slot 2 Advanced Settings: The error zone where accumulation is helpful to control versus where it should be reset to avoid further instability. Max limits how large accumulated integral error can become, d filter can keep sensor noise from destabilizing control, and a limit on the error term before PID calculation."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  PIDAdv2Dash	
+    "PID:Slot 2:Advanced::-"
+	uL	readwrite	29	  0
+	"dash"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  PIDAdv_2_iZone	
+    "PID:Slot 2:Advanced:i Zone"
+	fD readwrite	29	  21
+	"PID Slot 2 Advanced i Zone: The error zone where accumulation is helpful to control versus where it should be reset to avoid further instability."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  PIDAdv_2_maxAccum	
+    "PID:Slot 2:Advanced:max I Accum"
+	fD readwrite	29	  68
+	"PID Slot 2 Advanced Max I Accum: Limit accumulated integral error to cap the contribution and help with built-up overshoot."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  PIDAdv_2_dFilter	
+    "PID:Slot 2:Advanced:d Filter"
+	fD readwrite	29	  22
+	"PID Slot 2 Advanced d FIlter: Low-pass filter for derivative error to mediate sensor noise."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  PIDAdv_2_ErrorLimit	
+    "PID:Slot 2:Advanced:Error Limit"
+	fD readwrite	29	  69
+	"PID Slot 2 Advanced Error Limit: Cap reaction to large error term."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+
+
 
 attribute:  PIDModel_2	
     "PID:Slot 2:Model Gains"
 	cluster { 5, "kS" = fD, "kA" = fD, "kG"=fD, "kCos"=fD, "Cos Ratio"=fD } readwrite	29	  212
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"PID Slot 2 Model Values: Coefficients to help overcome static friction, apply acceleration boost, and terms for gravity compensation on linear or radial position control."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDF_3	
     "PID:Slot 3:PIDF Gains"
 	cluster { 4, "kP" = fD, "kI" = fD, "kD"=fD, "kF"=fD } readwrite	29	  213
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"PID Slot 3 Coefficients: kP, kI, kD, and the velocity feed-forward coefficient kF"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDOutRng_3	
     "PID:Slot 3:Output Range"
 	cluster { 2, "min" = fD, "max" = fD } readwrite	29	  214
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"PID Slot 3 Output Range: Limits to keep the outputs from PID in a safe and controllable range."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDAdv_3	
-    "PID:Slot 3:Advanced"
+    "PID:Slot 3:Advanced:All Elements"
 	cluster { 4, "i Zone" = fD, "max I Accum" = fD, "d Filter"=fD, "error Limit"=fD } readwrite	29	  215
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"PID Slot 3 Advanced Settings: The error zone where accumulation is helpful to control versus where it should be reset to avoid further instability. Max limits how large accumulated integral error can become, d filter can keep sensor noise from destabilizing control, and a limit on the error term before PID calculation."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  PIDAdv3Dash	
+    "PID:Slot 3:Advanced::-"
+	uL	readwrite	29	  0
+	"dash"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  PIDAdv_3_iZone	
+    "PID:Slot 3:Advanced:i Zone"
+	fD readwrite	29	  29
+	"PID Slot 3 Advanced i Zone: The error zone where accumulation is helpful to control versus where it should be reset to avoid further instability."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  PIDAdv_3_maxAccum	
+    "PID:Slot 3:Advanced:max I Accum"
+	fD readwrite	29	  6C
+	"PID Slot 3 Advanced Max I Accum: Limit accumulated integral error to cap the contribution and help with built-up overshoot."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  PIDAdv_3_dFilter	
+    "PID:Slot 3:Advanced:d Filter"
+	fD readwrite	29	  2A
+	"PID Slot 3 Advanced d FIlter: Low-pass filter for derivative error to mediate sensor noise."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+attribute:  PIDAdv_3_ErrorLimit	
+    "PID:Slot 3:Advanced:Error Limit"
+	fD readwrite	29	  6D
+	"PID Slot 3 Advanced Error Limit: Cap reaction to large error term."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
+
+
+
 
 attribute:  PIDModel_3	
     "PID:Slot 3:Model Gains"
 	cluster { 5, "kS" = fD, "kA" = fD, "kG"=fD, "kCos"=fD, "Cos Ratio"=fD } readwrite	29	  216
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"PID Slot 3 Model Values: Coefficients to help overcome static friction, apply acceleration boost, and terms for gravity compensation on linear or radial position control."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 
 
 attribute:  EncoderInverted	
     "Sensor:Encoder:Inverted"
 	bool	readwrite	29	  48
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Encoder Inverted: Sets whether the encoder direction is inverted."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  EncoderCountsPerRev	
     "Sensor:Encoder:Counts Per Rev"
 	uL	readwrite	29	  45
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Encoder Counts Per Rev: Sets the Primary Encoder's counts per revolution. Sparks only use this when in brushed mode. Note: Spark Flex will need a Flex Dock in order run in brushed mode."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  EncoderAverageDepth	
     "Sensor:Encoder:Average Depth"
 	uL	readwrite	29	  46
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Encoder Average Depth: Configures the Primary Encoder's velocity averaging filter size."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  EncoderSampleDelta	
     "Sensor:Encoder:Sample Delta"
 	uL	readwrite	29	  47
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Encoder Sample Delta: Configures the Primary Encoder's time delta between collected samples for velocity averaging in increments of 500us."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  EncoderPositionValue	
     "Sensor:Encoder:Position"
 	fD	readwrite	29	  217
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Encoder Position Value: Most recent position for the internal encoder."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  EncoderVelocityValue	
     "Sensor:Encoder:Velocity"
 	fD	readonly	29	  218
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Encoder Velocity Value: Most recently calculated velocity for the internal encoder."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 
 
 attribute:  DutyCycleInverted	
     "Sensor:Abs Encoder:Inverted"
 	bool	readwrite	29	  8D
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Duty Cycle Inverted: Sets whether the Duty Cycle Encoder values are inverted."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  DutyCycleAverageDepth	
     "Sensor:Abs Encoder:Average Depth"
 	uL	readwrite	29	  8F
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Duty Cycle Average Depth: The Duty Cycle sensor's velocity averaging filter size. Sets the number of samples used in the averaging filter as a power of 2. For example, a value of 3 sets the filter size to 2^(3) = 8 samples."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  DutyCycleRangeOffset	
     "Sensor:Abs Encoder:Range Offset"
 	fD	readwrite	29	  92
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Duty Cycle Range Offset: Sets the Duty Cycle Encoder Range offset about zero. Moves the range between (-1, 0] and [0, 1), instead of the default range [0, 1), assuming the default units of rotations."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  DutyCycleSensorPrescaler	
     "Sensor:Abs Encoder:Sensor Prescaler"
 	uL	readwrite	29	  99
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Duty Cycle Sensor Prescaler: Used for adjusting the maximum duty cycle period supported. Contact REV Robotics for more help."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  DutyCycleOffset	
     "Sensor:Abs Encoder:Offset"
 	fD	readwrite	29	  9A
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Duty Cycle Offset: Sets the Duty Cycle sensor position offset. Must be from 0 to 1."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  DutyCycleEncoderStartPulseUs	
     "Sensor:Abs Encoder:Start Pulse microsec"
 	fD	readwrite	29	  C4
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Duty Cycle Encoder Start Pulse Us: Sets the expected start pulse of the input duty cycle signal in us."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  DutyCycleEncoderEndPulseUs	
     "Sensor:Abs Encoder:End Pulse microsec"
 	fD	readwrite	29	  C5
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Duty Cycle Encoder End Pulse Us: Sets the expected end pulse of the input duty cycle signal in us."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  DutyCyclePositionValue	
     "Sensor:Abs Encoder:Position"
 	fD	readwrite	29	  22B
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Duty Cycle Encoder Position: Most recent position for the absolute encoder."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  DutyCycleVelocityValue	
     "Sensor:Abs Encoder:Velocity"
 	fD	readonly	29	  22C
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Duty Cycle Encoder Velocity: Most recently calculated velocity for the absolute encoder."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 
 
 attribute:  LimitSwitchFwdPolarity	
     "Sensor:Limit Switch:Forward Polarity"
 	bool	readwrite	29	  32
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Limit Switch Fwd Polarity: Sets whether the hardware forward limit switch is normally-open or normally-closed."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  HardLimitFwdEn	
     "Sensor:Limit Switch:Forward Enable"
 	uL    enum {"Move"=0, "Stop"=1, "Set Sensor"=2, "Stop & Set Sensor"=3}    readwrite	29	  34
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Hard Limit Fwd En: The forward limit switch mode. Sets the behavior for when the limit switch is triggered."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  LimitSwitchFwdValue	
     "Sensor:Limit Switch:Forward Limit Reached"
 	bool	readwrite	29	  219
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Hard Limit Fwd Value: Indicates whether the forward limit was reached."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  LimitSwitchRevPolarity	
     "Sensor:Limit Switch:Reverse Polarity"
 	bool	readwrite	29	  33
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Limit Switch Rev Polarity: Sets whether the hardware reverse limit switch is normally-open or normally-closed."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  HardLimitRevEn	
     "Sensor:Limit Switch:Reverse Enable"
 	uL    enum {"Move"=0, "Stop"=1, "Set Sensor"=2, "Stop & Set Sensor"=3}    readwrite	29	  35
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Soft Limit Rev En: Sets whether the soft reverse limit is enabled."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  LimitSwitchRevValue	
     "Sensor:Limit Switch:Reverse Limit Reached"
 	bool	readwrite	29	  21A
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Hard Limit Rev Value: Indicates whether the reverse limit was reached."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  LimitSwitchPositionSensor	
     "Sensor:Limit Switch:Position Sensor"
 	uL	enum	{"None"=0, "Main Encoder"=1, "Analog"=2, "Alt Encoder"=3, "Duty Cycle"=4, "Detached Absolute"=5, "Detached Relative"=6}    readwrite	29	  C9
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Limit Switch Position Sensor: Sets the hardware limit switch position sensor. This is used when the limit switch mode is set to set a position value on a limit switch trigger."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  LimitSwitchFwdPosition	
     "Sensor:Limit Switch:Forward Limit Sensor Value"
 	fD	readonly	29	  CA
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Limit Switch Fwd Position: Sets the position value that the limit switch sensor will be set to when the forward limit switch is triggered."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  LimitSwitchRevPosition	
     "Sensor:Limit Switch:Reverse Limit Sensor Value"
 	fD	readonly	29	  CB
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Limit Switch Rev Position: Sets the position value that the limit switch sensor will be set to when the reverse limit switch is triggered."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 
 
@@ -343,238 +456,238 @@ attribute:  LimitSwitchRevPosition
 attribute:  SoftLimitFwdEn	
     "Sensor:Soft Limit:Forward Enable"
 	bool	readwrite	29	  36
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Soft Limit Fwd En: Sets whether the soft forward limit is enabled."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  SoftLimitForward	
     "Sensor:Soft Limit:Forward Setpoint"
 	fD	readonly	29	  73
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Soft Limit Forward: Software implemented forward limit. Will stop the motor from moving forward after crossing the set value."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  SoftLimitForwardValue	
     "Sensor:Soft Limit:Forward Limit Reached"
 	bool	readonly	29	  21B
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Soft Limit Fwd Value: Indicates whether the forward soft limit was reached."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 
 attribute:  SoftLimitRevEn	
     "Sensor:Soft Limit:Reverse Enable"
 	bool	readwrite	29	  37
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Soft Limit Rev En: Sets whether the soft reverse limit is enabled."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  SoftLimitReverse	
     "Sensor:Soft Limit:Reverse Setpoint"
 	fD	readonly	29	  74
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Soft Limit Reverse: Software implemented reverse limit. Will stop the motor from moving reverse after crossing the set value."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  SoftLimitReverseValue	
     "Sensor:Soft Limit:Reverse Limit Reached"
 	bool	readonly	29	  21C
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Soft Limit Rev Value: Indicates whether the reverse soft limit was reached."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 
 
 attribute:  AnalogInverted	
     "Sensor:Analog:Inverted"
 	bool	readwrite	29	  7B
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Analog Inverted: Sets whether the analog sensor values are inverted."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  AnalogSensorMode	
     "Sensor:Analog:Sensor Mode"
 	uL	enum	{"Absolute"=0, "Relative"=1}	readwrite	29	  7A
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Analog Sensor Mode: Sets the analog sensor position mode. In absolute, the sensor position will wrap around with the voltage read and is unaffected by the set position command. In relative, the sensor position difference between samples are summed up to produce the relative position and can be set through the set position command."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  AnalogAverageDepth	
     "Sensor:Analog:Average Filter Depth"
 	uL	readwrite	29	  79
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Analog Average Depth: Configures the analog sensor's velocity averaging filter size."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  AnalogSampleDelta	
     "Sensor:Analog:Sample Delta ms"
 	uL	readwrite	29	  7C
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Analog Sample Delta: Configures the analog sensor's time delta between collected samples for velocity averaging in increments of 500us."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  AnalogPositionValue	
     "Sensor:Analog:Position"
 	fD	readwrite	29	  21D
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Analog Position Value: Most recent position for the analog sensor."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  AnalogVelocityValue	
     "Sensor:Analog:Velocity"
 	fD	readwrite	29	  21E
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Analog Velocity Value: Most recently calculated velocity for the analog sensor."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  AnalogVoltageValue	
     "Sensor:Analog:Voltage"
 	fD	readwrite	29	  21F
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Analog Voltage Value: Most recent voltage for the analog sensor."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 
 
 attribute:  AltEncoderInverted	
     "Sensor:Alt Encoder:Inverted"
 	bool	readwrite	29	  83
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Alt Encoder Inverted: Sets whether the External/Alternate Encoder's values are inverted."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  AltEncoderCountsPerRev	
     "Sensor:Alt Encoder:Counts Per Rev"
 	uL	readwrite	29	  80
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Alt Encoder Counts Per Rev: External/Alternate Encoder's counts per revolution."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  AltEncoderAverageDepth	
     "Sensor:Alt Encoder:Average Depth"
 	uL	readwrite	29	  81
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Alt Encoder Average Depth: The External/Alternate Encoder's velocity averaging filter size. Sets the number of samples used in the averaging filter."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  AltEncoderSampleDelta	
     "Sensor:Alt Encoder:Sample Delta ms"
 	uL	readwrite	29	  82
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Alt Encoder Sample Delta: Configures the External/Alternate Encoder's time delta between collected samples for velocity averaging in increments of 500us."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  AltEncoderPositionValue	
     "Sensor:Alt Encoder:Position"
 	fD	readwrite	29	  220
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Alt Encoder Position Value: Most recently calculated velocity for the alternate encoder."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  AltEncoderVelocityValue	
     "Sensor:Alt Encoder:Velocity"
 	fD	readwrite	29	  221
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Alt Encoder Velocity Value: Most recently calculated velocity for the alternate encoder"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 
 
 
-attribute:  SensorDivider	
+attribute:  SensorDash	
     "Sensor:-"
 	uL readwrite	29	  0
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"dash"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  CompatibilityPortConfig	
     "Sensor:Spark Data Port Mode"
 	uL enum {"Default"=0, "Alt Encoder"=1}	readwrite	29	  7F
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Compatibility Port Config: Note: This is a Spark MAX exclusive parameter. This sets whether the Data Port of the MAX is configured to DEFAULT mode or ALTERNATE ENCODER mode. In default mode, the data port is configured for both an absolute encoder and limit switches. In Alternate Encoder Mode, the data port is configured for quadrature encoder inputs, limit switches and an analog sensor. Please refer to the section 'How to Connect an Encoder' section at 'https://docs.revrobotics.com/brushless/spark-max/encoders#data-port-breakout-board' for determining the correct adapter boards to use."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 
 
 attribute:  MAXMotionConfig_0	
     "MAXMotion:Slot 0"
 	cluster {5, "Cruise Velocity"=fD, "Accel Limit"=fD, "Jerk Limit"=fD, "Goal Error"=fD, "Mode"=uL}	readwrite	29	  222
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"MAXMotion Slot 0 Configuration: Limit the velocity, acceleration, and jerk. Identify the acceptable error of the motion, and select the profile shape for position control (trapezoidal only)."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  MAXMotionConfig_1	
     "MAXMotion:Slot 1"
 	cluster {5, "Cruise Velocity"=fD, "Accel Limit"=fD, "Jerk Limit"=fD, "Goal Error"=fD, "Mode"=uL}	readwrite	29	  223
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"MAXMotion Slot 1 Configuration: Limit the velocity, acceleration, and jerk. Identify the acceptable error of the motion, and select the profile shape for position control (trapezoidal only)."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  MAXMotionConfig_2	
     "MAXMotion:Slot 2"
 	cluster {5, "Cruise Velocity"=fD, "Accel Limit"=fD, "Jerk Limit"=fD, "Goal Error"=fD, "Mode"=uL}	readwrite	29	  224
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"MAXMotion Slot 2 Configuration: Limit the velocity, acceleration, and jerk. Identify the acceptable error of the motion, and select the profile shape for position control (trapezoidal only)."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  MAXMotionConfig_3	
     "MAXMotion:Slot 3"
 	cluster {5, "Cruise Velocity"=fD, "Accel Limit"=fD, "Jerk Limit"=fD, "Goal Error"=fD, "Mode"=uL}	readwrite	29	  225
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"MAXMotion Slot 3 Configuration: Limit the velocity, acceleration, and jerk. Identify the acceptable error of the motion, and select the profile shape for position control (trapezoidal only)."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 
 attribute:  Status0Period	
     "Status:Updates:Period 0"
 	uL	readwrite	29	  9E
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Status 0 Period: Status Frame period in ms for Status 0"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  Status1Period	
     "Status:Updates:Period 1"
 	uL	readwrite	29	  9F
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Status 1 Period: Status Frame period in ms for Status 1"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  Status2Period	
     "Status:Updates:Period 2"
 	uL	readwrite	29	  A0
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Status 2 Period: Status Frame period in ms for Status 2"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  Status3Period	
     "Status:Updates:Period 3"
 	uL	readwrite	29	  A1
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Status 3 Period: Status Frame period in ms for Status 3"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  Status4Period	
     "Status:Updates:Period 4"
 	uL	readwrite	29	  A2
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Status 4 Period: Status Frame period in ms for Status 4"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  Status5Period	
     "Status:Updates:Period 5"
 	uL	readwrite	29	  A3
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Status 5 Period: Status Frame period in ms for Status 5"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  Status6Period	
     "Status:Updates:Period 6"
 	uL	readwrite	29	  A4
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Status 6 Period: Status Frame period in ms for Status 6"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  Status7Period	
     "Status:Updates:Period 7"
 	uL	readwrite	29	  A5
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Status 7 Period: Status Frame period in ms for Status 7"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  Status8Period	
     "Status:Updates:Period 8"
 	uL	readwrite	29	  C7
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Status 8 Period: Status Frame period in ms for Status 8"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  Status9Period	
     "Status:Updates:Period 9"
 	uL	readwrite	29	  E0
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Status 9 Period: Status Frame period in ms for Status 9"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  ForceEnableStatus_0	
     "Status:Updates:Force 0"
 	bool	readwrite	29	  BA
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Force Enable Status 0: Sets whether the status frame 0 is forced to be enabled. Note: Status 0 is always forced enabled because it acts as the identifier frame for Sparks."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  ForceEnableStatus_1	
     "Status:Updates:Force 1"
 	bool	readwrite	29	  BB
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Force Enable Status 1: Sets whether the status frame 1 is forced to be enabled. Note: disabling this setting does not turn off the frame. A separate 'Set Status Frame Enabled' command needs to be sent."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  ForceEnableStatus_2	
     "Status:Updates:Force 2"
 	bool	readwrite	29	  BC
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Force Enable Status 2: Sets whether the status frame 2 is forced to be enabled. Note: disabling this setting does not turn off the frame. A separate 'Set Status Frame Enabled' command needs to be sent."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  ForceEnableStatus_3	
     "Status:Updates:Force 3"
 	bool	readwrite	29	  BD
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Force Enable Status 3: Sets whether the status frame 3 is forced to be enabled. Note: disabling this setting does not turn off the frame. A separate 'Set Status Frame Enabled' command needs to be sent."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  ForceEnableStatus_4	
     "Status:Updates:Force 4"
 	bool	readwrite	29	  BE
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Force Enable Status 4: Sets whether the status frame 4 is forced to be enabled. Note: disabling this setting does not turn off the frame. A separate 'Set Status Frame Enabled' command needs to be sent."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  ForceEnableStatus_5	
     "Status:Updates:Force 5"
 	bool	readwrite	29	  BF
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Force Enable Status 5: Sets whether the status frame 5 is forced to be enabled. Note: disabling this setting does not turn off the frame. A separate 'Set Status Frame Enabled' command needs to be sent."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  ForceEnableStatus_6	
     "Status:Updates:Force 6"
 	bool	readwrite	29	  C0
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Force Enable Status 6: Sets whether the status frame 6 is forced to be enabled. Note: disabling this setting does not turn off the frame. A separate 'Set Status Frame Enabled' command needs to be sent."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  ForceEnableStatus_7	
     "Status:Updates:Force 7"
 	bool	readwrite	29	  C1
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Force Enable Status 7: Sets whether the status frame 7 is forced to be enabled. Note: disabling this setting does not turn off the frame. A separate 'Set Status Frame Enabled' command needs to be sent."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  ForceEnableStatus_8	
     "Status:Updates:Force 8"
 	bool	readwrite	29	  C8
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Force Enable Status 8: Sets whether the status frame 8 is forced to be enabled. Note: disabling this setting does not turn off the frame. A separate 'Set Status Frame Enabled' command needs to be sent."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  ForceEnableStatus_9	
     "Status:Updates:Force 9"
 	bool	readwrite	29	  E1
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	"Force Enable Status 9: Sets whether the status frame 9 is forced to be enabled. Note: disabling this setting does not turn off the frame. A separate 'Set Status Frame Enabled' command needs to be sent."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 
 
@@ -582,28 +695,29 @@ attribute:  ForceEnableStatus_9
 
 attribute:  MotorFaults	
     "Status:Faults"
-	typedef "<vilib>:REV Custom Controls\Spark Faults.ctl"  readwrite	29	  226
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	typedef "<vilib>:REV Custom Controls\Spark Faults.ctl"  readonly	29	  226
+	"Motor Faults: Fault issues currently present."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  MotorStickyFaults	
     "Status:Sticky Faults"
-	typedef "<vilib>:REV Custom Controls\Spark Faults.ctl"  readwrite	29	  227
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	typedef "<vilib>:REV Custom Controls\Spark Faults.ctl"  readonly	29	  227
+	"Motor Faults: Fault issues that occurred since they were last cleared."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  MotorWarnings	
     "Status:Warnings"
-	typedef "<vilib>:REV Custom Controls\Spark Warnings.ctl"  readwrite	29	  228
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	typedef "<vilib>:REV Custom Controls\Spark Warnings.ctl"  readonly	29	  228
+	"Motor Warnings: Warnings currently present."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  MotorStickyWarnings	
     "Status:Sticky Warnings"
-	typedef "<vilib>:REV Custom Controls\Spark Warnings.ctl"  readwrite	29	  229
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	typedef "<vilib>:REV Custom Controls\Spark Warnings.ctl"  readonly	29	  229
+	"Motor Warnings: Warnings that occurred since they were last cleared."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 
 
 
 attribute:  MotorDetails	
     "Motor Details"
-	typedef "<vilib>:REV Custom Controls\c_REVLib_MotorDetails.ctl"  readwrite	29	  22A
-	"INCOMPLETE"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+	typedef "<vilib>:REV Custom Controls\c_REVLib_MotorDetails.ctl"  readonly	29	  22A
+	"Motor Details: CAN address, FW version, Motor type, and advanced product info."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+
