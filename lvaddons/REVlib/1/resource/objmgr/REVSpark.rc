@@ -28,17 +28,17 @@ attribute:  PowerDash
 
 attribute:  InputDeadband	
     "Power:Input Deadband"
-	fD	readwrite	29	  7
+	fS	readwrite	29	  7
 	"Input Deadband: The proportion size of the PWM input period region for idling/disabling the motor in PWM mode."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  OpenLoopRampRate	
     "Power:Open Loop Ramp Rate"
-	fD	readwrite	29	  38
+	fS	readwrite	29	  38
 	"Open Loop Ramp Rate: Ramp rate for the duty cycle applied to the motor with open-loop control. This value is the desired change in duty cycle per second."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PowerDash1	
     "Power:-"
-	fD	readwrite	29	  0
+	fS	readwrite	29	  0
 	"dash"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  SmartCurrentStallLimit	
@@ -63,7 +63,7 @@ attribute:  VoltageCompensation
 
 attribute:  CurrentChop	
     "Power:Current Chop"
-	fD	readwrite	29	  B
+	fS	readwrite	29	  B
 	"Current Chop: The phase current threshold for activating the current chopping protection mechanism. Current chopping will attempt to average out the phase currents of the motor to below the threshold by disabling the motor for the number of 'Current Chop Cycles' and resume afterwards."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  CurrentChopCycles	
@@ -73,27 +73,27 @@ attribute:  CurrentChopCycles
 
 attribute:  PowerDash2	
     "Power:-"
-	fD	readwrite	29	  0
+	fS	readwrite	29	  0
 	"dash"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  MotorOutputCurrent	
     "Power:Output Current"
-	fD  readonly	29	  201
+	fS  readonly	29	  201
 	"Motor Output Current: The amps being consumed by the motor."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  MotorTemperature
     "Power:Motor Temperature"
-	fD  readonly	29	  202
+	fS  readonly	29	  202
 	"Motor Temperature: Temperature of motor controller in degC."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 	
 attribute:  MotorBusVoltage	
     "Power:Bus Voltage"
-	fD  readonly	29	  203
+	fS  readonly	29	  203
 	"Motor Bus Voltage: The input voltage to the motor controller."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 	
 attribute:  MotorAppliedOutput
     "Power:Applied Output"
-	fD  readonly	29	  204
+	fS  readonly	29	  204
 	"Motor Applied Output: The equivalent DC volts being applied to the motor."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 
@@ -116,7 +116,7 @@ attribute:  ClosedLoopControlSensor
 
 attribute:  PositionPIDWrap	
     "PID:Position PID Wrap"
-	cluster { 3, "Enable" = bool, "Min" = fD, "Max"=fD } readwrite	29	  206
+	cluster { 3, "Enable" = bool, "Min" = fS, "Max"=fS } readwrite	29	  206
 	"Position PID Wrap Info: Determine if the position wraps between the ranges of 'Min' and 'Max'."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  DetachedEncoderDeviceID	
@@ -131,17 +131,17 @@ attribute:  PIDDash
 
 attribute:  PIDF_0	
     "PID:Slot 0:PIDF Gains"
-	cluster { 4, "kP" = fD, "kI" = fD, "kD"=fD, "kF"=fD } readwrite	29	  207
+	cluster { 4, "kP" = fS, "kI" = fS, "kD"=fS, "kF"=fS } readwrite	29	  207
 	"PID Slot 0 Coefficients: kP, kI, kD, and the velocity feed-forward coefficient kF."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDOutRng_0	
     "PID:Slot 0:Output Range"
-	cluster { 2, "min" = fD, "max" = fD } readwrite	29	  208
+	cluster { 2, "min" = fS, "max" = fS } readwrite	29	  208
 	"PID Slot 0 Output Range: Limits to keep the outputs from PID in a safe and controllable range."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDAdv_0	
     "PID:Slot 0:Advanced:All Elements"
-	cluster { 4, "i Zone" = fD, "max I Accum" = fD, "d Filter"=fD, "error Limit"=fD } readwrite	29	  209
+	cluster { 4, "i Zone" = fS, "max I Accum" = fS, "d Filter"=fS, "error Limit"=fS } readwrite	29	  209
 	"PID Slot 0 Advanced Settings: The error zone where accumulation is helpful to control versus where it should be reset to avoid further instability. Max limits how large accumulated integral error can become, d filter can keep sensor noise from destabilizing control, and a limit on the error term before PID calculation."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDAdv0Dash	
@@ -151,22 +151,22 @@ attribute:  PIDAdv0Dash
 
 attribute:  PIDAdv_0_iZone	
     "PID:Slot 0:Advanced:i Zone"
-	fD readwrite	29	  11
+	fS readwrite	29	  11
 	"PID Slot 0 Advanced i Zone: The error zone where accumulation is helpful to control versus where it should be reset to avoid further instability."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDAdv_0_maxAccum	
     "PID:Slot 0:Advanced:max I Accum"
-	fD readwrite	29	  60
+	fS readwrite	29	  60
 	"PID Slot 0 Advanced Max I Accum: Limit accumulated integral error to cap the contribution and help with built-up overshoot."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDAdv_0_dFilter	
     "PID:Slot 0:Advanced:d Filter"
-	fD readwrite	29	  12
+	fS readwrite	29	  12
 	"PID Slot 0 Advanced d FIlter: Low-pass filter for derivative error to mediate sensor noise."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDAdv_0_ErrorLimit	
     "PID:Slot 0:Advanced:Error Limit"
-	fD readwrite	29	  61
+	fS readwrite	29	  61
 	"PID Slot 0 Advanced Error Limit: Cap reaction to large error term."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 
@@ -174,22 +174,22 @@ attribute:  PIDAdv_0_ErrorLimit
 
 attribute:  PIDModel_0	
     "PID:Slot 0:Model Gains"
-	cluster { 5, "kS" = fD, "kA" = fD, "kG"=fD, "kCos"=fD, "Cos Ratio"=fD } readwrite	29	  20A
+	cluster { 5, "kS" = fS, "kA" = fS, "kG"=fS, "kCos"=fS, "Cos Ratio"=fS } readwrite	29	  20A
 	"PID Slot 0 Model Values: Coefficients to help overcome static friction, apply acceleration boost, and terms for gravity compensation on linear or radial position control."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDF_1	
     "PID:Slot 1:PIDF Gains"
-	cluster { 4, "kP" = fD, "kI" = fD, "kD"=fD, "kF"=fD } readwrite	29	  20B
+	cluster { 4, "kP" = fS, "kI" = fS, "kD"=fS, "kF"=fS } readwrite	29	  20B
 	"PID Slot 1 Coefficients: kP, kI, kD, and the velocity feed-forward coefficient kF"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDOutRng_1	
     "PID:Slot 1:Output Range"
-	cluster { 2, "min" = fD, "max" = fD } readwrite	29	  20C
+	cluster { 2, "min" = fS, "max" = fS } readwrite	29	  20C
 	"PID Slot 1 Output Range: Limits to keep the outputs from PID in a safe and controllable range."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDAdv_1	
     "PID:Slot 1:Advanced:All Elements"
-	cluster { 4, "i Zone" = fD, "max I Accum" = fD, "d Filter"=fD, "error Limit"=fD } readwrite	29	  20D
+	cluster { 4, "i Zone" = fS, "max I Accum" = fS, "d Filter"=fS, "error Limit"=fS } readwrite	29	  20D
 	"PID Slot 1 Advanced Settings: The error zone where accumulation is helpful to control versus where it should be reset to avoid further instability. Max limits how large accumulated integral error can become, d filter can keep sensor noise from destabilizing control, and a limit on the error term before PID calculation."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDAdv1Dash	
@@ -199,22 +199,22 @@ attribute:  PIDAdv1Dash
 
 attribute:  PIDAdv_1_iZone	
     "PID:Slot 1:Advanced:i Zone"
-	fD readwrite	29	  19
+	fS readwrite	29	  19
 	"PID Slot 1 Advanced i Zone: The error zone where accumulation is helpful to control versus where it should be reset to avoid further instability."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDAdv_1_maxAccum	
     "PID:Slot 1:Advanced:max I Accum"
-	fD readwrite	29	  64
+	fS readwrite	29	  64
 	"PID Slot 1 Advanced Max I Accum: Limit accumulated integral error to cap the contribution and help with built-up overshoot."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDAdv_1_dFilter	
     "PID:Slot 1:Advanced:d Filter"
-	fD readwrite	29	  1A
+	fS readwrite	29	  1A
 	"PID Slot 1 Advanced d FIlter: Low-pass filter for derivative error to mediate sensor noise."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDAdv_1_ErrorLimit	
     "PID:Slot 1:Advanced:Error Limit"
-	fD readwrite	29	  65
+	fS readwrite	29	  65
 	"PID Slot 1 Advanced Error Limit: Cap reaction to large error term."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 
@@ -223,22 +223,22 @@ attribute:  PIDAdv_1_ErrorLimit
 
 attribute:  PIDModel_1	
     "PID:Slot 1:Model Gains"
-	cluster { 5, "kS" = fD, "kA" = fD, "kG"=fD, "kCos"=fD, "Cos Ratio"=fD } readwrite	29	  20E
+	cluster { 5, "kS" = fS, "kA" = fS, "kG"=fS, "kCos"=fS, "Cos Ratio"=fS } readwrite	29	  20E
 	"PID Slot 1 Model Values: Coefficients to help overcome static friction, apply acceleration boost, and terms for gravity compensation on linear or radial position control."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDF_2	
     "PID:Slot 2:PIDF Gains"
-	cluster { 4, "kP" = fD, "kI" = fD, "kD"=fD, "kF"=fD } readwrite	29	  20F
+	cluster { 4, "kP" = fS, "kI" = fS, "kD"=fS, "kF"=fS } readwrite	29	  20F
 	"PID Slot 2 Coefficients: kP, kI, kD, and the velocity feed-forward coefficient kF"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDOutRng_2	
     "PID:Slot 2:Output Range"
-	cluster { 2, "min" = fD, "max" = fD } readwrite	29	  210
+	cluster { 2, "min" = fS, "max" = fS } readwrite	29	  210
 	"PID Slot 2 Output Range: Limits to keep the outputs from PID in a safe and controllable range."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDAdv_2	
     "PID:Slot 2:Advanced:All Elements"
-	cluster { 4, "i Zone" = fD, "max I Accum" = fD, "d Filter"=fD, "error Limit"=fD } readwrite	29	  211
+	cluster { 4, "i Zone" = fS, "max I Accum" = fS, "d Filter"=fS, "error Limit"=fS } readwrite	29	  211
 	"PID Slot 2 Advanced Settings: The error zone where accumulation is helpful to control versus where it should be reset to avoid further instability. Max limits how large accumulated integral error can become, d filter can keep sensor noise from destabilizing control, and a limit on the error term before PID calculation."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDAdv2Dash	
@@ -248,22 +248,22 @@ attribute:  PIDAdv2Dash
 
 attribute:  PIDAdv_2_iZone	
     "PID:Slot 2:Advanced:i Zone"
-	fD readwrite	29	  21
+	fS readwrite	29	  21
 	"PID Slot 2 Advanced i Zone: The error zone where accumulation is helpful to control versus where it should be reset to avoid further instability."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDAdv_2_maxAccum	
     "PID:Slot 2:Advanced:max I Accum"
-	fD readwrite	29	  68
+	fS readwrite	29	  68
 	"PID Slot 2 Advanced Max I Accum: Limit accumulated integral error to cap the contribution and help with built-up overshoot."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDAdv_2_dFilter	
     "PID:Slot 2:Advanced:d Filter"
-	fD readwrite	29	  22
+	fS readwrite	29	  22
 	"PID Slot 2 Advanced d FIlter: Low-pass filter for derivative error to mediate sensor noise."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDAdv_2_ErrorLimit	
     "PID:Slot 2:Advanced:Error Limit"
-	fD readwrite	29	  69
+	fS readwrite	29	  69
 	"PID Slot 2 Advanced Error Limit: Cap reaction to large error term."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 
@@ -271,22 +271,22 @@ attribute:  PIDAdv_2_ErrorLimit
 
 attribute:  PIDModel_2	
     "PID:Slot 2:Model Gains"
-	cluster { 5, "kS" = fD, "kA" = fD, "kG"=fD, "kCos"=fD, "Cos Ratio"=fD } readwrite	29	  212
+	cluster { 5, "kS" = fS, "kA" = fS, "kG"=fS, "kCos"=fS, "Cos Ratio"=fS } readwrite	29	  212
 	"PID Slot 2 Model Values: Coefficients to help overcome static friction, apply acceleration boost, and terms for gravity compensation on linear or radial position control."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDF_3	
     "PID:Slot 3:PIDF Gains"
-	cluster { 4, "kP" = fD, "kI" = fD, "kD"=fD, "kF"=fD } readwrite	29	  213
+	cluster { 4, "kP" = fS, "kI" = fS, "kD"=fS, "kF"=fS } readwrite	29	  213
 	"PID Slot 3 Coefficients: kP, kI, kD, and the velocity feed-forward coefficient kF"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDOutRng_3	
     "PID:Slot 3:Output Range"
-	cluster { 2, "min" = fD, "max" = fD } readwrite	29	  214
+	cluster { 2, "min" = fS, "max" = fS } readwrite	29	  214
 	"PID Slot 3 Output Range: Limits to keep the outputs from PID in a safe and controllable range."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDAdv_3	
     "PID:Slot 3:Advanced:All Elements"
-	cluster { 4, "i Zone" = fD, "max I Accum" = fD, "d Filter"=fD, "error Limit"=fD } readwrite	29	  215
+	cluster { 4, "i Zone" = fS, "max I Accum" = fS, "d Filter"=fS, "error Limit"=fS } readwrite	29	  215
 	"PID Slot 3 Advanced Settings: The error zone where accumulation is helpful to control versus where it should be reset to avoid further instability. Max limits how large accumulated integral error can become, d filter can keep sensor noise from destabilizing control, and a limit on the error term before PID calculation."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDAdv3Dash	
@@ -296,22 +296,22 @@ attribute:  PIDAdv3Dash
 
 attribute:  PIDAdv_3_iZone	
     "PID:Slot 3:Advanced:i Zone"
-	fD readwrite	29	  29
+	fS readwrite	29	  29
 	"PID Slot 3 Advanced i Zone: The error zone where accumulation is helpful to control versus where it should be reset to avoid further instability."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDAdv_3_maxAccum	
     "PID:Slot 3:Advanced:max I Accum"
-	fD readwrite	29	  6C
+	fS readwrite	29	  6C
 	"PID Slot 3 Advanced Max I Accum: Limit accumulated integral error to cap the contribution and help with built-up overshoot."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDAdv_3_dFilter	
     "PID:Slot 3:Advanced:d Filter"
-	fD readwrite	29	  2A
+	fS readwrite	29	  2A
 	"PID Slot 3 Advanced d FIlter: Low-pass filter for derivative error to mediate sensor noise."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  PIDAdv_3_ErrorLimit	
     "PID:Slot 3:Advanced:Error Limit"
-	fD readwrite	29	  6D
+	fS readwrite	29	  6D
 	"PID Slot 3 Advanced Error Limit: Cap reaction to large error term."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 
@@ -320,7 +320,7 @@ attribute:  PIDAdv_3_ErrorLimit
 
 attribute:  PIDModel_3	
     "PID:Slot 3:Model Gains"
-	cluster { 5, "kS" = fD, "kA" = fD, "kG"=fD, "kCos"=fD, "Cos Ratio"=fD } readwrite	29	  216
+	cluster { 5, "kS" = fS, "kA" = fS, "kG"=fS, "kCos"=fS, "Cos Ratio"=fS } readwrite	29	  216
 	"PID Slot 3 Model Values: Coefficients to help overcome static friction, apply acceleration boost, and terms for gravity compensation on linear or radial position control."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 
@@ -347,12 +347,12 @@ attribute:  EncoderSampleDelta
 
 attribute:  EncoderPositionValue	
     "Sensor:Encoder:Position"
-	fD	readwrite	29	  217
+	fS	readwrite	29	  217
 	"Encoder Position Value: Most recent position for the internal encoder."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  EncoderVelocityValue	
     "Sensor:Encoder:Velocity"
-	fD	readonly	29	  218
+	fS	readonly	29	  218
 	"Encoder Velocity Value: Most recently calculated velocity for the internal encoder."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 
@@ -369,7 +369,7 @@ attribute:  DutyCycleAverageDepth
 
 attribute:  DutyCycleRangeOffset	
     "Sensor:Abs Encoder:Range Offset"
-	fD	readwrite	29	  92
+	fS	readwrite	29	  92
 	"Duty Cycle Range Offset: Sets the Duty Cycle Encoder Range offset about zero. Moves the range between (-1, 0] and [0, 1), instead of the default range [0, 1), assuming the default units of rotations."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  DutyCycleSensorPrescaler	
@@ -379,27 +379,27 @@ attribute:  DutyCycleSensorPrescaler
 
 attribute:  DutyCycleOffset	
     "Sensor:Abs Encoder:Offset"
-	fD	readwrite	29	  9A
+	fS	readwrite	29	  9A
 	"Duty Cycle Offset: Sets the Duty Cycle sensor position offset. Must be from 0 to 1."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  DutyCycleEncoderStartPulseUs	
     "Sensor:Abs Encoder:Start Pulse microsec"
-	fD	readwrite	29	  C4
+	fS	readwrite	29	  C4
 	"Duty Cycle Encoder Start Pulse Us: Sets the expected start pulse of the input duty cycle signal in us."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  DutyCycleEncoderEndPulseUs	
     "Sensor:Abs Encoder:End Pulse microsec"
-	fD	readwrite	29	  C5
+	fS	readwrite	29	  C5
 	"Duty Cycle Encoder End Pulse Us: Sets the expected end pulse of the input duty cycle signal in us."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  DutyCyclePositionValue	
     "Sensor:Abs Encoder:Position"
-	fD	readwrite	29	  22B
+	fS	readwrite	29	  22B
 	"Duty Cycle Encoder Position: Most recent position for the absolute encoder."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  DutyCycleVelocityValue	
     "Sensor:Abs Encoder:Velocity"
-	fD	readonly	29	  22C
+	fS	readonly	29	  22C
 	"Duty Cycle Encoder Velocity: Most recently calculated velocity for the absolute encoder."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 
@@ -441,12 +441,12 @@ attribute:  LimitSwitchPositionSensor
 
 attribute:  LimitSwitchFwdPosition	
     "Sensor:Limit Switch:Forward Limit Sensor Value"
-	fD	readonly	29	  CA
+	fS	readonly	29	  CA
 	"Limit Switch Fwd Position: Sets the position value that the limit switch sensor will be set to when the forward limit switch is triggered."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  LimitSwitchRevPosition	
     "Sensor:Limit Switch:Reverse Limit Sensor Value"
-	fD	readonly	29	  CB
+	fS	readonly	29	  CB
 	"Limit Switch Rev Position: Sets the position value that the limit switch sensor will be set to when the reverse limit switch is triggered."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 
@@ -460,7 +460,7 @@ attribute:  SoftLimitFwdEn
 
 attribute:  SoftLimitForward	
     "Sensor:Soft Limit:Forward Setpoint"
-	fD	readonly	29	  73
+	fS	readonly	29	  73
 	"Soft Limit Forward: Software implemented forward limit. Will stop the motor from moving forward after crossing the set value."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  SoftLimitForwardValue	
@@ -476,7 +476,7 @@ attribute:  SoftLimitRevEn
 
 attribute:  SoftLimitReverse	
     "Sensor:Soft Limit:Reverse Setpoint"
-	fD	readonly	29	  74
+	fS	readonly	29	  74
 	"Soft Limit Reverse: Software implemented reverse limit. Will stop the motor from moving reverse after crossing the set value."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  SoftLimitReverseValue	
@@ -508,17 +508,17 @@ attribute:  AnalogSampleDelta
 
 attribute:  AnalogPositionValue	
     "Sensor:Analog:Position"
-	fD	readwrite	29	  21D
+	fS	readwrite	29	  21D
 	"Analog Position Value: Most recent position for the analog sensor."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  AnalogVelocityValue	
     "Sensor:Analog:Velocity"
-	fD	readwrite	29	  21E
+	fS	readwrite	29	  21E
 	"Analog Velocity Value: Most recently calculated velocity for the analog sensor."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  AnalogVoltageValue	
     "Sensor:Analog:Voltage"
-	fD	readwrite	29	  21F
+	fS	readwrite	29	  21F
 	"Analog Voltage Value: Most recent voltage for the analog sensor."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 
@@ -545,12 +545,12 @@ attribute:  AltEncoderSampleDelta
 
 attribute:  AltEncoderPositionValue	
     "Sensor:Alt Encoder:Position"
-	fD	readwrite	29	  220
+	fS	readwrite	29	  220
 	"Alt Encoder Position Value: Most recently calculated velocity for the alternate encoder."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  AltEncoderVelocityValue	
     "Sensor:Alt Encoder:Velocity"
-	fD	readwrite	29	  221
+	fS	readwrite	29	  221
 	"Alt Encoder Velocity Value: Most recently calculated velocity for the alternate encoder"	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 
@@ -570,22 +570,22 @@ attribute:  CompatibilityPortConfig
 
 attribute:  MAXMotionConfig_0	
     "MAXMotion:Slot 0"
-	cluster {5, "Cruise Velocity"=fD, "Accel Limit"=fD, "Jerk Limit"=fD, "Goal Error"=fD, "Mode"=uL}	readwrite	29	  222
+	cluster {5, "Cruise Velocity"=fS, "Accel Limit"=fS, "Jerk Limit"=fS, "Goal Error"=fS, "Mode"=uL}	readwrite	29	  222
 	"MAXMotion Slot 0 Configuration: Limit the velocity, acceleration, and jerk. Identify the acceptable error of the motion, and select the profile shape for position control (trapezoidal only)."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  MAXMotionConfig_1	
     "MAXMotion:Slot 1"
-	cluster {5, "Cruise Velocity"=fD, "Accel Limit"=fD, "Jerk Limit"=fD, "Goal Error"=fD, "Mode"=uL}	readwrite	29	  223
+	cluster {5, "Cruise Velocity"=fS, "Accel Limit"=fS, "Jerk Limit"=fS, "Goal Error"=fS, "Mode"=uL}	readwrite	29	  223
 	"MAXMotion Slot 1 Configuration: Limit the velocity, acceleration, and jerk. Identify the acceptable error of the motion, and select the profile shape for position control (trapezoidal only)."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  MAXMotionConfig_2	
     "MAXMotion:Slot 2"
-	cluster {5, "Cruise Velocity"=fD, "Accel Limit"=fD, "Jerk Limit"=fD, "Goal Error"=fD, "Mode"=uL}	readwrite	29	  224
+	cluster {5, "Cruise Velocity"=fS, "Accel Limit"=fS, "Jerk Limit"=fS, "Goal Error"=fS, "Mode"=uL}	readwrite	29	  224
 	"MAXMotion Slot 2 Configuration: Limit the velocity, acceleration, and jerk. Identify the acceptable error of the motion, and select the profile shape for position control (trapezoidal only)."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  MAXMotionConfig_3	
     "MAXMotion:Slot 3"
-	cluster {5, "Cruise Velocity"=fD, "Accel Limit"=fD, "Jerk Limit"=fD, "Goal Error"=fD, "Mode"=uL}	readwrite	29	  225
+	cluster {5, "Cruise Velocity"=fS, "Accel Limit"=fS, "Jerk Limit"=fS, "Goal Error"=fS, "Mode"=uL}	readwrite	29	  225
 	"MAXMotion Slot 3 Configuration: Limit the velocity, acceleration, and jerk. Identify the acceptable error of the motion, and select the profile shape for position control (trapezoidal only)."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 
