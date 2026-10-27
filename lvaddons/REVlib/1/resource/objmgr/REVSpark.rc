@@ -114,10 +114,10 @@ attribute:  ClosedLoopControlSensor
 	uL	enum	{"None"=0, "Main Encoder"=1, "Analog"=2, "Alt Encoder"=3, "Duty Cycle"=4, "Detached Absolute"=5, "Detached Relative"=6}    readwrite	29	  9
 	"Closed Loop Control Sensor: The reference/feedback sensor type used for closed loop motor control."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
-attribute:  PositionPIDWrap	
-    "PID:Position PID Wrap"
-	cluster { 3, "Enable" = bool, "Min" = fS, "Max"=fS } readwrite	29	  206
-	"Position PID Wrap Info: Determine if the position wraps between the ranges of 'Min' and 'Max'."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
+attribute:  PositionPIDWrapEnable	
+    "PID:Position PID Wrap Enable"
+	LVBoolean readwrite	29	  95
+	"Position PID Wrap Enable: Control whether the position wraps between zero and one."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  DetachedEncoderDeviceID	
     "PID:Detached Encoder Device ID"
