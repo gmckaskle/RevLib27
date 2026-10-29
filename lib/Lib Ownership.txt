@@ -1,0 +1,10 @@
+REV:
+libBackendDriver comes with the REV HW client, but we need it for normal operation.
+libREVLibDriver ""
+libREVLib we need this and I don't see it even after HW client is installed.
+libREVLibWpi ""
+
+WPI:
+libntcoreffi we need this for NT and it isn't on controller
+libwpimath needed by REV, but they don't install it with HW client and it isn't on controller
+libwpiHal ""
