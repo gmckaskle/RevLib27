@@ -1,0 +1,2 @@
+[LabVIEW]
+HelpMenuPlugin="NI Vision for LabVIEW Help.chm;IMAQVision.txt;IMAQVision.chm;NIIMAQVIReference.chm;NIIMAQVIReference.txt;NI-IMAQdx_VI_Reference.chm;NI-IMAQdx_VI_Reference.txt;"

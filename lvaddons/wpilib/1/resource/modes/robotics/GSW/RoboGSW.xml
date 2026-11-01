@@ -1,0 +1,506 @@
+<?xml version='1.0' encoding='windows-1252' standalone='yes'?>
+<Tree localize="yes">
+	<Node>
+		<ControlID>banner background</ControlID>
+		<Handler>ClickableItem</Handler>
+		<Hidden>True</Hidden>
+	</Node>
+	<Node>
+		<ControlID>banner background no logo</ControlID>
+		<Handler>ClickableItem</Handler>
+		<Hidden>False</Hidden>
+	</Node>
+	<Node>
+		<ControlID>logo</ControlID>
+		<Handler>Image</Handler>
+		<ImagePath>resource/modes/robotics/lvlogo.png</ImagePath>
+		<Hidden>False</Hidden>
+	</Node>
+	<Node>
+		<Name localize="yes">Create New Project</Name>
+		<Handler>NewProjectDialog</Handler>
+		<Description localize="yes">Opens the Create Project dialog box, which you can use to create a new project from a template or sample project. The field below the <B>Create Project</B> button lists the templates and sample projects you recently selected.</Description>
+		<ControlID>left_button</ControlID>
+	</Node>
+	<Node>
+		<Name localize="yes">Open</Name>
+		<Handler>Open</Handler>
+		<Description localize="yes">Opens a dialog box that allows you to navigate to and select a LabVIEW file. The field below the <B>Open Existing</B> buttons lists the files you recently opened.</Description>
+		<ControlID>right_button</ControlID>
+	</Node>
+	<Node>
+		<Name localize="yes">Find Drivers and Add-Ons</Name>
+		<Title localize="yes">Find Drivers and Add-Ons</Title>
+		<Description localize="yes">Connect to devices and expand the functionality of LabVIEW.</Description>
+		<Handler>ResourcePane</Handler>
+		<ControlID>LinksPane1_Title</ControlID>
+		<SecondaryPane>
+			<SubNode>
+				<Name localize="yes">Find Drivers and Add-Ons</Name>
+				<Description localize="yes">Find Drivers and Add-Ons</Description>
+				<Handler>InfoText</Handler>
+				<InfoText localize="yes">Find Drivers and Add-Ons</InfoText>
+				<ControlID>Title</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Find NI Device Drivers Icon</Name>
+				<Handler>Image</Handler>
+				<ImagePath>resource/dialog/GSW/images/FindNIDrivers.png</ImagePath>
+				<Absolute>False</Absolute>
+				<ControlID>LinksPane_Icon</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Find NI Device Drivers</Name>
+				<Description localize="yes">Search for and download device drivers for National Instruments hardware.</Description>
+				<Handler>Web</Handler>
+				<URL localize="yes">http://www.ni.com/cgi-bin/redirect.cgi?dest=infcoprod&amp;src=lv-2012&amp;openagent&amp;code=expsdt</URL>
+				<ControlID>LinksPane_Title</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Find NI Device Drivers Subtitle</Name>
+				<Description localize="yes">Search for and download device drivers for National Instruments hardware.</Description>
+				<Handler>InfoText</Handler>
+				<InfoText localize="yes">Search for and download device drivers for National Instruments hardware.</InfoText>
+				<ControlID>LinksPane_Subtitle</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Connect to Instruments Icon</Name>
+				<Handler>Image</Handler>
+				<ImagePath>resource/dialog/GSW/images/FindInstrDrivers.png</ImagePath>
+				<Absolute>False</Absolute>
+				<ControlID>LinksPane_Icon2</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Connect to Instruments</Name>
+				<Description localize="yes">Launches NI Instrument Driver Finder so you can search for and install LabVIEW Plug and Play instrument drivers without leaving the LabVIEW development environment.</Description>
+				<Handler>IDFinder</Handler>
+				<VIPath>help/_FindInstrumentDrivers.llb/Find Instrument Drivers.vi</VIPath>
+				<Absolute>False</Absolute>
+				<ControlID>LinksPane_Title2</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Connect to Instruments Subtitle</Name>
+				<Description localize="yes">Launches NI Instrument Driver Finder so you can search for and install LabVIEW Plug and Play instrument drivers without leaving the LabVIEW development environment.</Description>
+				<Handler>InfoText</Handler>
+				<InfoText localize="yes">Use the NI Instrument Driver Finder to install drivers for connected instruments.</InfoText>
+				<ControlID>LinksPane_Subtitle2</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Find LabVIEW Add-Ons Icon</Name>
+				<Handler>Image</Handler>
+				<ImagePath>resource/dialog/GSW/images/FindAddons.png</ImagePath>
+				<Absolute>False</Absolute>
+				<ControlID>LinksPane_Icon3</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Find LabVIEW Add-Ons</Name>
+				<Description localize="yes">Search for and install LabVIEW add-ons to expand the functionality of LabVIEW.</Description>
+				<Handler>RunVI</Handler>
+				<OpenPanel>False</OpenPanel>
+			    <VIPath>project/Find LabVIEW Add-ons.vi</VIPath>
+			    <Absolute>False</Absolute>
+			    <ControlID>LinksPane_Title3</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Find LabVIEW Add-Ons Subtitle</Name>
+				<Description localize="yes">Search for and install LabVIEW add-ons to expand the functionality of LabVIEW.</Description>
+				<Handler>InfoText</Handler>
+				<InfoText localize="yes">Search for and install LabVIEW add-ons to expand the functionality of LabVIEW.</InfoText>
+				<ControlID>LinksPane_Subtitle3</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Empty Slot Icon</Name>
+				<Handler>ClickableItem</Handler>
+				<Hidden>True</Hidden>
+				<ControlID>LinksPane_Icon4</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Empty Slot</Name>
+				<Handler>ClickableItem</Handler>
+				<Hidden>True</Hidden>
+				<ControlID>LinksPane_Title4</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Empty Slot Subtitle</Name>
+				<Handler>ClickableItem</Handler>
+				<Hidden>True</Hidden>
+				<ControlID>LinksPane_Subtitle4</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Checkbox</Name>
+				<Handler>ClickableItem</Handler>
+				<Hidden>True</Hidden>
+				<ControlID>show on launch</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Close</Name>
+				<Handler>ClickableItem</Handler>
+				<Description localize="yes">Dismiss the Find Drivers and Add-Ons pane</Description>
+				<ControlID>close button</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Close</Name>
+				<Handler>ClickableItem</Handler>
+				<Description localize="yes">Dismiss the Find Drivers and Add-Ons pane</Description>
+				<ControlID>close box</ControlID>
+			</SubNode>
+		</SecondaryPane>
+	</Node>
+	<Node>
+		<Name localize="yes">Find Drivers and Add-Ons Subtitle</Name>
+		<Description localize="yes">Connect to devices and expand the functionality of LabVIEW.</Description>
+		<Handler>InfoText</Handler>
+		<InfoText localize="yes">Connect to devices and expand the functionality of LabVIEW.</InfoText>
+		<ControlID>LinksPane1_Subtitle</ControlID>
+	</Node>
+	<Node>
+		<Name localize="yes">Community and Support</Name>
+		<Description localize="yes">Participate in the discussion forums or request technical support.</Description>
+		<Handler>ResourcePane</Handler>
+		<Title localize="yes">Community and Support</Title>
+		<ControlID>LinksPane2_Title</ControlID>
+		<SecondaryPane>
+			<SubNode>
+				<Name localize="yes">Community and Support</Name>
+				<Description localize="yes">Community and Support</Description>
+				<Handler>InfoText</Handler>
+				<InfoText localize="yes">Community and Support</InfoText>
+				<ControlID>Title</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Discussion Forums Icon</Name>
+				<Handler>Image</Handler>
+				<ImagePath>resource/dialog/GSW/images/Discussion.png</ImagePath>
+				<Absolute>False</Absolute>
+				<ControlID>LinksPane_Icon</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Discussion Forums</Name>
+				<Description localize="yes">Ask questions, share answers, and learn with your peers in the NI Discussion Forums.</Description>
+				<Handler>Web</Handler>
+				<URL localize="yes">http://digital.ni.com/express.nsf/bycode/exhdgz?opendocument</URL>
+				<ControlID>LinksPane_Title</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Discussion Forums Subtitle</Name>
+				<Description localize="yes">Ask questions, share answers, and learn with your peers in the NI Discussion Forums.</Description>
+				<Handler>InfoText</Handler>
+				<InfoText localize="yes">Ask questions, share answers, and learn with your peers in the NI Discussion Forums.</InfoText>
+				<ControlID>LinksPane_Subtitle</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Community Icon</Name>
+				<Handler>Image</Handler>
+				<ImagePath>resource/dialog/GSW/images/Community.png</ImagePath>
+				<Absolute>False</Absolute>
+				<ControlID>LinksPane_Icon2</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">NI Developer Community</Name>
+				<Description localize="yes">Download and share example programs, instrument drivers and other software IP for LabVIEW Robotics.</Description>
+				<Handler>Web</Handler>
+				<URL localize="yes">https://decibel.ni.com/content/community/zone/labviewrobotics</URL>
+				<ControlID>LinksPane_Title2</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Community Subtitle</Name>
+				<Description localize="yes">Collaborate with a worldwide community of engineers and scientists.</Description>
+				<Handler>InfoText</Handler>
+				<InfoText localize="yes">Collaborate with a worldwide community of engineers and scientists</InfoText>
+				<ControlID>LinksPane_Subtitle2</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Support Icon</Name>
+				<Handler>Image</Handler>
+				<ImagePath>resource/dialog/GSW/images/Support.png</ImagePath>
+				<Absolute>False</Absolute>
+				<ControlID>LinksPane_Icon3</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Request Support</Name>
+				<Description localize="yes">Request support from NI Technical Support.</Description>
+				<Handler>Web</Handler>
+				<URL localize="yes">http://digital.ni.com/express.nsf/bycode/ex8g43?opendocument</URL>
+				<ControlID>LinksPane_Title3</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Support Subtitle</Name>
+				<Description localize="yes">Request support from NI Technical Support.</Description>
+				<Handler>InfoText</Handler>
+				<InfoText localize="yes">Request support from NI Technical Support.</InfoText>
+				<ControlID>LinksPane_Subtitle3</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Empty Slot Icon</Name>
+				<Handler>ClickableItem</Handler>
+				<Hidden>True</Hidden>
+				<ControlID>LinksPane_Icon4</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Empty Slot</Name>
+				<Handler>ClickableItem</Handler>
+				<Hidden>True</Hidden>
+				<ControlID>LinksPane_Title4</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Empty Slot Subtitle</Name>
+				<Handler>ClickableItem</Handler>
+				<Hidden>True</Hidden>
+				<ControlID>LinksPane_Subtitle4</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Checkbox</Name>
+				<Handler>ClickableItem</Handler>
+				<Hidden>True</Hidden>
+				<ControlID>show on launch</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Close</Name>
+				<Handler>ClickableItem</Handler>
+				<Description localize="yes">Dismiss the Community and Support pane</Description>
+				<ControlID>close button</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Close</Name>
+				<Handler>ClickableItem</Handler>
+				<Description localize="yes">Dismiss the Community and Support pane</Description>
+				<ControlID>close box</ControlID>
+			</SubNode>
+		</SecondaryPane>
+	</Node>
+	<Node>
+		<Name localize="yes">Community and Support Subtitle</Name>
+		<Description localize="yes">Participate in the discussion forums or request technical support.</Description>
+		<Handler>InfoText</Handler>
+		<InfoText localize="yes">Participate in the discussion forums or request technical support.</InfoText>
+		<ControlID>LinksPane2_Subtitle</ControlID>
+	</Node>
+	<Node>
+		<Name localize="yes">Welcome to LabVIEW</Name>
+		<Description localize="yes">Learn to use LabVIEW and upgrade from previous versions.</Description>
+		<Handler>ResourcePane</Handler>
+		<Title localize="yes">Welcome</Title>
+		<ControlID>LinksPane3_Title</ControlID>
+		<RunOnceGlobal>NI.GSW.WelcomeShown</RunOnceGlobal>
+		<SecondaryPane>
+			<SubNode>
+				<Name localize="yes">Welcome to LabVIEW</Name>
+				<Description localize="yes">Welcome to LabVIEW</Description>
+				<Handler>InfoText</Handler>
+				<InfoText localize="yes">Welcome to LabVIEW</InfoText>
+				<ControlID>Title</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Learn to Use LabVIEW Robotics Icon</Name>
+				<Handler>Image</Handler>
+				<ImagePath>resource/dialog/GSW/images/LearnToUse.png</ImagePath>
+				<Absolute>False</Absolute>
+				<ControlID>LinksPane_Icon</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Learn to Use LabVIEW Robotics</Name>
+				<Description localize="yes">Displays the Getting Started with LabVIEW manual. Use this manual as a tutorial to familiarize yourself with the LabVIEW graphical programming environment and the basic LabVIEW features.</Description>
+				<Handler>Manual</Handler>
+				<Manual>manuals/Robotics_Getting_Started.pdf</Manual>
+				<ControlID>LinksPane_Title</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Learn to Use LabVIEW Subtitle</Name>
+				<Description localize="yes">Introduction to the LabVIEW Robotics Module</Description>
+				<Handler>InfoText</Handler>
+				<InfoText localize="yes">Introduction to the LabVIEW Robotics Module</InfoText>
+				<ControlID>LinksPane_Subtitle</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Getting Started Tutorials Icon</Name>
+				<Handler>Image</Handler>
+				<ImagePath>resource/modes/robotics/GSW/GettingStartedTutorial.png</ImagePath>
+				<Absolute>False</Absolute>
+				<ControlID>LinksPane_Icon2</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Getting Started Tutorials</Name>
+				<Handler>Web</Handler>
+				<URL localize="yes">http://www.ni.com/white-paper/10483/en</URL>
+				<Description localize="yes">Opens Robotics Getting Started Tutorials at ni.com in a web browser</Description>
+				<ControlID>LinksPane_Title2</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Getting Started Tutorials Subtitle</Name>
+				<Description localize="yes">Follow step-by-step instructions for common robotics tasks.</Description>
+				<Handler>InfoText</Handler>
+				<InfoText localize="yes">Follow step-by-step instructions for common robotics tasks.</InfoText>
+				<ControlID>LinksPane_Subtitle2</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Hardware Setup Wizard Icon</Name>
+				<Handler>Image</Handler>
+				<ImagePath>resource/dialog/GSW/images/Upgrading.png</ImagePath>
+				<Absolute>False</Absolute>
+				<ControlID>LinksPane_Icon3</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Hardware Setup Wizard</Name>
+				<Handler>SystemExec</Handler>
+				<BasePath>HKEY_LOCAL_MACHINE</BasePath>
+				<subkey>SOFTWARE\National Instruments\LabVIEW\19.0\AddOns\Robotics</subkey>
+				<value>RoboticsHWSetup</value>
+				<Description localize="yes">Configure your hardware to work with the LabVIEW Robotics Module</Description>
+				<ControlID>LinksPane_Title3</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Hardware Setup Wizard Subtitle</Name>
+				<Description localize="yes">Configure your hardware to work with the LabVIEW Robotics Module</Description>
+				<Handler>InfoText</Handler>
+				<InfoText localize="yes">Configure your hardware to work with the LabVIEW Robotics Module</InfoText>
+				<ControlID>LinksPane_Subtitle3</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Empty Slot Icon</Name>
+				<Handler>Image</Handler>
+				<ImagePath>resource/dialog/GSW/images/Training.png</ImagePath>
+				<Absolute>False</Absolute>
+				<Hidden>True</Hidden>
+				<ControlID>LinksPane_Icon4</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Empty Slot</Name>
+				<Handler>Web</Handler>
+				<URL localize="yes">http://ni.com/</URL>
+				<Hidden>True</Hidden>
+				<Description localize="yes">Training</Description>
+				<ControlID>LinksPane_Title4</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Empty Slot Subtitle</Name>
+				<Handler>InfoText</Handler>
+				<Hidden>True</Hidden>
+				<InfoText localize="yes">Empty Slot</InfoText>
+				<ControlID>LinksPane_Subtitle4</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Show on launch</Name>
+				<Description localize="yes">Show the Welcome pane when starting LabVIEW</Description>
+				<Handler>Checkbox</Handler>
+				<OnLaunchConfigToken>ShowWelcomeOnLaunch</OnLaunchConfigToken>
+				<ControlID>show on launch</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Close</Name>
+				<Handler>ClickableItem</Handler>
+				<Description localize="yes">Dismiss the Welcome pane</Description>
+				<ControlID>close button</ControlID>
+			</SubNode>
+			<SubNode>
+				<Name localize="yes">Close</Name>
+				<Handler>ClickableItem</Handler>
+				<Description localize="yes">Dismiss the Welcome pane</Description>
+				<ControlID>close box</ControlID>
+			</SubNode>
+		</SecondaryPane>
+	</Node>
+	<Node>
+		<Name localize="yes">Welcome Subtitle</Name>
+		<Description localize="yes">Tutorials, upgrade notes and training</Description>
+		<Handler>InfoText</Handler>
+		<InfoText localize="yes">Tutorials, upgrade notes and training</InfoText>
+		<ControlID>LinksPane3_Subtitle</ControlID>
+	</Node>
+	<Node>
+		<Name localize="yes">LabVIEW News</Name>
+		<Description localize="yes">Displays news and information from National Instruments.</Description>
+		<Handler>Feed_link</Handler>
+		<URL localize="yes">http://www.ni.com/lv2019/gsw_newsfeed_en/</URL>
+		<METC>mtb8b8</METC>
+		<ControlID>headlines</ControlID>
+		<GUID>{2fbb4440-9643-11dd-ad8b-0800200c9a67}</GUID>
+	</Node>
+	<Node>
+		<Name localize="yes">Recent Files</Name>
+		<Handler>RecentFiles</Handler>
+		<Pinned>GSW_Pinned_Files</Pinned>
+		<ControlID>Recent_Files</ControlID>
+		<Filters>all;*.lvproj;*.vi;other</Filters>
+		<FilterToken>GSW_filter</FilterToken>
+	</Node>
+	<Node>
+		<Name localize="yes">Show</Name>
+		<Handler>RecentFilesFilter</Handler>
+		<ControlID>Ring</ControlID>
+		<Items>All;Projects;VIs;Other</Items>
+		<FilterToken>GSW_filter</FilterToken>
+	</Node>
+	<Node>
+		<Name localize="yes">Pin</Name>
+		<Handler>ClickableItem</Handler>
+		<Description localize="yes">Make an item persistent.</Description>
+		<Hidden>True</Hidden>
+		<ControlID>pin</ControlID>
+	</Node>
+	<Node>
+		<Name localize="yes">Remove</Name>
+		<Handler>ClickableItem</Handler>
+		<Description localize="yes">Remove an item.</Description>
+		<Hidden>True</Hidden>
+		<ControlID>close box</ControlID>
+	</Node>
+	<Node> 
+		<Name localize="yes">Recent Project Templates</Name> 
+		<Handler>RecentTemplates</Handler> 
+		<Pinned>GSW_Pinned_Templates</Pinned> 
+		<ControlID>Recent_Templates</ControlID> 
+		<Font language="en">Microsoft Sans Serif</Font> 
+		<Font language="de">Dlg Font</Font> 
+		<Font language="fr">Dlg Font</Font> 
+		<Font language="ja">Dlg Font</Font> 
+		<Font language="ko">Dlg Font</Font> 
+		<Font language="zh-cn">Dlg Font</Font> 
+		<Font_Size>14</Font_Size> 
+		<Font_Bold>False</Font_Bold> 
+	</Node> 
+	<Node> 
+		<Name localize="yes">Pin</Name> 
+		<Handler>ClickableItem</Handler> 
+		<Description localize="yes">Make a template persistent.</Description> 
+		<Hidden>True</Hidden> 
+		<ControlID>pin_templates</ControlID> 
+	</Node>
+	<Node>
+		<Name localize="yes">Search</Name>
+		<Description localize="yes">Use this application-wide search capability to search the help system. (Windows) The search box also returns results from ni.com. In localized versions of LabVIEW, the search might return results in the local language and in English.</Description>
+		<Handler>InfoText</Handler>
+		<ControlID>Search in LabVIEW</ControlID>
+		<Hidden>False</Hidden>
+		<Font language="en">Microsoft Sans Serif</Font>
+		<Font language="de">Dlg Font</Font>
+		<Font language="fr">Dlg Font</Font>
+		<Font language="ja">Dlg Font</Font>
+		<Font language="ko">Dlg Font</Font>
+		<Font language="zh-cn">Dlg Font</Font>
+		<Font_Size language="en">14</Font_Size>
+		<Font_Size language="de">0</Font_Size>
+		<Font_Size language="fr">0</Font_Size>
+		<Font_Size language="ja">14</Font_Size>
+		<Font_Size language="ko">14</Font_Size>
+		<Font_Size language="zh-cn">14</Font_Size>
+		<Font_Bold>False</Font_Bold>
+	</Node>
+	<Node>
+		<Name localize="yes">Search Help</Name>
+		<Description localize="yes">Searches the LabVIEW Help for the word or phrase you enter.</Description>
+		<Handler>InfoText</Handler>
+		<ControlID>Search LabVIEW Help</ControlID>
+		<Hidden>True</Hidden>
+		<Font>Dlg Font</Font>
+		<Font_Size>0</Font_Size>
+		<Font_Bold>False</Font_Bold>
+	</Node>
+	<Globals>
+		<GettingStarted localize="yes">LabVIEW</GettingStarted>
+		<NISearchHint localize="yes">Search</NISearchHint>
+		<PDF_failure_message localize="yes">LabVIEW encountered an error opening %s. Make sure you have Adobe Reader installed.</PDF_failure_message>
+		<Close localize="yes">Close</Close>
+		<Search_Help_CH localize="yes">Searches the LabVIEW Help for the word or phrase you enter.</Search_Help_CH>
+	</Globals>
+</Tree>
+

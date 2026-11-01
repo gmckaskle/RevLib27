@@ -14,15 +14,17 @@
 		<Property Name="server.vi.callsEnabled" Type="Bool">true</Property>
 		<Property Name="server.vi.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="specify.custom.address" Type="Bool">false</Property>
-		<Item Name="OpModes" Type="Folder">
+		<Item Name="Auto OpModes" Type="Folder">
 			<Item Name="AutoOp Default.vi" Type="VI" URL="../AutoOp Default.vi"/>
-			<Item Name="TeleOp Default.vi" Type="VI" URL="../TeleOp Default.vi"/>
-			<Item Name="UtilityOp Default.vi" Type="VI" URL="../UtilityOp Default.vi"/>
+		</Item>
+		<Item Name="SwerveDrive" Type="Folder" URL="../SwerveDrive">
+			<Property Name="NI.DISK" Type="Bool">true</Property>
 		</Item>
 		<Item Name="Robot Main.vi" Type="VI" URL="../Robot Main.vi"/>
 		<Item Name="Declare OpModes.vi" Type="VI" URL="../Declare OpModes.vi"/>
+		<Item Name="TeleOp Default.vi" Type="VI" URL="../TeleOp Default.vi"/>
+		<Item Name="UtilityOp Default.vi" Type="VI" URL="../UtilityOp Default.vi"/>
 		<Item Name="SubSystems.vi" Type="VI" URL="../SubSystems.vi"/>
-		<Item Name="Handle OpModes.vi" Type="VI" URL="/&lt;vilib&gt;/MRC/MrcLib/VIs/Robot Framework/Handle OpModes.vi"/>
 		<Item Name="Dependencies" Type="Dependencies"/>
 		<Item Name="Build Specifications" Type="Build"/>
 	</Item>

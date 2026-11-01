@@ -1,0 +1,4 @@
+[LabVIEW]
+Functions="Programming;Measurement I/O;Vision and Motion;Mathematics;Data Communication;Control Design & Simulation;Select a VI...;Real-Time;FPGA Interface;Robotics;"
+
+Controls="Modern;Silver;System;Control Design & Simulation;Select a Control...;Robotics;Vision;"

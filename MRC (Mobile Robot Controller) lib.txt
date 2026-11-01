@@ -1,0 +1,49 @@
+MRC (Mobile Robot Controller) lib
+All alpha 7 apis wrapped and moderately tested.
+*** In alpha 8 they added some additional low-level I/O and modified some api. Need to make another pass to complete and continue testing.
+*** No examples, no external documentation of api via LabVIEW.
+*** Some testing will require building cables and acquiring sensors and thinking about 
+repeatability.
+Callbacks for DS notification and unreserve were added, but are in PR and not tested.
+DS and dashboard integration have some testing, but more is needed -- students.
+--- Add a reservation mode cache and a force param and error handling
+--- We don't have a Set IMU operation yet
+ 
+REV libs as of a8 are functional
+Took to school, put on real robot, and used joystick to drive a single motor in %vBus mode.
+--- Added callbacks for property node, but are waiting in PR. 
+*** Lots of testing needed (best done by students on robot) + whitebox testing, assisted by students
+--- Likely want to make another pass on properties to allow for partial read/write of some cluster types.
+ 
+Framework is in progress
+Have one approach for opModes where they are VIs, run asynchronously so they can be cooperatively exited or aborted.
+--- Working on project with initial framework code and comments that will be the primary template(s).
+??? Another approach for opModes would be a simple class with methods for init, runEnable, runDisable, and cleanup.
+ 
+Installers for SystemCore HW are on git/ni. They have been used a number of times and Joe has that well underway.
+*** Installers for laptop LV, including dll versions of wpi libs and rev libs doesn't exist. Goal is loading and modifying code and pushing to robot.
+*** Support and testing for Win64, Mac, and linux. No win32 dlls. I think we can support LV '25 and greater. This would allow teams to avoid reinstall of LV.
+*** Simulation (they are pretty loose with this definition) has not been started except for a few wrappers.
+ 
+*** Drive libraries, specifically for swerve need to be updated and cleaned and added to palettes or examples or ???
+*** Libraries to import paths from Choreo, BeeLine, or other need to be developed/tested. JSimpson has something for Choreo, but kids were not impressed.
+*** Verify vision toolkit from Serenial GAR (or something like that) works on target.
+ 
+LabVIEW Editor
+--- New HTML Home screen is pretty heavy. CEF and resources needed to get to screen are likely not worth it. Need to investigate graceful fallback to different GSW.
+New graphics and editor changes are present.
+Project window and libraries are now working.
+VIObjCache is now working -- or close (PR).
+*** When you grow a property node, it allows "-" items to be selected
+ 
+*** Performance testing for some common workflows.
+
+--- Need a way to set encoder positon (test)
+
+--- make init and close smartIO funcs, or make it lazy.
+
+--- Rm MRC_Init from InitDS and all other functions
+*** Finish reworking GSW, test proj templates and see if we still need wizard for anything
+ 
+Legend
+*** marks items where work is needed. Others are status update.

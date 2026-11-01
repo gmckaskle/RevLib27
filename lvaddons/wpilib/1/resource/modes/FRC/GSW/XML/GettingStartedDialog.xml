@@ -1,0 +1,195 @@
+<?xml version='1.0' encoding='windows-1252' standalone='yes'?>
+<Tree localize="yes">
+	<Node>
+		<Name localize="yes">Templates</Name>
+		<GUID>{f2aa14fa-32f7-42a8-8a87-06d29194ae44}</GUID>
+		<ParentGUID>0</ParentGUID>
+		<Column>1</Column>
+		<Handler>New</Handler>
+		<Description localize="yes">Lists new LabVIEW file types that you can launch from the <B>Getting Started</B> window. Click this link to open the New dialog box for more options.</Description>
+		<Weight>0</Weight>
+		<Type>None</Type>
+	</Node>
+	<Node>
+		<Name localize="yes">FRC roboRIO Project</Name>
+		<GUID>{960e4b00-25cf-11dd-bd0b-0800200c9a66}</GUID>
+		<ParentGUID>{f2aa14fa-32f7-42a8-8a87-06d29194ae44}</ParentGUID>
+		<Column>1</Column>
+		<Handler>ProjectWizardClickableText</Handler>
+		<Description localize="yes">Creates a FRC cRIO Robot project for programming your robot.</Description>
+		<Weight>0</Weight>
+		<Wizard>resource/plugins/NewDialogFiles/ProjectWizards/ProjectWizard.llb/ProjectWizard Host.vi</Wizard>
+		<WizardArg>resource/plugins/NewDialogFiles/ProjectWizards/FRC/FRC Wizard - Robot.vi</WizardArg>
+		<Type>New Project</Type>
+	</Node>
+	<Node>
+		<Name localize="yes">FRC Dashboard Project</Name>
+		<GUID>{960e4b01-25cf-11dd-bd0b-0800200c9a66}</GUID>
+		<ParentGUID>{f2aa14fa-32f7-42a8-8a87-06d29194ae44}</ParentGUID>
+		<Column>1</Column>
+		<Handler>ProjectWizardClickableText</Handler>
+		<Description localize="yes">Creates a FRC Dashboard project for interacting with and debugging your robot.</Description>
+		<Weight>0</Weight>
+		<Wizard>resource/plugins/NewDialogFiles/ProjectWizards/ProjectWizard.llb/ProjectWizard Host.vi</Wizard>
+		<WizardArg>resource/plugins/NewDialogFiles/ProjectWizards/FRC/FRC Wizard - Dashboard.vi</WizardArg>
+		<Type>New Project</Type>
+	</Node>
+
+		<Node>
+		<Name localize="yes">Blank VI</Name>
+		<GUID>{73a8d7e0-fdff-40b1-8662-c9255c26f8ad}</GUID>
+		<ParentGUID>{f2aa14fa-32f7-42a8-8a87-06d29194ae44}</ParentGUID>
+		<Column>1</Column>
+		<Handler>New</Handler>
+		<NewWhat>VI</NewWhat>
+		<Description localize="yes">Creates a new, blank Virtual Instrument (VI).</Description>
+		<Weight>0</Weight>
+		<Type>New VI</Type>
+	</Node>
+
+
+
+
+
+
+
+	<Node>
+		<Name localize="yes">Resources</Name>
+		<GUID>{960e4b08-25cf-11dd-bd0b-0800200c9a66}</GUID>
+		<ParentGUID>0</ParentGUID>
+		<Column>2</Column>
+		<Handler>Help</Handler>
+		<HelpFile>lvhelp.chm</HelpFile>
+		<Topic>LabVIEW_Help.html</Topic>
+		<Description localize="yes">Displays the LabVIEW Help. Use this help file to learn about LabVIEW programming concepts, to follow how-to instructions for using LabVIEW features, and as a reference for information about LabVIEW objects.</Description>
+		<Weight>0</Weight>
+	</Node>
+	
+	
+	
+	<Node>
+		<Name localize="yes">LabVIEW Training</Name>
+		<GUID>{960e4b02-25cf-11dd-bd0b-0800200c9a66}</GUID>
+		<ParentGUID>{960e4b08-25cf-11dd-bd0b-0800200c9a66}</ParentGUID>
+		<Column>2</Column>
+		<Handler>Web</Handler>
+		<Relative>False</Relative>
+		<URL localize="yes">https://forums.ni.com/t5/FIRST-Robotics-Competition/Training-NI-LabVIEW-for-FRC-Programming-Fundamentals/ta-p/3736322?profile.language=en</URL>
+		<Description localize="yes">Displays the LabVIEW Robotics Programming Guide for FIRST Robotics Competition.  Use this manual to set up hardware and software for FIRST Robotics Competition (FRC) and to develop LabVIEW programs that control the robot.
+</Description>
+		<Weight>0</Weight>
+	</Node>	
+	
+	
+	
+	
+	
+	<Node>
+		<Name localize="yes">Installed Tutorials</Name>
+		<GUID>{960e4b02-25cf-11dd-bd0b-0800200c9a66}</GUID>
+		<ParentGUID>{960e4b08-25cf-11dd-bd0b-0800200c9a66}</ParentGUID>
+		<Column>2</Column>
+		<Handler>Web</Handler>
+		<Relative>True</Relative>
+		<URL localize="yes">manuals\FRC_Programming_Guide\index.html</URL>
+		<Description localize="yes">Displays the LabVIEW Robotics Programming Guide for FIRST Robotics Competition.  Use this manual to set up hardware and software for FIRST Robotics Competition (FRC) and to develop LabVIEW programs that control the robot.
+</Description>
+		<Weight>0</Weight>
+	</Node>
+	
+
+
+
+	<Node>
+		<Name localize="yes">Online Tutorials</Name>
+		<GUID>{960e4b04-25cf-11dd-bd0b-0800200c9a66}</GUID>
+		<ParentGUID>{960e4b02-25cf-11dd-bd0b-0800200c9a66}</ParentGUID>
+		<Column>2</Column>
+		<Handler>Web</Handler>
+		<URL localize="yes">http://www.ni.com/cgi-bin/redirect.cgi?dest=infcoprod&src=examplewiz&openagent&code=FRCTutorials</URL>
+		<Description localize="yes">Opens the Online Training. Use this link to learn about everything from basic LabVIEW to advanced cRIO functions.</Description>
+		<Weight>500</Weight>
+	</Node>	
+	<Node>
+		<Name localize="yes">NI Support</Name>
+		<GUID>{960e4b0a-25cf-11dd-bd0b-0800200c9a66}</GUID>
+		<ParentGUID>{960e4b08-25cf-11dd-bd0b-0800200c9a66}</ParentGUID>
+		<Column>2</Column>
+		<Handler>Web</Handler>
+		<URL localize="yes">https://forums.ni.com/t5/Support/ct-p/Support?profile.language=en</URL>
+		<Description localize="yes">Post your questions or comments here to reach your peers and Support Engineers from National Instruments.</Description>
+		<Weight>0</Weight>
+	</Node>
+	
+	
+	<Node>
+		<Name localize="yes">Installed Examples</Name>
+		<GUID>{960e4b11-25cf-11dd-bd0b-0800200c9a66}</GUID>
+		<ParentGUID>{2d36a0a1-0f1a-4dc2-9c1d-f7b5c1888745}</ParentGUID>
+		<Column>2</Column>
+		<Handler>Example</Handler>
+		<Description localize="yes">Launch NI Example Finder to discover example VIs and projects.</Description>
+		<Weight>0</Weight>
+	</Node>
+
+	<Node>
+		<Name localize="yes">Online FRC Examples</Name>
+		<GUID>{D6CA9756-8574-41E4-BBD3-E46F5D6676EB}</GUID>
+		<ParentGUID>{960e4b08-25cf-11dd-bd0b-0800200c9a66}</ParentGUID>
+		<Column>2</Column>
+		<Handler>Web</Handler>
+		<URL localize="yes">http://ni.com/r/lvfrcexamples</URL>
+		<Description localize="yes">Find examples on the web at ni.com.</Description>
+		<Weight>0</Weight>
+	</Node>
+
+<Node>
+		<Name localize="yes">LabVIEW Manual</Name>
+		<GUID>{960e4b09-25cf-11dd-bd0b-0800200c9a66}</GUID>
+		<ParentGUID>{960e4b08-25cf-11dd-bd0b-0800200c9a66}</ParentGUID>
+		<Column>2</Column>
+		<Handler>Help</Handler>
+		<HelpFile>lvhelp.chm</HelpFile>
+		<Topic>LabVIEW_Help.html</Topic>
+		<Description localize="yes">Displays the LabVIEW Help. Use this help file to learn about LabVIEW programming concepts, to follow how-to instructions for using LabVIEW features, and as a reference for information about LabVIEW objects.</Description>
+		<Weight>0</Weight>
+	</Node>
+	
+	<Node>
+		<Name localize="yes">Community Content</Name>
+		<GUID>{D6CA9756-8574-41E4-BBD3-E46F5D6676EB}</GUID>
+		<ParentGUID>{960e4b08-25cf-11dd-bd0b-0800200c9a66}</ParentGUID>
+		<Column>2</Column>
+		<Handler>Web</Handler>
+		<URL localize="yes">http://ni.com/r/lvfrcexamples</URL>
+		<Description localize="yes">Pages from teams.</Description>
+		<Weight>0</Weight>
+	</Node>
+	
+	<Node>
+		<Name localize="yes">Balena Etcher SD Burner</Name>
+		<GUID>{D6CA9756-8574-41E4-BBD3-E46F5D6676ED}</GUID>
+		<ParentGUID>{960e4b08-25cf-11dd-bd0b-0800200c9a66}</ParentGUID>
+		<Column>2</Column>
+		<Handler>Web</Handler>
+		<URL localize="yes">https://www.balena.io/etcher</URL>
+		<Description localize="yes">Link to SD burner.</Description>
+		<Weight>0</Weight>
+	</Node>	<Node>
+		<Name localize="yes">WPILib LabVIEW Math</Name>
+		<GUID>{D6CA9756-8574-41E4-BBD3-E46F5D6676EC}</GUID>
+		<ParentGUID>{960e4b08-25cf-11dd-bd0b-0800200c9a66}</ParentGUID>
+		<Column>2</Column>
+		<Handler>Web</Handler>
+		<URL localize="yes">https://github.com/jsimpso81/WPIlibMathLabVIEW/releases/latest</URL>
+		<Description localize="yes">Jim Simpson contribution.</Description>
+		<Weight>0</Weight>
+	</Node>
+
+	<Globals>
+		<GettingStarted localize="yes">FRC 2026 Getting Started</GettingStarted>
+	</Globals>
+
+</Tree>
+
+

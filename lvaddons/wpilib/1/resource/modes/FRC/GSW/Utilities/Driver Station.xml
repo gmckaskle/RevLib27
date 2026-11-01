@@ -1,0 +1,17 @@
+<?xml version='1.0' standalone='yes' ?>
+<LVData xmlns="http://www.ni.com/LVData">
+<Version>11.0</Version>
+<Tree>
+
+<Order>2</Order>
+<Name>Driver Station</Name>
+<LabVIEWRelativePath>False</LabVIEWRelativePath>
+<32bitRelativePath>True</32bitRelativePath>
+<64bitRelativePath>False</64bitRelativePath>
+<PublicDocsRelativePath>False</PublicDocsRelativePath>
+<AppDataRelativePath>False</AppDataRelativePath>
+<Path>FRC Driver Station\DriverStation.exe</Path>
+<GraphicsType>png</GraphicsType>
+<PassParameters></PassParameters>
+
+</Tree></LVData>
