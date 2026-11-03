@@ -9,7 +9,7 @@ matchExact: strict
 menuSelect: yes
 setFunction: LV_REVSparkSetAttribute
 getFunction: LV_REVSparkGetAttribute
-library: libFRC_NetworkTablesLV.so
+library: libFRC_REVLibLV.so
 termName: "RevSpark Session"
 sourcePalette: "<vilib>:\REVLibDriver\VIs\SPARK Open Brushless.vi"
 cleanup: idle
