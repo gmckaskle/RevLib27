@@ -14,13 +14,14 @@
 		<Property Name="server.vi.callsEnabled" Type="Bool">true</Property>
 		<Property Name="server.vi.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="specify.custom.address" Type="Bool">false</Property>
-		<Item Name="Auto OpModes" Type="Folder">
-			<Item Name="AutoOp Default.vi" Type="VI" URL="../AutoOp Default.vi"/>
+		<Item Name="Documentation" Type="Folder" URL="../Documentation">
+			<Property Name="NI.DISK" Type="Bool">true</Property>
+		</Item>
+		<Item Name="OpModes" Type="Folder" URL="../OpModes">
+			<Property Name="NI.DISK" Type="Bool">true</Property>
 		</Item>
 		<Item Name="Robot Main.vi" Type="VI" URL="../Robot Main.vi"/>
 		<Item Name="Declare OpModes.vi" Type="VI" URL="../Declare OpModes.vi"/>
-		<Item Name="TeleOp Default.vi" Type="VI" URL="../TeleOp Default.vi"/>
-		<Item Name="UtilityOp Default.vi" Type="VI" URL="../UtilityOp Default.vi"/>
 		<Item Name="SubSystems.vi" Type="VI" URL="../SubSystems.vi"/>
 		<Item Name="Dependencies" Type="Dependencies"/>
 		<Item Name="Build Specifications" Type="Build"/>

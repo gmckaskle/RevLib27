@@ -1,0 +1,3 @@
+The drive wheels on a swerve drivebase can swivel independently and run at different speeds allowing for holonomic control.
+
+This template code includes operations for autonomous driving along a path, teleOperated driving using joysticks, and demonstrates how a control loop can turn to an angle.

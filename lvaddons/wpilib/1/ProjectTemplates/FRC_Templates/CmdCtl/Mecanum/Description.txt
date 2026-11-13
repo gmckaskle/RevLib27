@@ -1,0 +1,4 @@
+The drive wheels on a Mecanum drivebase provide partial traction (generally using integrated rollers), and the wheels are mounted so forward-backard and left-right forces are possible. Omniwheels and Mecanum wheels are common choices. Running wheels at different speeds allows for holonomic control.
+
+This template code includes operations for autonomous driving along a path, teleOperated driving using joysticks, and demonstrates how to write a control
+loop to turn to an angle.

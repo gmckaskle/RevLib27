@@ -1,0 +1,7 @@
+This is a template for subsystem control of a generic mechanism.
+
+The code runs independent of auto and teleOp code. This allows for control loops that need to run faster, or run to completion across a longer time-frame. Operations are requested via commands describing the operation -- lift arm to scoring height.
+
+Commands can complete when the operation is complete, or they can be  interrupted by a new command -- actually, lower arm to ground for pickup.
+
+The template includes the ability to debug commands interactively on the panel and a trace utility to show the sequence of commands across the entire robot.

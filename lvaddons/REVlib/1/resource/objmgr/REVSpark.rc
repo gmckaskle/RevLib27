@@ -460,7 +460,7 @@ attribute:  SoftLimitFwdEn
 
 attribute:  SoftLimitForward	
     "Sensor:Soft Limit:Forward Setpoint"
-	fS	readonly	29	  73
+	fS	readwrite	29	  73
 	"Soft Limit Forward: Software implemented forward limit. Will stop the motor from moving forward after crossing the set value."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  SoftLimitForwardValue	
@@ -476,7 +476,7 @@ attribute:  SoftLimitRevEn
 
 attribute:  SoftLimitReverse	
     "Sensor:Soft Limit:Reverse Setpoint"
-	fS	readonly	29	  74
+	fS	readwrite	29	  74
 	"Soft Limit Reverse: Software implemented reverse limit. Will stop the motor from moving reverse after crossing the set value."	"REVSpark_Properties.html"	"..\..\help\REVSpark_Reference.chm"
 
 attribute:  SoftLimitReverseValue	

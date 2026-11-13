@@ -1,0 +1,4 @@
+A differential drivebase has wheels on the left and right sides of the robot. Steering is achieved by running left and right motors at different speeds.
+
+This template code includes operations for autonomous driving along a path, teleOperated driving using joysticks, and demonstrates how to write a control
+loop to turn to an angle.

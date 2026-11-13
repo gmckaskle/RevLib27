@@ -178,7 +178,7 @@
 	</Item>
 	<Item Name="SytemCore" Type="Folder">
 		<Item Name="API" Type="Folder">
-			<Item Name="SystemCore Get Team Number.vi" Type="VI" URL="/&lt;vilib&gt;/MRC/MrcLib/VIs/SystemCore/SystemCore Get Team Number.vi"/>
+			<Item Name="SystemCore Get Team Number.vi" Type="VI" URL="/&lt;vilib&gt;/MRC/MrcLib/VIs/Console/SystemCore Get Team Number.vi"/>
 			<Item Name="SystemCore Get Voltage.vi" Type="VI" URL="/&lt;vilib&gt;/MRC/MrcLib/VIs/SystemCore/SystemCore Get Voltage.vi"/>
 		</Item>
 		<Item Name="Wrappers" Type="Folder">

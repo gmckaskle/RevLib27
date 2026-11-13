@@ -1,0 +1,11 @@
+Documentation about project modifications and operation.
+Feel free to update with specific information for your robot.
+You can write the material here, or put links to online docs.
+You can add documents directly to the project as well.
+
+How should robot systems be configured?
+How should DS and dashboards be configured?
+Are there common issues that you want to document for future team
+members trying to demo this robot?
+
+You may choose to implement this as a checklist instead.
