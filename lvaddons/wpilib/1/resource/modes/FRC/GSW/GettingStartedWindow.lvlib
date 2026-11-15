@@ -1,11 +1,10 @@
 ﻿<?xml version='1.0' encoding='UTF-8'?>
-<Library LVVersion="27002005">
+<Library LVVersion="23008000">
 	<Property Name="NI.Lib.HelpPath" Type="Str"></Property>
-	<Property Name="NI.Lib.Icon" Type="Bin">*Q!A"1!!!!)!"1!&amp;!!!-!%!!!@````]!!!!"!!%!!!,@!!!*Q(C=T:3R&lt;B."%)&lt;`1R2/[:)#+9JL6`-)O-A,W"8VC*,/&lt;7C18W%[/CR,C!=)AB?96X!&lt;7232+Y)CC_/\T2J:M&lt;%&lt;%-R[^OT`XZX^&lt;G^^5IG?^&amp;4NK8BR.)\[\8'`0?'@GP_P`7ZT4O`0K&gt;$2Q$][J`0P&gt;W*S0\Q@0P:X:B\W6T=LP+[@&lt;/YW_`Y.L3X^:%A]^F=YK\&lt;UE\P.X:[`.?EHG\0^_NPC^!@^NM*V`)@K\^\@!&lt;\*&lt;BTQBZN/L0U"@\0OL-VA]RN`O/\%1@E=]NMV9)0S/@4]C06;'ASUVFZMR[[\W,&gt;V_PS=0HZ8JQ`JXQWJ+;2EEE%[;?8OWE20^%20^%20^%!0^%!0^%!0&gt;%&gt;X&gt;%&gt;X&gt;%&gt;X&gt;%-X&gt;%-X&gt;%-X^.,1B3ZUI&lt;-LS?,*1EH2J%!S'"1F8=+4]#1]#1]`F@!E0!F0QJ0Q-%1*4]+4]#1]#1`4F0!E0!F0QJ0Q5+K1:'HI]#1]F&amp;@!%`!%0!&amp;0Q-/3#HA#A'#RI("1"!Q&amp;:P!FY!FY!B[_+O!*?!+?A#@AQ6&lt;!%`!%0!&amp;0Q-/5MCN2;,K'$A^FZ0!Y0![0Q_0Q5&amp;I/D]0D]$A]$A`,S?&amp;R?"Q):U'H/!BS*DE$H"]/D]0$21[0Q_0Q/$Q/$V:Z1FZWJK0J'DI]"I`"9`!90!90*74Q'$Q'D]&amp;D]&amp;"7"I`"9`!90!903]HA-8A-(A0%7*4F:21T*BK$$-(AY6./CZ7H&amp;)8%3KN`T9?$KHI!61_7[I&amp;201CK$VDVQ;E_%.7.6NV!V9V2P7(6'V%&amp;6&amp;V9N;$K1.X3,]FL=E(/S#EZ*E@E"&gt;HPJP\BA&lt;?XNVIOF\K_PN:CM&gt;"M.N.U/N6Y0.:I..,&amp;R98[`@[PN^5Z\3';\8PJCO`E'@GM8B`H]W\-&gt;OS8^HPT4P0GYY^Z]_(&lt;P&amp;F]\:'8T@O8]Z)@0V`C^2D4;_&lt;HP?&lt;4;[[8P4,P\3MV&lt;^:FP?&lt;BP@1`P"PV2/X/;ZY^_AF(`FOX!!!!!!</Property>
+	<Property Name="NI.Lib.Icon" Type="Bin">)Q#!!!!!!!)!"1!&amp;!!!-!%!!!@````]!!!!"!!%!!!,@!!!*Q(C=T:3R&lt;B."%)&lt;`1R2/[:)#+9JL6`-)O-A,W"8VC*,/&lt;7C18W%[/CR,C!=)AB?96X!&lt;7232+Y)CC_/\T2J:M&lt;%&lt;%-R[^OT`XZX^&lt;G^^5IG?^&amp;4NK8BR.)\[\8'`0?'@GP_P`7ZT4O`0K&gt;$2Q$][J`0P&gt;W*S0\Q@0P:X:B\W6T=LP+[@&lt;/YW_`Y.L3X^:%A]^F=YK\&lt;UE\P.X:[`.?EHG\0^_NPC^!@^NM*V`)@K\^\@!&lt;\*&lt;BTQBZN/L0U"@\0OL-VA]RN`O/\%1@E=]NMV9)0S/@4]C06;'ASUVFZMR[[\W,&gt;V_PS=0HZ8JQ`JXQWJ+;2EEE%[;?8OWE20^%20^%20^%!0^%!0^%!0&gt;%&gt;X&gt;%&gt;X&gt;%&gt;X&gt;%-X&gt;%-X&gt;%-X^.,1B3ZUI&lt;-LS?,*1EH2J%!S'"1F8=+4]#1]#1]`F@!E0!F0QJ0Q-%1*4]+4]#1]#1`4F0!E0!F0QJ0Q5+K1:'HI]#1]F&amp;@!%`!%0!&amp;0Q-/3#HA#A'#RI("1"!Q&amp;:P!FY!FY!B[_+O!*?!+?A#@AQ6&lt;!%`!%0!&amp;0Q-/5MCN2;,K'$A^FZ0!Y0![0Q_0Q5&amp;I/D]0D]$A]$A`,S?&amp;R?"Q):U'H/!BS*DE$H"]/D]0$21[0Q_0Q/$Q/$V:Z1FZWJK0J'DI]"I`"9`!90!90*74Q'$Q'D]&amp;D]&amp;"7"I`"9`!90!903]HA-8A-(A0%7*4F:21T*BK$$-(AY6./CZ7H&amp;)8%3KN`T9?$KHI!61_7[I&amp;201CK$VDVQ;E_%.7.6NV!V9V2P7(6'V%&amp;6&amp;V9N;$K1.X3,]FL=E(/S#EZ*E@E"&gt;HPJP\BA&lt;?XNVIOF\K_PN:CM&gt;"M.N.U/N6Y0.:I..,&amp;R98[`@[PN^5Z\3';\8PJCO`E'@GM8B`H]W\-&gt;OS8^HPT4P0GYY^Z]_(&lt;P&amp;F]\:'8T@O8]Z)@0V`C^2D4;_&lt;HP?&lt;4;[[8P4,P\3MV&lt;^:FP?&lt;BP@1`P"PV2/X/;ZY^_AF(`FOX!!!!!!</Property>
 	<Property Name="NI.Lib.Locked" Type="Str">205711D140723D6BBB6516562B9D45C8</Property>
-	<Property Name="NI.Lib.SourceVersion" Type="Int">654319621</Property>
 	<Property Name="NI.Lib.Version" Type="Str">1.0.0.0</Property>
-	<Property Name="NI.LV.All.SourceOnly" Type="Bool">false</Property>
+	<Property Name="NI.LV.All.SourceOnly" Type="Bool">true</Property>
 	<Property Name="NI.SortType" Type="Int">3</Property>
 	<Item Name="SubVIs" Type="Folder">
 		<Property Name="NI.LibItem.Scope" Type="Int">1</Property>
@@ -97,5 +96,6 @@
 	<Item Name="getting_started.vi" Type="VI" URL="/&lt;resource&gt;/modes/FRC/GSW/getting_started.vi"/>
 	<Item Name="Close_GSW.vi" Type="VI" URL="/&lt;resource&gt;/modes/FRC/GSW/Close_GSW.vi"/>
 	<Item Name="Reinit_GSW_Links.vi" Type="VI" URL="/&lt;resource&gt;/modes/FRC/GSW/Reinit_GSW_Links.vi"/>
+	<Item Name="Launch_GSW.vi" Type="VI" URL="/&lt;resource&gt;/modes/FRC/GSW/Launch_GSW.vi"/>
 </Library>
-<?sig 806D6CE725A07A897DEA9B7093E5D391?>
+<?sig 09AEC98BAEE5870115CCE20AAE8C0091?>

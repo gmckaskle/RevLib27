@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="windows-1252" standalone="yes"?>
+<Tree localize="yes">
+	<Node>
+		<Name localize="yes">Project</Name>
+		<GUID>3F7CF7A8-5E4D-4EDC-AA25-FA4A326988EF</GUID>
+		<ParentGUID>0</ParentGUID>
+		<ItemPath/>
+		<ItemType/>
+		<Description localize="yes">The items in this category create new projects.</Description>
+		<MagicNumber/>
+		<Weight>536870912</Weight>
+		<Version/>
+		<ChildOnly/>
+		<ProjectRequired>0</ProjectRequired>
+		<NDIconPath>resource/plugins/templatebrowser.llb/Folder_closed.png;resource/plugins/templatebrowser.llb/Folder_open.png</NDIconPath>
+	</Node>
+	<Node>
+		<Name localize="yes">Empty Project</Name>
+		<GUID>2</GUID>
+		<ParentGUID>3F7CF7A8-5E4D-4EDC-AA25-FA4A326988EF</ParentGUID>
+		<ItemPath/>
+		<ItemType>Built-in doc type</ItemType>
+		<Description localize="yes">Creates a project to manage VIs, support files, applications, and hardware configurations.</Description>
+		<ImagePath>resource/Framework/Providers/Icons/Project_128.png</ImagePath>
+		<MagicNumber>5</MagicNumber>
+		<Weight>1073741824</Weight>
+		<Version/>
+		<ChildOnly>1</ChildOnly>
+		<ProjectPossible>0</ProjectPossible>
+		<NDIconPath>resource/plugins/templatebrowser.llb/ProjectNew.png</NDIconPath>
+	</Node>
+	<Node>
+		<Name localize="yes">Project from Wizard</Name>
+		<GUID>00770B31-E6B3-440E-BFED-6FA5AA81B661</GUID>
+		<ParentGUID>3F7CF7A8-5E4D-4EDC-AA25-FA4A326988EF</ParentGUID>
+		<ItemPath/>
+		<ItemType/>
+		<Description localize="yes">The items in this category interactively create projects based on details you provide about the intended application.</Description>
+		<MagicNumber/>
+		<Weight>536870912</Weight>
+		<Version/>
+		<ChildOnly/>
+		<ProjectPossible>0</ProjectPossible>
+		<NDIconPath>resource/plugins/templatebrowser.llb/Folder_closed.png;resource/plugins/templatebrowser.llb/Folder_open.png</NDIconPath>
+	</Node>
+	<Node>
+		<Name localize="yes">VI</Name>
+		<GUID>12852C5E-EF28-4C57-9918-A983E12B9000</GUID>
+		<ParentGUID>0</ParentGUID>
+		<ItemPath/>
+		<ItemType/>
+		<Description localize="yes">The items in this category create new VIs.</Description>
+		<MagicNumber/>
+		<Weight>1073741824</Weight>
+		<Version/>
+		<ChildOnly/>
+		<ProjectPossible>0</ProjectPossible>
+		<NDIconPath>resource/plugins/templatebrowser.llb/Folder_closed.png;resource/plugins/templatebrowser.llb/Folder_open.png</NDIconPath>
+	</Node>
+	<Node>
+		<Name localize="yes">From Template</Name>
+		<GUID>77E350A8-F9AA-43FF-85E2-454279EBB9A7</GUID>
+		<ParentGUID>12852C5E-EF28-4C57-9918-A983E12B9000</ParentGUID>
+		<ItemPath/>
+		<ItemType/>
+		<Description localize="yes">Opens a front panel and block diagram with components you need to build different types of VIs.</Description>
+		<MagicNumber/>
+		<Weight>268435456</Weight>
+		<Version/>
+		<ChildOnly/>
+		<ProjectPossible>0</ProjectPossible>
+		<NDIconPath>resource/plugins/templatebrowser.llb/Folder_closed.png;resource/plugins/templatebrowser.llb/Folder_open.png</NDIconPath>
+	</Node>
+	<Node>
+		<Name localize="yes">User</Name>
+		<GUID>C20AD50F-B51C-48F0-A234-C577B3205C7B</GUID>
+		<ParentGUID>77E350A8-F9AA-43FF-85E2-454279EBB9A7</ParentGUID>
+		<ItemPath/>
+		<ItemType>Folder</ItemType>
+		<Description localize="yes">Opens a VI with components from a template that you created.</Description>
+		<MagicNumber/>
+		<Weight>-1</Weight>
+		<Version/>
+		<ChildOnly/>
+		<ProjectPossible>0</ProjectPossible>
+		<NDIconPath>resource/plugins/templatebrowser.llb/Folder_closed.png;resource/plugins/templatebrowser.llb/Folder_open.png</NDIconPath>
+	</Node>
+	<Node>
+		<Name localize="yes">Browse...</Name>
+		<GUID>F38C0C3D-64E1-45E7-802A-B4F7500D1311</GUID>
+		<ParentGUID>C20AD50F-B51C-48F0-A234-C577B3205C7B</ParentGUID>
+		<ItemPath/>
+		<ItemType>Browse</ItemType>
+		<Description localize="yes">Opens a file dialog from which you can select a template.</Description>
+		<MagicNumber/>
+		<Weight>-1</Weight>
+		<Version/>
+		<ChildOnly>1</ChildOnly>
+		<ProjectPossible>1</ProjectPossible>
+		<NDIconPath>resource/plugins/templatebrowser.llb/Folder_closed.png;resource/plugins/templatebrowser.llb/Folder_open.png</NDIconPath>
+	</Node>
+	<Node>
+		<Name localize="yes">From Wizard</Name>
+		<GUID>0936A631-D3F8-4340-938F-FC842EAF7085</GUID>
+		<ParentGUID>12852C5E-EF28-4C57-9918-A983E12B9000</ParentGUID>
+		<ItemPath/>
+		<ItemType/>
+		<Description localize="yes">The items in this category interactively create VIs based on details you provide about the intended application.</Description>
+		<MagicNumber/>
+		<Weight>134217728</Weight>
+		<Version/>
+		<ChildOnly/>
+		<ProjectPossible>0</ProjectPossible>
+		<NDIconPath>resource/plugins/templatebrowser.llb/Folder_closed.png;resource/plugins/templatebrowser.llb/Folder_open.png</NDIconPath>
+	</Node>
+	<Node>
+		<Name localize="yes">Run-Time Menu</Name>
+		<GUID>9A27B830-B833-4959-855A-2CC53FD83489</GUID>
+		<ParentGUID>8E4D36AD-F776-4C48-97C6-C1D85EFE889F</ParentGUID>
+		<ItemPath/>
+		<ItemType>Built-in doc type</ItemType>
+		<Description localize="yes">Creates a run-time menu.</Description>
+		<ImagePath>resource/Framework/Providers/Icons/RTM_128.png</ImagePath>
+		<MagicNumber>3</MagicNumber>
+		<Weight>-1</Weight>
+		<Version/>
+		<ChildOnly>1</ChildOnly>
+		<ProjectPossible>1</ProjectPossible>
+		<NDIconPath>resource/plugins/templatebrowser.llb/rtm.png</NDIconPath>
+	</Node>
+	<Node>
+		<Name localize="yes">Custom Control</Name>
+		<GUID>A09C6440-BBD9-4508-9462-C3AAAD503B2A</GUID>
+		<ParentGUID>8E4D36AD-F776-4C48-97C6-C1D85EFE889F</ParentGUID>
+		<ItemPath/>
+		<ItemType>Built-in doc type</ItemType>
+		<Description localize="yes">Creates custom user interface components that vary cosmetically from built-in LabVIEW controls and indicators. You also can use this option to create type definitions.</Description>
+		<ImagePath>resource/Framework/Providers/Icons/Control Document_128.png</ImagePath>
+		<MagicNumber>2</MagicNumber>
+		<Weight>-1</Weight>
+		<Version/>
+		<ChildOnly>1</ChildOnly>
+		<ProjectPossible>1</ProjectPossible>
+		<NDIconPath>resource/plugins/templatebrowser.llb/ctl.png</NDIconPath>
+	</Node>
+	<Node>
+		<Name localize="yes">Type Definition</Name>
+		<GUID>A09C6440-BBD9-4508-9462-C3AAAD503B2B</GUID>
+		<ParentGUID>8E4D36AD-F776-4C48-97C6-C1D85EFE889F</ParentGUID>
+		<ItemPath/>
+		<ItemType>Built-in doc type</ItemType>
+		<Description localize="yes">Creates type definitions to link all the instances of a custom control or indicator to a saved custom control or indicator file. Type definitions identify the correct data type for each instance of a custom control or indicator.</Description>
+		<ImagePath>resource/Framework/Providers/Icons/Control Document_128.png</ImagePath>
+		<MagicNumber>-3</MagicNumber>
+		<Weight>-1</Weight>
+		<Version/>
+		<ChildOnly>1</ChildOnly>
+		<ProjectPossible>1</ProjectPossible>
+		<NDIconPath>resource/plugins/templatebrowser.llb/ctl.png</NDIconPath>
+	</Node>
+	<Node>
+		<Name localize="yes">Polymorphic VI</Name>
+		<GUID>95B1F587-6FFF-4639-8D89-969D20506164</GUID>
+		<ParentGUID>12852C5E-EF28-4C57-9918-A983E12B9000</ParentGUID>
+		<ItemPath/>
+		<ItemType>Built-in doc type</ItemType>
+		<Description localize="yes">Creates a new, blank, polymorphic VI.</Description>
+		<ImagePath>resource/Framework/Providers/Icons/Virtual Instrument_128.png</ImagePath>
+		<MagicNumber>4</MagicNumber>
+		<Weight>536870912</Weight>
+		<Version/>
+		<ChildOnly>1</ChildOnly>
+		<ProjectPossible>1</ProjectPossible>
+		<NDIconPath>resource/plugins/templatebrowser.llb/VI.png</NDIconPath>
+	</Node>
+	<Node>
+		<Name localize="yes">Malleable VI</Name>
+		<GUID>95B1F587-6FFF-4639-8D89-969D20506165</GUID>
+		<ParentGUID>12852C5E-EF28-4C57-9918-A983E12B9000</ParentGUID>
+		<ItemPath/>
+		<ItemType>Built-in doc type</ItemType>
+		<Description localize="yes">Creates a new, blank, malleable VI (.vim). Use a malleable VI to perform the same operation on any acceptable data type instead of saving a separate copy of the VI for each data type.</Description>
+		<ImagePath>resource/Framework/Providers/Icons/vim_128.png</ImagePath>
+		<MagicNumber>-2</MagicNumber>
+		<Weight>536870913</Weight>
+		<Version/>
+		<ChildOnly>1</ChildOnly>
+		<ProjectPossible>1</ProjectPossible>
+		<NDIconPath>resource/Framework/Providers/Icons/vim.png</NDIconPath>
+	</Node>
+	<Node>
+		<Name localize="yes">Other Files</Name>
+		<GUID>8E4D36AD-F776-4C48-97C6-C1D85EFE889F</GUID>
+		<ParentGUID>0</ParentGUID>
+		<ItemPath/>
+		<ItemType/>
+		<Description localize="yes">Creates the tools you use to build other LabVIEW objects.</Description>
+		<MagicNumber/>
+		<Weight>67108864</Weight>
+		<Version/>
+		<ChildOnly/>
+		<ProjectPossible>0</ProjectPossible>
+		<NDIconPath>resource/plugins/templatebrowser.llb/Folder_closed.png;resource/plugins/templatebrowser.llb/Folder_open.png</NDIconPath>
+	</Node>
+	<Node>
+		<Name localize="yes">Global Variable</Name>
+		<GUID>C26E7225-44A0-4CDD-8B16-BA9836DBD5A7</GUID>
+		<ParentGUID>8E4D36AD-F776-4C48-97C6-C1D85EFE889F</ParentGUID>
+		<ItemPath/>
+		<ItemType>Built-in doc type</ItemType>
+		<Description localize="yes">Creates a container VI for global variables that can be accessed from anywhere in the application.</Description>
+		<ImagePath>resource/Framework/Providers/Icons/GlobalVariable_128.png</ImagePath>
+		<MagicNumber>1</MagicNumber>
+		<Weight>-1</Weight>
+		<Version/>
+		<ChildOnly>1</ChildOnly>
+		<ProjectPossible>1</ProjectPossible>
+		<NDIconPath>resource/plugins/templatebrowser.llb/GlobalVariable.png</NDIconPath>
+	</Node>
+	<Node>
+		<Name localize="yes">Build Specifications</Name>
+		<GUID>4E42E73D-E584-4A26-AB0A-928FB5C367B1</GUID>
+		<ParentGUID>0</ParentGUID>
+		<ItemPath/>
+		<ItemType/>
+		<Description localize="yes">The items in this category create build specifications that you can use within a project.</Description>
+		<MagicNumber/>
+		<Weight>134217728</Weight>
+		<Version/>
+		<ChildOnly/>
+		<ProjectPossible>0</ProjectPossible>
+		<NDIconPath>resource/plugins/templatebrowser.llb/Folder_closed.png;resource/plugins/templatebrowser.llb/Folder_open.png</NDIconPath>
+	</Node>
+	<Node>
+		<Name localize="yes">Library</Name>
+		<GUID>ABC740D6-F254-4BBC-5675-8858F35B820E</GUID>
+		<ParentGUID>8E4D36AD-F776-4C48-97C6-C1D85EFE889F</ParentGUID>
+		<ItemPath/>
+		<ItemType>Library</ItemType>
+		<Description localize="yes">Creates a project library.</Description>
+		<ImagePath>resource/Framework/Providers/Icons/LV Library_128.png</ImagePath>
+		<MagicNumber/>
+		<Weight>-1</Weight>
+		<Version/>
+		<ChildOnly>1</ChildOnly>
+		<ProjectPossible>1</ProjectPossible>
+		<NDIconPath>resource/Framework/Providers/Icons/lvlib.png</NDIconPath>
+	</Node>
+	<Node>
+		<Name localize="yes">XControl</Name>
+		<GUID>2E4BD3AC-4E04-45C9-B6C5AD138962C435</GUID>
+		<ParentGUID>8E4D36AD-F776-4C48-97C6-C1D85EFE889F</ParentGUID>
+		<ItemPath/>
+		<ItemType>XControl</ItemType>
+		<Description localize="yes">Creates an XControl that combines built-in LabVIEW controls and indicators.</Description>
+		<ImagePath>resource/Framework/Providers/Icons/XCTL_128.png</ImagePath>
+		<MagicNumber/>
+		<Weight>-1</Weight>
+		<Version/>
+		<ChildOnly>1</ChildOnly>
+		<ProjectPossible>1</ProjectPossible>
+		<FeatureName>LabVIEW_Pro</FeatureName>
+		<NDIconPath>resource/Framework/Providers/Icons/xcontrol.png</NDIconPath>
+	</Node>
+	<Node>
+		<Name localize="yes">Class</Name>
+		<GUID>A49BDC70-DB9C-11DA-A94D-0800200C9a66</GUID>
+		<ParentGUID>8E4D36AD-F776-4C48-97C6-C1D85EFE889F</ParentGUID>
+		<ItemPath/>
+		<ItemType>Class</ItemType>
+		<Description localize="yes">Creates a LabVIEW class.</Description>
+		<ImagePath>resource/Framework/Providers/Icons/LV Class_128.png</ImagePath>
+		<MagicNumber/>
+		<Weight>-1</Weight>
+		<Version/>
+		<ChildOnly>1</ChildOnly>
+		<ProjectPossible>1</ProjectPossible>
+		<NDIconPath>resource/Framework/Providers/Icons/UDClass File.png</NDIconPath>
+	</Node>
+	<Node>
+		<Name localize="yes">Interface</Name>
+		<GUID>51FCD3A5-B7E4-4E0C-82AB-AC7AB71B2165</GUID>
+		<ParentGUID>8E4D36AD-F776-4C48-97C6-C1D85EFE889F</ParentGUID>
+		<ItemPath/>
+		<ItemType>Interface</ItemType>
+		<Description localize="yes">Creates an interface.</Description>
+		<ImagePath>resource/Framework/Providers/Icons/LV Interface_128.png</ImagePath>
+		<MagicNumber/>
+		<Weight>-1</Weight>
+		<Version/>
+		<ChildOnly>1</ChildOnly>
+		<ProjectPossible>1</ProjectPossible>
+		<NDIconPath>resource/Framework/Providers/Icons/UDInterface File.png</NDIconPath>
+	</Node>
+</Tree>

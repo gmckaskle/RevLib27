@@ -11,7 +11,7 @@
 		<Type>None</Type>
 	</Node>
 	<Node>
-		<Name localize="yes">FRC roboRIO Project</Name>
+		<Name localize="yes">FRC Robot Project</Name>
 		<GUID>{960e4b00-25cf-11dd-bd0b-0800200c9a66}</GUID>
 		<ParentGUID>{f2aa14fa-32f7-42a8-8a87-06d29194ae44}</ParentGUID>
 		<Column>1</Column>
@@ -187,7 +187,7 @@
 	</Node>
 
 	<Globals>
-		<GettingStarted localize="yes">FRC 2026 Getting Started</GettingStarted>
+		<GettingStarted localize="yes">FRC 2027 Getting Started</GettingStarted>
 	</Globals>
 
 </Tree>

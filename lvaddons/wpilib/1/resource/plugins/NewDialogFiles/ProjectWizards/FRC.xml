@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="windows-1252" standalone="yes"?>
+<Tree localize="yes">
+	<Node>
+		<Name localize="yes">FRC roboRIO Robot Project</Name>
+		<GUID>960e4b12-25cf-11dd-bd0b-0800200c9a66</GUID>
+		<ParentGUID>00770B31-E6B3-440E-BFED-6FA5AA81B661</ParentGUID>
+		<ItemPath>resource/plugins/NewDialogFiles/ProjectWizards/ProjectWizard.llb/ProjectWizard Host.vi</ItemPath>
+		<WizardArg>resource/plugins/NewDialogFiles/ProjectWizards/FRC/FRC Wizard - Robot.vi</WizardArg>
+		<ItemType>ProjectWizard</ItemType>
+		<Description localize="yes">The FRC roboRIO Robot Project Wizard helps you create a new project for controlling your robot.</Description>
+		<ImagePath>resource/plugins/NewDialogFiles/ProjectWizards/FRC/Img roboRIO Project.PNG</ImagePath>
+		<Version>1</Version>
+		<Weight>200000</Weight>
+		<GSWIconPath>2</GSWIconPath>
+		<NDIconPath>resource/plugins/templatebrowser.llb/ProjectNew.png</NDIconPath>
+		<ProjectPossible>0</ProjectPossible>
+	</Node>
+	<Node>
+		<Name localize="yes">FRC Dashboard Project</Name>
+		<GUID>960e4b13-25cf-11dd-bd0b-0800200c9a66</GUID>
+		<ParentGUID>00770B31-E6B3-440E-BFED-6FA5AA81B661</ParentGUID>
+		<ItemPath>resource/plugins/NewDialogFiles/ProjectWizards/ProjectWizard.llb/ProjectWizard Host.vi</ItemPath>
+		<WizardArg>resource/plugins/NewDialogFiles/ProjectWizards/FRC/FRC Wizard - Dashboard.vi</WizardArg>
+		<ItemType>ProjectWizard</ItemType>
+		<Description localize="yes">The FRC Dashboard Project Wizard helps you create a new project for interacting with your robot.</Description>
+		<ImagePath>resource/plugins/NewDialogFiles/ProjectWizards/FRC/Img Dashboard Project.PNG</ImagePath>
+		<Version>1</Version>
+		<Weight>200000</Weight>
+		<GSWIconPath>2</GSWIconPath>
+		<NDIconPath>resource/plugins/templatebrowser.llb/ProjectNew.png</NDIconPath>
+		<ProjectPossible>0</ProjectPossible>
+	</Node>
+</Tree>
