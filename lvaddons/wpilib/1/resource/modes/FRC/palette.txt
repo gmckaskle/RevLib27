@@ -1,0 +1,4 @@
+[LabVIEW]
+Functions="Programming;Measurement I/O;Vision and Motion;Mathematics;Data Communication;Control & Simulation;Select a VI...;MRC;FIRST Vision;Hobbyist;Addons;"
+
+Controls="Modern;Silver;System;Control & Simulation;Select a Control...;Addons;"
